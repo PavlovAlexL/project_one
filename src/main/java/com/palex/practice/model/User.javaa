@@ -1,0 +1,29 @@
+package com.palex.Project_one.model;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+public class User {
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @Version
+    private Integer version;
+
+    private String firstName;
+    private String secondName;
+    private String middleName;
+    private String position;
+    private Integer phone;
+    private String docName;
+    private Integer docNumber;
+    private Date docDate;
+    private String citizenshipName;
+    private Integer citizenshipCode;
+    private Boolean isIdentified;
+
+
+
+}

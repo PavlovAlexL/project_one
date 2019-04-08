@@ -1,13 +1,13 @@
-package com.palex.Project_one;
+package com.palex.practice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectOneApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjectOneApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
