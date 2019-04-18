@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS Country (
   code                  VARCHAR(10) NOT NULL,
   name                  VARCHAR(50) NOT NULL
 );
-COMMENT ON TABLE Country IS 'Справочник - класификатор стран';
+COMMENT ON TABLE Country IS 'Справочник - клаcсификатор стран';
 COMMENT ON COLUMN Country.id IS 'id';
 COMMENT ON COLUMN Country.name IS 'Наименование страны';
 COMMENT ON COLUMN Country.code IS 'Код страны';
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS User_document(
 );
 COMMENT ON TABLE User_document IS 'Таблица хранения реквизитов сотрудников';
 COMMENT ON COLUMN User_document.id IS '';
-COMMENT ON COLUMN User_document.version IS 'Служебное поле hibernate';
+COMMENT ON COLUMN User_document.version IS 'Служебное поле hibernate, должно быть NOT NULL';
 COMMENT ON COLUMN User_document.doc_type_id IS 'Тип документа, связан с Document_type.id';
 COMMENT ON COLUMN User_document.doc_Number IS 'Номер документа';
 COMMENT ON COLUMN User_document.doc_Date IS 'Дата документа';
@@ -42,11 +42,11 @@ CREATE TABLE IF NOT EXISTS Organization (
   kpp         VARCHAR(9)  NOT NULL,
   address     VARCHAR(200) NOT NULL,
   phone       VARCHAR(20) ,
-  isActive    VARCHAR(5) DEFAULT 'true'
+  isActive    BOOLEAN
 );
 COMMENT ON TABLE Organization IS 'Организация';
 COMMENT ON COLUMN Organization.id IS 'id';
-COMMENT ON COLUMN Organization.version IS 'Служебное поле hibernate';
+COMMENT ON COLUMN Organization.version IS 'Служебное поле hibernate, должно быть NOT NULL';
 COMMENT ON COLUMN Organization.name IS 'Сокращенное наименование';
 COMMENT ON COLUMN Organization.fullName IS 'Полное наименование';
 COMMENT ON COLUMN Organization.inn IS 'ИНН организации';
@@ -63,11 +63,11 @@ CREATE TABLE IF NOT EXISTS Office (
   name        VARCHAR(50),
   address     VARCHAR(200),
   phone       VARCHAR(20),
-  isActive    VARCHAR(5) DEFAULT 'true'
+  isActive    BOOLEAN
 );
 COMMENT ON TABLE Office IS 'Офис';
 COMMENT ON COLUMN Office.id IS 'id';
-COMMENT ON COLUMN Office.version IS 'Служебное поле hibernate';
+COMMENT ON COLUMN Office.version IS 'Служебное поле hibernate, должно быть NOT NULL';
 COMMENT ON COLUMN Office.org_Id IS 'Идентификатор организации, связан с Organisation.id';
 COMMENT ON COLUMN Office.name IS 'Название';
 COMMENT ON COLUMN Office.address IS 'Адрес';
@@ -87,11 +87,11 @@ CREATE TABLE IF NOT EXISTS User (
   phone                VARCHAR(11) ,
   document_id          INTEGER REFERENCES User_document(id),
   citizenship_id       INTEGER REFERENCES Country(id),
-  is_Identified        VARCHAR(5)  DEFAULT 'false'
+  is_Identified        BOOLEAN
 );
 COMMENT ON TABLE User IS 'Сотрудник';
 COMMENT ON COLUMN User.id IS 'id';
-COMMENT ON COLUMN User.version IS 'Служебное поле hibernate';
+COMMENT ON COLUMN User.version IS 'Служебное поле hibernate, должно быть NOT NULL';
 COMMENT ON COLUMN User.office_Id IS 'Офис, связан с Office.id';
 COMMENT ON COLUMN User.first_Name IS 'Имя';
 COMMENT ON COLUMN User.second_Name IS 'Фамилия';
