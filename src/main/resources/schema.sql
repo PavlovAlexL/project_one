@@ -20,7 +20,7 @@ COMMENT ON COLUMN Document_type.code IS 'Код документа';
 
 CREATE TABLE IF NOT EXISTS User_document(
   id                   INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  version              INTEGER,
+  version              INTEGER NOT NULL DEFAULT 1,
   doc_type_id          INTEGER REFERENCES Document_type(id),
   doc_Number           VARCHAR(20) ,
   doc_Date             DATE
@@ -28,14 +28,14 @@ CREATE TABLE IF NOT EXISTS User_document(
 COMMENT ON TABLE User_document IS 'Таблица хранения реквизитов сотрудников';
 COMMENT ON COLUMN User_document.id IS '';
 COMMENT ON COLUMN User_document.version IS 'Служебное поле hibernate, должно быть NOT NULL';
-COMMENT ON COLUMN User_document.doc_type_id IS 'Тип документа, связан с Document_type.id';
+COMMENT ON COLUMN User_document.doc_type_id IS 'Тип документа, связан с DocumentTypeEntity.id';
 COMMENT ON COLUMN User_document.doc_Number IS 'Номер документа';
 COMMENT ON COLUMN User_document.doc_Date IS 'Дата документа';
 CREATE INDEX IX_User_document_doc_type_id ON User_document(doc_type_id);
 
-CREATE TABLE IF NOT EXISTS Organization (
+CREATE TABLE IF NOT EXISTS Organisation (
   id          INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  version     INTEGER,
+  version     INTEGER NOT NULL DEFAULT 1,
   name        VARCHAR(50) NOT NULL,
   fullName    VARCHAR(50) NOT NULL,
   inn         VARCHAR(10) NOT NULL,
@@ -44,22 +44,22 @@ CREATE TABLE IF NOT EXISTS Organization (
   phone       VARCHAR(20) ,
   isActive    BOOLEAN
 );
-COMMENT ON TABLE Organization IS 'Организация';
-COMMENT ON COLUMN Organization.id IS 'id';
-COMMENT ON COLUMN Organization.version IS 'Служебное поле hibernate, должно быть NOT NULL';
-COMMENT ON COLUMN Organization.name IS 'Сокращенное наименование';
-COMMENT ON COLUMN Organization.fullName IS 'Полное наименование';
-COMMENT ON COLUMN Organization.inn IS 'ИНН организации';
-COMMENT ON COLUMN Organization.kpp IS 'КПП организации';
-COMMENT ON COLUMN Organization.address IS 'Адрес';
-COMMENT ON COLUMN Organization.phone IS 'Телефон';
-COMMENT ON COLUMN Organization.isActive IS 'Статус';
+COMMENT ON TABLE  Organisation IS 'Организация';
+COMMENT ON COLUMN Organisation.id IS 'id';
+COMMENT ON COLUMN Organisation.version IS 'Служебное поле hibernate, должно быть NOT NULL';
+COMMENT ON COLUMN Organisation.name IS 'Сокращенное наименование';
+COMMENT ON COLUMN Organisation.fullName IS 'Полное наименование';
+COMMENT ON COLUMN Organisation.inn IS 'ИНН организации';
+COMMENT ON COLUMN Organisation.kpp IS 'КПП организации';
+COMMENT ON COLUMN Organisation.address IS 'Адрес';
+COMMENT ON COLUMN Organisation.phone IS 'Телефон';
+COMMENT ON COLUMN Organisation.isActive IS 'Статус';
 
 
 CREATE TABLE IF NOT EXISTS Office (
   id          INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  version     INTEGER,
-  org_Id      INTEGER NOT NULL REFERENCES Organization(id),
+  version     INTEGER NOT NULL DEFAULT 1,
+  org_Id      INTEGER NOT NULL REFERENCES Organisation(id),
   name        VARCHAR(50),
   address     VARCHAR(200),
   phone       VARCHAR(20),
@@ -78,7 +78,7 @@ CREATE INDEX IX_Office_org_id ON Office(org_Id);
 
 CREATE TABLE IF NOT EXISTS User (
   id                   INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  version              INTEGER,
+  version              INTEGER NOT NULL DEFAULT 1,
   office_Id            INTEGER NOT NULL REFERENCES Office(id),
   first_Name           VARCHAR(50) NOT NULL,
   second_Name          VARCHAR(50) ,
@@ -92,13 +92,13 @@ CREATE TABLE IF NOT EXISTS User (
 COMMENT ON TABLE User IS 'Сотрудник';
 COMMENT ON COLUMN User.id IS 'id';
 COMMENT ON COLUMN User.version IS 'Служебное поле hibernate, должно быть NOT NULL';
-COMMENT ON COLUMN User.office_Id IS 'Офис, связан с Office.id';
+COMMENT ON COLUMN User.office_Id IS 'Офис, связан с OfficeEntity.id';
 COMMENT ON COLUMN User.first_Name IS 'Имя';
 COMMENT ON COLUMN User.second_Name IS 'Фамилия';
 COMMENT ON COLUMN User.middle_Name IS 'Отчество';
 COMMENT ON COLUMN User.position IS 'Должность';
 COMMENT ON COLUMN User.phone IS 'Телефон';
-COMMENT ON COLUMN User.citizenship_id IS 'Идентификатор гражданства, связан с Country.id';
+COMMENT ON COLUMN User.citizenship_id IS 'Идентификатор гражданства, связан с CountryEntity.id';
 COMMENT ON COLUMN User.is_Identified IS 'Идентификация';
 CREATE INDEX IX_User_office_id ON User(office_Id);
 CREATE INDEX IX_User_document_id ON User(document_id);

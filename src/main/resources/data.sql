@@ -26,10 +26,3 @@ INSERT INTO Country (code, name) VALUES (438,	'ЛИХТЕНШТЕЙН');
 INSERT INTO Country (code, name) VALUES (440,	'ЛИТВА');
 INSERT INTO Country (code, name) VALUES (442,	'ЛЮКСЕМБУРГ');
 INSERT INTO Country (code, name) VALUES (276,	'ГЕРМАНИЯ');
-
-INSERT INTO Organization (name, fullName, inn, kpp, address, phone, isActive) VALUES ('Белл', 'ООО "Белл Интегратор"','1111111111','222222222','г. Москва, ул. Южнопортовая','84957778899','true');
-INSERT INTO Organization (name, fullName, inn, kpp, address, phone, isActive) VALUES ('Крок', 'ООО "Крок"','3333333333','222232222','г. Москва, ул. Таганская','84953778899','true');
-
-INSERT INTO Office (org_Id) VALUES ('2');
-
-INSERT INTO User (office_Id, first_Name, position) VALUES (1, 'Sasha', 'Специалист');
