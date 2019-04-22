@@ -21,9 +21,9 @@ COMMENT ON COLUMN Document_type.code IS 'Код документа';
 CREATE TABLE IF NOT EXISTS User_document(
   id                   INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
   version              INTEGER NOT NULL DEFAULT 1,
-  doc_type_id          INTEGER REFERENCES Document_type(id),
-  doc_Number           VARCHAR(20) ,
-  doc_Date             DATE
+  doc_type_id          INTEGER NOT NULL REFERENCES Document_type(id),
+  doc_Number           VARCHAR(20) NOT NULL,
+  doc_Date             DATE NOT NULL
 );
 COMMENT ON TABLE User_document IS 'Таблица хранения реквизитов сотрудников';
 COMMENT ON COLUMN User_document.id IS '';

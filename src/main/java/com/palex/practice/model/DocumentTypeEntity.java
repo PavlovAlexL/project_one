@@ -1,7 +1,9 @@
 package com.palex.practice.model;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Document_type")
@@ -26,13 +28,6 @@ public class DocumentTypeEntity {
     @Column(name="name", length = 100, nullable = false)
     private String name;
 
-    /**
-     * Связь с владельцем объекта
-     */
-    @OneToOne
-    @MapsId
-    @JoinColumn(name="doc_type_id")
-    private UserDocumentEntity userDocumentEntity;
 
     /**
      * Конструктор по умолчанию для Hibernate

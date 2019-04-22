@@ -1,7 +1,20 @@
 package com.palex.practice.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Version;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.CascadeType;
+import javax.persistence.GenerationType;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,7 +27,7 @@ public class OfficeEntity {
      * Уникальный идентификатор
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -23,13 +36,6 @@ public class OfficeEntity {
      */
     @Version
     private Integer version;
-
-    /**
-     * Связь Идентификатор организации, many_to_one
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name="org_id", nullable = false)
-    private OrganisationEntity organisation;
 
     /**
      * Наименование
@@ -52,14 +58,18 @@ public class OfficeEntity {
     /**
      * Статус
      */
-    @Column(name="isActive")
     private Boolean isActive;
+
+    /**
+     * Принадлежность к организации <<<<<<<<<<<<<<<<<<<<<<<<Не работает связь!!!
+     */
+    private OrganisationEntity organisation;
 
     /**
      * Множество пользователей, принадлежащих данному офису
      */
-    @OneToMany(mappedBy = "Office", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserEntity> users;
+
+    private HashSet<UserEntity> users;
 
     /**
      * Конструктор для Hibernate
@@ -68,15 +78,20 @@ public class OfficeEntity {
 
     }
 
-
+    /**
+     * <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Не работает связь!!!
+     * @return
+     */
+    @ManyToOne
+    @JoinColumn(name = "org_Id")
     public OrganisationEntity getOrganisation(){
         return this.organisation;
     }
-
     public void setOrganisation(OrganisationEntity organisation){
         this.organisation = organisation;
     }
 
+    @OneToMany(mappedBy = "Office", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<UserEntity> getUsers() {
         if(users == null){
             users = new HashSet<>();
@@ -84,71 +99,4 @@ public class OfficeEntity {
         return users;
     }
 
-    public void setUsers(Set<UserEntity> users) {
-        this.users = users;
-    }
-
-    public void addUser(UserEntity user){
-        getUsers().add(user);
-    }
-
-    public void removeUser(UserEntity user){
-        getUsers().remove(user);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OfficeEntity)) return false;
-        OfficeEntity that = (OfficeEntity) o;
-        return id.equals(that.id) &&
-                Objects.equals(version, that.version) &&
-                Objects.equals(organisation, that.organisation) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(phone, that.phone) &&
-                Objects.equals(isActive, that.isActive) &&
-                Objects.equals(users, that.users);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, version, organisation, name, address, phone, isActive, users);
-    }
 }
