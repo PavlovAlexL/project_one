@@ -7,16 +7,11 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
-import javax.persistence.GenerationType;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 
 /**
  * Класс сотрудник.
@@ -38,6 +33,7 @@ public class UserEntity {
      * Специальный поле Hibernate
      */
     @Version
+    @Column (name="version", nullable = false)
     private Integer version;
 
     /**
@@ -50,20 +46,20 @@ public class UserEntity {
     /**
      *Имя
      */
-    @Column(name = "firstName", length = 50, nullable = false)
-    private String firstName;
+    @Column(name = "first_Name", length = 50, nullable = false)
+    private String first_Name;
 
     /**
      * Фамилия
      */
-    @Column(name = "secondName", length = 50)
-    private String secondName;
+    @Column(name = "second_Name", length = 50)
+    private String second_Name;
 
     /**
      * Отчество
      */
-    @Column(name = "middleName", length = 50)
-    private String middleName;
+    @Column(name = "middle_Name", length = 50)
+    private String middle_Name;
 
     /**
      * Должность
@@ -78,6 +74,12 @@ public class UserEntity {
     private String phone;
 
     /**
+     * Прошел ли сотрудник идентификацию
+     */
+    @Column (name="is_identified")
+    private Boolean is_identified;
+
+    /**
      * Идентификатор документа в таблице документов
      */
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -90,17 +92,112 @@ public class UserEntity {
     private CountryEntity country;
 
     /**
-     * Прошел ли сотрудник идентификацию
-     */
-    private Boolean is_Identified;
-
-
-    /**
      * Конструктор поумолчанию дял Hibernate
      */
     public UserEntity(){
 
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public OfficeEntity getOffice() {
+        return office;
+    }
+
+    public void setOffice(OfficeEntity office) {
+        this.office = office;
+    }
+
+    public String getFirstName() {
+        return first_Name;
+    }
+
+    public void setFirstName(String firstName) {
+        this.first_Name = firstName;
+    }
+
+    public String getSecondName() {
+        return second_Name;
+    }
+
+    public void setSecondName(String secondName) {
+        this.second_Name = secondName;
+    }
+
+    public String getMiddleName() {
+        return middle_Name;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middle_Name = middleName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Boolean getIs_identified() {
+        return is_identified;
+    }
+
+    public void setIs_identified(Boolean is_identified) {
+        this.is_identified = is_identified;
+    }
+
+    public UserDocumentEntity getUserDocument() {
+        return userDocument;
+    }
+
+    public void setUserDocument(UserDocumentEntity userDocument) {
+        this.userDocument = userDocument;
+    }
+
+    public CountryEntity getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountryEntity country) {
+        this.country = country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserEntity)) return false;
+        UserEntity that = (UserEntity) o;
+        return getOffice().equals(that.getOffice()) &&
+                getFirstName().equals(that.getFirstName()) &&
+                Objects.equals(getSecondName(), that.getSecondName()) &&
+                Objects.equals(getMiddleName(), that.getMiddleName()) &&
+                getPosition().equals(that.getPosition()) &&
+                Objects.equals(getPhone(), that.getPhone()) &&
+                Objects.equals(getIs_identified(), that.getIs_identified());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getOffice(), getFirstName(), getSecondName(), getMiddleName(), getPosition(), getPhone(), getIs_identified());
+    }
 }

@@ -7,10 +7,9 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
-import javax.persistence.GenerationType;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -21,7 +20,7 @@ public class OrganisationEntity {
      * Уникальный идентификатор
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -41,8 +40,8 @@ public class OrganisationEntity {
     /**
      * Полное название
      */
-    @Column(name="fullName", nullable = false)
-    private String fullName;
+    @Column(name="full_Name", nullable = false)
+    private String full_Name;
 
     /**
      * ИНН
@@ -65,12 +64,14 @@ public class OrganisationEntity {
     /**
      * Телефон
      */
+    @Column(name="phone")
     private String phone;
 
     /**
      * Статус
      */
-    private Boolean isActive;
+    @Column(name="is_active")
+    private Boolean is_active;
 
     /**
      * Множество офисов, принадлежащих данной организации
@@ -84,6 +85,77 @@ public class OrganisationEntity {
     public OrganisationEntity() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFull_Name() {
+        return full_Name;
+    }
+
+    public void setFull_Name(String full_Name) {
+        this.full_Name = full_Name;
+    }
+
+    public String getInn() {
+        return inn;
+    }
+
+    public void setInn(String inn) {
+        this.inn = inn;
+    }
+
+    public String getKpp() {
+        return kpp;
+    }
+
+    public void setKpp(String kpp) {
+        this.kpp = kpp;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Boolean getIs_active() {
+        return is_active;
+    }
+
+    public void setIs_active(Boolean is_active) {
+        this.is_active = is_active;
+    }
+
+    public void setOffices(Set<OfficeEntity> offices) {
+        this.offices = offices;
+    }
 
     public Set<OfficeEntity> getOffices(){
         if(offices == null){
@@ -92,4 +164,22 @@ public class OrganisationEntity {
         return this.offices;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OrganisationEntity)) return false;
+        OrganisationEntity that = (OrganisationEntity) o;
+        return getName().equals(that.getName()) &&
+                getFull_Name().equals(that.getFull_Name()) &&
+                getInn().equals(that.getInn()) &&
+                getKpp().equals(that.getKpp()) &&
+                getAddress().equals(that.getAddress()) &&
+                Objects.equals(getPhone(), that.getPhone()) &&
+                Objects.equals(getIs_active(), that.getIs_active());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getFull_Name(), getInn(), getKpp(), getAddress(), getPhone(), getIs_active());
+    }
 }

@@ -22,84 +22,84 @@ CREATE TABLE IF NOT EXISTS User_document(
   id                   INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
   version              INTEGER NOT NULL DEFAULT 1,
   doc_type_id          INTEGER NOT NULL REFERENCES Document_type(id),
-  doc_Number           VARCHAR(20) NOT NULL,
-  doc_Date             DATE NOT NULL
+  doc_number           VARCHAR(20) NOT NULL,
+  doc_date             DATE NOT NULL
 );
 COMMENT ON TABLE User_document IS 'Таблица хранения реквизитов сотрудников';
 COMMENT ON COLUMN User_document.id IS '';
 COMMENT ON COLUMN User_document.version IS 'Служебное поле hibernate, должно быть NOT NULL';
 COMMENT ON COLUMN User_document.doc_type_id IS 'Тип документа, связан с DocumentTypeEntity.id';
-COMMENT ON COLUMN User_document.doc_Number IS 'Номер документа';
-COMMENT ON COLUMN User_document.doc_Date IS 'Дата документа';
+COMMENT ON COLUMN User_document.doc_number IS 'Номер документа';
+COMMENT ON COLUMN User_document.doc_date IS 'Дата документа';
 CREATE INDEX IX_User_document_doc_type_id ON User_document(doc_type_id);
 
 CREATE TABLE IF NOT EXISTS Organisation (
   id          INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
   version     INTEGER NOT NULL DEFAULT 1,
   name        VARCHAR(50) NOT NULL,
-  fullName    VARCHAR(50) NOT NULL,
+  full_name   VARCHAR(50) NOT NULL,
   inn         VARCHAR(10) NOT NULL,
   kpp         VARCHAR(9)  NOT NULL,
   address     VARCHAR(200) NOT NULL,
   phone       VARCHAR(20) ,
-  isActive    BOOLEAN
+  is_active   BOOLEAN
 );
 COMMENT ON TABLE  Organisation IS 'Организация';
 COMMENT ON COLUMN Organisation.id IS 'id';
 COMMENT ON COLUMN Organisation.version IS 'Служебное поле hibernate, должно быть NOT NULL';
 COMMENT ON COLUMN Organisation.name IS 'Сокращенное наименование';
-COMMENT ON COLUMN Organisation.fullName IS 'Полное наименование';
+COMMENT ON COLUMN Organisation.full_name IS 'Полное наименование';
 COMMENT ON COLUMN Organisation.inn IS 'ИНН организации';
 COMMENT ON COLUMN Organisation.kpp IS 'КПП организации';
 COMMENT ON COLUMN Organisation.address IS 'Адрес';
 COMMENT ON COLUMN Organisation.phone IS 'Телефон';
-COMMENT ON COLUMN Organisation.isActive IS 'Статус';
+COMMENT ON COLUMN Organisation.is_active IS 'Статус';
 
 
 CREATE TABLE IF NOT EXISTS Office (
   id          INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
   version     INTEGER NOT NULL DEFAULT 1,
-  org_Id      INTEGER NOT NULL REFERENCES Organisation(id),
+  org_id      INTEGER NOT NULL REFERENCES Organisation(id),
   name        VARCHAR(50),
   address     VARCHAR(200),
   phone       VARCHAR(20),
-  isActive    BOOLEAN
+  is_active    BOOLEAN
 );
 COMMENT ON TABLE Office IS 'Офис';
 COMMENT ON COLUMN Office.id IS 'id';
 COMMENT ON COLUMN Office.version IS 'Служебное поле hibernate, должно быть NOT NULL';
-COMMENT ON COLUMN Office.org_Id IS 'Идентификатор организации, связан с Organisation.id';
+COMMENT ON COLUMN Office.org_id IS 'Идентификатор организации, связан с Organisation.id';
 COMMENT ON COLUMN Office.name IS 'Название';
 COMMENT ON COLUMN Office.address IS 'Адрес';
 COMMENT ON COLUMN Office.phone IS 'Телефон';
-COMMENT ON COLUMN Office.isActive IS 'Статус';
-CREATE INDEX IX_Office_org_id ON Office(org_Id);
+COMMENT ON COLUMN Office.is_active IS 'Статус';
+CREATE INDEX IX_Office_org_id ON Office(org_id);
 
 
 CREATE TABLE IF NOT EXISTS User (
   id                   INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
   version              INTEGER NOT NULL DEFAULT 1,
-  office_Id            INTEGER NOT NULL REFERENCES Office(id),
-  first_Name           VARCHAR(50) NOT NULL,
-  second_Name          VARCHAR(50) ,
-  middle_Name          VARCHAR(50) ,
+  office_id            INTEGER NOT NULL REFERENCES Office(id),
+  first_name           VARCHAR(50) NOT NULL,
+  second_name          VARCHAR(50) ,
+  middle_name          VARCHAR(50) ,
   position             VARCHAR(100) NOT NULL,
   phone                VARCHAR(11) ,
   document_id          INTEGER REFERENCES User_document(id),
   citizenship_id       INTEGER REFERENCES Country(id),
-  is_Identified        BOOLEAN
+  is_identified        BOOLEAN
 );
 COMMENT ON TABLE User IS 'Сотрудник';
 COMMENT ON COLUMN User.id IS 'id';
 COMMENT ON COLUMN User.version IS 'Служебное поле hibernate, должно быть NOT NULL';
-COMMENT ON COLUMN User.office_Id IS 'Офис, связан с OfficeEntity.id';
-COMMENT ON COLUMN User.first_Name IS 'Имя';
-COMMENT ON COLUMN User.second_Name IS 'Фамилия';
-COMMENT ON COLUMN User.middle_Name IS 'Отчество';
+COMMENT ON COLUMN User.office_id IS 'Офис, связан с OfficeEntity.id';
+COMMENT ON COLUMN User.first_name IS 'Имя';
+COMMENT ON COLUMN User.second_name IS 'Фамилия';
+COMMENT ON COLUMN User.middle_name IS 'Отчество';
 COMMENT ON COLUMN User.position IS 'Должность';
 COMMENT ON COLUMN User.phone IS 'Телефон';
 COMMENT ON COLUMN User.citizenship_id IS 'Идентификатор гражданства, связан с CountryEntity.id';
-COMMENT ON COLUMN User.is_Identified IS 'Идентификация';
-CREATE INDEX IX_User_office_id ON User(office_Id);
+COMMENT ON COLUMN User.is_identified IS 'Идентификация';
+CREATE INDEX IX_User_office_id ON User(office_id);
 CREATE INDEX IX_User_document_id ON User(document_id);
 CREATE INDEX IX_User_citizenship_id ON User(citizenship_id);
