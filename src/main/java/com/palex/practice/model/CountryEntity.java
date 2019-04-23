@@ -1,9 +1,6 @@
 package com.palex.practice.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Country")
@@ -29,9 +26,16 @@ public class CountryEntity {
     private String name;
 
     /**
+     * Принадлежность к сотруднику
+     */
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "country")
+    private UserEntity user;
+
+    /**
      * Конструктор по умолчанию для Hibernate
      */
-
     public CountryEntity(){
 
     }

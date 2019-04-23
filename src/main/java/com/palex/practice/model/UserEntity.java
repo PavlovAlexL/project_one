@@ -8,9 +8,13 @@ import javax.persistence.Column;
 import javax.persistence.Version;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
+import javax.persistence.GenerationType;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +45,7 @@ public class UserEntity {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="office_id", nullable = false)
-    private OfficeEntity officeEntity;
+    private OfficeEntity office;
 
     /**
      *Имя
@@ -76,18 +80,14 @@ public class UserEntity {
     /**
      * Идентификатор документа в таблице документов
      */
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name="document_id")
-    ////@OneToOne(mappedBy = "User", cascade = CascadeType.ALL)
-    //private UserDocumentEntity userDocumentEntity;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserDocumentEntity userDocument;
 
     /**
      * Идентификатор гражданства
      */
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name="citizenship_id")
-    ////@OneToOne(mappedBy = "User", cascade = CascadeType.ALL)
-    //private CountryEntity countryEntity;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private CountryEntity country;
 
     /**
      * Прошел ли сотрудник идентификацию
@@ -101,5 +101,6 @@ public class UserEntity {
     public UserEntity(){
 
     }
+
 
 }

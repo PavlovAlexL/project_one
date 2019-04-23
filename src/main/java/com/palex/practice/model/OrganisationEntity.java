@@ -75,8 +75,8 @@ public class OrganisationEntity {
     /**
      * Множество офисов, принадлежащих данной организации
      */
-
-    private HashSet<OfficeEntity> offices;
+    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OfficeEntity> offices;
 
     /**
      * Пустой конструктор для Hibernate
@@ -84,7 +84,7 @@ public class OrganisationEntity {
     public OrganisationEntity() {
     }
 
-    @OneToMany(mappedBy = "Organisation", cascade = CascadeType.ALL, orphanRemoval = true)
+
     public Set<OfficeEntity> getOffices(){
         if(offices == null){
             offices = new HashSet<>();

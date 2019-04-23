@@ -1,9 +1,6 @@
 package com.palex.practice.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Document_type")
@@ -27,6 +24,14 @@ public class DocumentTypeEntity {
      */
     @Column(name="name", length = 100, nullable = false)
     private String name;
+
+    /**
+     * Принадлежность к типу документа
+     */
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "documentType")
+    private UserDocumentEntity userDocument;
 
 
     /**

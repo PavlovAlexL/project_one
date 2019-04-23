@@ -61,15 +61,17 @@ public class OfficeEntity {
     private Boolean isActive;
 
     /**
-     * Принадлежность к организации <<<<<<<<<<<<<<<<<<<<<<<<Не работает связь!!!
+     * Принадлежность к организации
      */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "org_Id")
     private OrganisationEntity organisation;
 
     /**
      * Множество пользователей, принадлежащих данному офису
      */
-
-    private HashSet<UserEntity> users;
+    @OneToMany(mappedBy = "office", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserEntity> users;
 
     /**
      * Конструктор для Hibernate
@@ -78,12 +80,7 @@ public class OfficeEntity {
 
     }
 
-    /**
-     * <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Не работает связь!!!
-     * @return
-     */
-    @ManyToOne
-    @JoinColumn(name = "org_Id")
+
     public OrganisationEntity getOrganisation(){
         return this.organisation;
     }
@@ -91,7 +88,8 @@ public class OfficeEntity {
         this.organisation = organisation;
     }
 
-    @OneToMany(mappedBy = "Office", cascade = CascadeType.ALL, orphanRemoval = true)
+
+
     public Set<UserEntity> getUsers() {
         if(users == null){
             users = new HashSet<>();
