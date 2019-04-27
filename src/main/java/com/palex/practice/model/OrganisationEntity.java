@@ -79,11 +79,6 @@ public class OrganisationEntity {
     @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OfficeEntity> offices;
 
-    /**
-     * Пустой конструктор для Hibernate
-     */
-    public OrganisationEntity() {
-    }
 
     public Long getId() {
         return id;
@@ -157,29 +152,4 @@ public class OrganisationEntity {
         this.offices = offices;
     }
 
-    public Set<OfficeEntity> getOffices(){
-        if(offices == null){
-            offices = new HashSet<>();
-        }
-        return this.offices;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OrganisationEntity)) return false;
-        OrganisationEntity that = (OrganisationEntity) o;
-        return getName().equals(that.getName()) &&
-                getFull_Name().equals(that.getFull_Name()) &&
-                getInn().equals(that.getInn()) &&
-                getKpp().equals(that.getKpp()) &&
-                getAddress().equals(that.getAddress()) &&
-                Objects.equals(getPhone(), that.getPhone()) &&
-                Objects.equals(getIs_active(), that.getIs_active());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getFull_Name(), getInn(), getKpp(), getAddress(), getPhone(), getIs_active());
-    }
 }

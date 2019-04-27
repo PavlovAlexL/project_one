@@ -8,11 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Version;
 import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
-import javax.persistence.CascadeType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.MapsId;
-import java.util.Objects;
 import java.util.Date;
 
 
@@ -50,24 +47,12 @@ public class UserDocumentEntity {
     private Date doc_date;
 
     /**
-     * Принадлежность к сструднику
-     */
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "userDocument")
-    private UserEntity user;
-
-    /**
      * Связь с таблицей типов докумнетов
      */
-    @OneToOne(mappedBy = "userDocument", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name="doc_type_id")
     private DocumentTypeEntity documentType;
 
-    /**
-     * Конструктор по умолчанию для Hibernate
-     */
-    public UserDocumentEntity() {
-    }
 
     public Long getId() {
         return id;
@@ -97,14 +82,6 @@ public class UserDocumentEntity {
         this.doc_date = doc_date;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
     public DocumentTypeEntity getDocumentType() {
         return documentType;
     }
@@ -113,19 +90,4 @@ public class UserDocumentEntity {
         this.documentType = documentType;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserDocumentEntity)) return false;
-        UserDocumentEntity that = (UserDocumentEntity) o;
-        return getDoc_number().equals(that.getDoc_number()) &&
-                getDoc_date().equals(that.getDoc_date()) &&
-                getUser().equals(that.getUser()) &&
-                getDocumentType().equals(that.getDocumentType());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getDoc_number(), getDoc_date(), getUser(), getDocumentType());
-    }
 }

@@ -72,12 +72,6 @@ public class OfficeEntity {
     @OneToMany(mappedBy = "office", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserEntity> users;
 
-    /**
-     * Конструктор для Hibernate
-     */
-    public OfficeEntity(){
-
-    }
 
     public Long getId() {
         return id;
@@ -142,20 +136,4 @@ public class OfficeEntity {
         this.users = users;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OfficeEntity)) return false;
-        OfficeEntity that = (OfficeEntity) o;
-        return Objects.equals(getName(), that.getName()) &&
-                Objects.equals(getAddress(), that.getAddress()) &&
-                Objects.equals(getPhone(), that.getPhone()) &&
-                Objects.equals(getIs_active(), that.getIs_active()) &&
-                getOrganisation().equals(that.getOrganisation());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getAddress(), getPhone(), getIs_active(), getOrganisation());
-    }
 }

@@ -10,8 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.CascadeType;
-import java.util.Objects;
 
 /**
  * Класс сотрудник.
@@ -82,21 +80,16 @@ public class UserEntity {
     /**
      * Идентификатор документа в таблице документов
      */
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name="document_id")
     private UserDocumentEntity userDocument;
 
     /**
      * Идентификатор гражданства
      */
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name="itizenship_id")
     private CountryEntity country;
-
-    /**
-     * Конструктор поумолчанию дял Hibernate
-     */
-    public UserEntity(){
-
-    }
 
     public Long getId() {
         return id;
@@ -182,22 +175,4 @@ public class UserEntity {
         this.country = country;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserEntity)) return false;
-        UserEntity that = (UserEntity) o;
-        return getOffice().equals(that.getOffice()) &&
-                getFirstName().equals(that.getFirstName()) &&
-                Objects.equals(getSecondName(), that.getSecondName()) &&
-                Objects.equals(getMiddleName(), that.getMiddleName()) &&
-                getPosition().equals(that.getPosition()) &&
-                Objects.equals(getPhone(), that.getPhone()) &&
-                Objects.equals(getIs_identified(), that.getIs_identified());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getOffice(), getFirstName(), getSecondName(), getMiddleName(), getPosition(), getPhone(), getIs_identified());
-    }
 }
