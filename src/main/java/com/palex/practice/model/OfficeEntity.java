@@ -63,7 +63,7 @@ public class OfficeEntity {
      * Принадлежность к организации
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "org_id")
+    @JoinColumn(name = "org_id", nullable = false)
     private OrganisationEntity organisation;
 
     /**

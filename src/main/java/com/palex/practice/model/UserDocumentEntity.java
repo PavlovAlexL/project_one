@@ -50,7 +50,7 @@ public class UserDocumentEntity {
      * Связь с таблицей типов докумнетов
      */
     @OneToOne
-    @JoinColumn(name="doc_type_id")
+    @JoinColumn(name="doc_type_id", nullable = false)
     private DocumentTypeEntity documentType;
 
 
