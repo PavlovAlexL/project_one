@@ -14,6 +14,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
+/**
+ * Контроллер для доступа к справочникам.
+ */
 @RestController
 @RequestMapping(value = "/api", produces = APPLICATION_JSON_VALUE)
 public class ApiController {
@@ -30,6 +33,10 @@ public class ApiController {
         this.countriesService = countriesService;
     }
 
+    /**
+     * Вывод справочника типов документов.
+     * @return Коллекция типов документов.
+     */
     @RequestMapping(
             value = "/docs",
             method = {POST})    //may be GET???
@@ -38,6 +45,10 @@ public class ApiController {
         return countriesService.countries();
     }
 
+    /**
+     * Вывод справочника стран.
+     * @return Коллекция стран.
+     */
     @RequestMapping(
             value = "/countries",
             method = {POST})

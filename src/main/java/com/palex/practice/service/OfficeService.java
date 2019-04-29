@@ -1,10 +1,28 @@
 package com.palex.practice.service;
 
+
+import com.palex.practice.model.OfficeEntity;
+
 public interface OfficeService {
 
-    void list();
-    void getById();
-    void update();
-    void save();
+    /**
+     * Отобразить объекта с параметрами.
+     */
+    OfficeEntity list(String params);
+
+    /**
+     *  Отобразить объект по Id.
+     */
+    OfficeEntity getById(Integer id);
+
+    /**
+     * Изменить объект.
+     */
+    void update(OfficeEntity office);
+
+    /**
+     * Создать объект.
+     */
+    void save(OfficeEntity office);
 
 }

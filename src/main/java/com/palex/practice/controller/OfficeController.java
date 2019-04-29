@@ -1,35 +1,33 @@
 package com.palex.practice.controller;
 
+import com.palex.practice.model.OfficeEntity;
+import com.palex.practice.model.UserEntity;
+import com.palex.practice.service.OfficeService;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+/**
+ * Контроллер для office
+ */
 @RestController
 @RequestMapping(value = "/api/office", produces = APPLICATION_JSON_VALUE)
 public class OfficeController {
 
-    /**
-     * In (фильтр):
-     * {
-     *   “orgId”:””, //обязательный параметр
-     *   “name”:””,
-     *   “phone”:””,
-     *   “isActive”
-     * }
-     * @return
-     *     “id”:””,
-     *     “name”:””,
-     *     “isActive”:”true”
-     */
+    private final OfficeService officeService;
+
+    public OfficeController(OfficeService officeService) {
+        this.officeService = officeService;
+    }
 
     /**
-     *
-     * @param organisationId
+     * Запрос офиса с параметрами.
+     * @param organisationId обязательный параметр.
      * @param officeName
      * @param officePhone
-     * @param officeStatius
+     * @param officeStatus
      * @return
      */
     @RequestMapping(
@@ -37,62 +35,36 @@ public class OfficeController {
             params = {"orgId", "name", "phone", "isActive"},
             method = {POST})
     @ResponseBody
-    public String officelist (
-            @RequestParam("orgId") String organisationId,
+    public OfficeEntity officelist (
+            @RequestParam("orgId") Integer organisationId,
             @RequestParam("name") String officeName,
             @RequestParam("phone") String officePhone,
-            @RequestParam("isActive") String officeStatius
+            @RequestParam("isActive") Boolean officeStatus
     ) {
-
-        return null;
+        String params = organisationId.toString();
+        if(officeName != null) {params += " ," + officeName;}
+        if(officePhone != null) {params += " ," + officePhone;}
+        if(officeStatus != null) {params += " ," + officeStatus;}
+        return officeService.list(params);
     }
 
-
-
-
-
-    /**
-     *
-     *
-     * @return
-     * Out:
-     * {
-     *   “id”:””,
-     *   “name”:””,
-     *   “address”:””,
-     *   “phone”,””,
-     *   “isActive”:”true”
-     * }
-     */
-    @RequestMapping(value = "/office/{id}", method = {GET})
+    @RequestMapping(
+            value = "/office/{id}",
+            method = {GET})
     @ResponseBody
-    public String officeById(
-            @PathVariable("id") String officeId
+    public OfficeEntity officeById(
+            @PathVariable("id") Integer officeId
     ){
-        return null;
+        return officeService.getById(officeId);
     }
 
-
-
-
-
-    /**
-     In:
-     {
-     “id”:””, //обязательный параметр
-     “name”:””, //обязательный параметр
-     “address”:””, //обязательный параметр
-     “phone”,””,
-     “isActive”:”true” //пример
-     }
-     */
     @RequestMapping(
             value = "/office/update",
             params = {"id", "name", "address", "phone", "isActive"},
             method = {GET})
     @ResponseBody
     public String officeUpdate(
-            @PathVariable("id") String officeId,
+            @PathVariable("id") Integer officeId,
             @PathVariable("name") String officeName,
             @PathVariable("address") String officeAddress,
             @PathVariable("phone") String officePhone,
