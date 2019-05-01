@@ -48,6 +48,11 @@ public class OfficeController {
         return officeService.list(params);
     }
 
+    /**
+     * Запрос офиса по Id.
+     * @param officeId
+     * @return
+     */
     @RequestMapping(
             value = "/office/{id}",
             method = {GET})
@@ -58,6 +63,15 @@ public class OfficeController {
         return officeService.getById(officeId);
     }
 
+    /**
+     * Запрос на обновление.
+     * @param officeId - обязательный параметр.
+     * @param officeName - обязательный параметр.
+     * @param officeAddress - обязательный параметр.
+     * @param officePhone
+     * @param isAvtive
+     * @return "result":"(success or none)"
+     */
     @RequestMapping(
             value = "/office/update",
             params = {"id", "name", "address", "phone", "isActive"},
@@ -70,27 +84,10 @@ public class OfficeController {
             @PathVariable("phone") String officePhone,
             @PathVariable("isActive") String isAvtive
     ){
+
         return null;
     }
 
-
-
-    /**
-     *
-     * @param
-     *
-    {
-    “orgId”:””, //обязательный параметр
-    “name”:””,
-    “address”:””,
-    “phone”,””,
-    “isActive”:”true”
-    }
-
-    Out:
-    {
-    “result”:”success”
-     */
     @RequestMapping(
             value = "/office/save",
             params = {"id", "name", "address", "phone", "isActive"},
