@@ -1,9 +1,12 @@
 package com.palex.practice.controller;
 
 import com.palex.practice.model.OfficeEntity;
-import com.palex.practice.model.UserEntity;
+import com.palex.practice.view.OfficeView;
 import com.palex.practice.service.OfficeService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -22,48 +25,63 @@ public class OfficeController {
         this.officeService = officeService;
     }
 
-    /**
-     * Запрос офиса с параметрами.
-     * @param organisationId обязательный параметр.
+    /*
+     * Запрос списка по параметрам.
+     * @param orgId обязательный параметр.
      * @param officeName
      * @param officePhone
      * @param officeStatus
      * @return
      */
+    /*
     @RequestMapping(
-            value = "/office/list",
+            value = "/list",
             params = {"orgId", "name", "phone", "isActive"},
             method = {POST})
     @ResponseBody
-    public OfficeEntity officelist (
-            @RequestParam("orgId") Integer organisationId,
+    public List<OfficeView> officeList (
+            @RequestParam("orgId") Long orgId,
             @RequestParam("name") String officeName,
             @RequestParam("phone") String officePhone,
             @RequestParam("isActive") Boolean officeStatus
     ) {
-        String params = organisationId.toString();
+        String params = orgId.toString();
         if(officeName != null) {params += " ," + officeName;}
         if(officePhone != null) {params += " ," + officePhone;}
         if(officeStatus != null) {params += " ," + officeStatus;}
         return officeService.list(params);
     }
+    */
+    @RequestMapping(
+            value = "/list",
+            method = {POST})
+    @ResponseBody
+     public List<OfficeView> officeList (
+            @RequestParam Map<String,String> params
+    ) {
+        return officeService.list(params);
+    }
+
+
 
     /**
-     * Запрос офиса по Id.
+     * Запрос по Id.
      * @param officeId
      * @return
      */
     @RequestMapping(
-            value = "/office/{id}",
+            value = "/{id:\\\\d+}",
             method = {GET})
     @ResponseBody
-    public OfficeEntity officeById(
-            @PathVariable("id") Integer officeId
+    public OfficeView officeGetById(
+            @PathVariable("id") Long officeId
     ){
         return officeService.getById(officeId);
     }
 
-    /**
+
+
+    /*
      * Запрос на обновление.
      * @param officeId - обязательный параметр.
      * @param officeName - обязательный параметр.
@@ -72,34 +90,57 @@ public class OfficeController {
      * @param isAvtive
      * @return "result":"(success or none)"
      */
+    /*
     @RequestMapping(
-            value = "/office/update",
+            value = "/update",
             params = {"id", "name", "address", "phone", "isActive"},
-            method = {GET})
+            method = {POST})
     @ResponseBody
     public String officeUpdate(
-            @PathVariable("id") Integer officeId,
+            @PathVariable("id") Long officeId,
             @PathVariable("name") String officeName,
             @PathVariable("address") String officeAddress,
             @PathVariable("phone") String officePhone,
             @PathVariable("isActive") String isAvtive
     ){
+        return officeService.update();
+    }
+    */
 
-        return null;
+    /**
+     *
+     * @param params    Карта с парамерами
+     * officeId - обязательный параметр.
+     * officeName - обязательный параметр.
+     * officeAddress - обязательный параметр.
+     * officePhone
+     * isAvtive
+     * @return
+     */
+    @RequestMapping(
+            value = "/update",
+            method = {POST})
+    @ResponseBody
+    public String officeUpdate (
+            @RequestParam Map<String,String> params
+    ) {
+        return officeService.update(params);
     }
 
+    /**
+     *
+     * @param params
+     * orgId обязательный параметр
+     * @return
+     */
     @RequestMapping(
-            value = "/office/save",
-            params = {"id", "name", "address", "phone", "isActive"},
-            method = {GET})
+            value = "/save",
+            method = {POST})
     @ResponseBody
     public String officeSave(
-            @PathVariable("id") String officeId,
-            @PathVariable("name") String officeName,
-            @PathVariable("address") String officeAddress,
-            @PathVariable("phone") String officePhone,
-            @PathVariable("isActive") String isAvtive
+            @RequestParam Map<String,String> params
     ){
-        return null;
+
+        return officeService.save(params);
     }
 }

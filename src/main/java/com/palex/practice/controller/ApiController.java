@@ -1,13 +1,13 @@
 package com.palex.practice.controller;
 
-import com.palex.practice.model.DocumentTypeEntity;
-import com.palex.practice.service.CountriesService;
+import com.palex.practice.service.CountryService;
 import com.palex.practice.service.DocksTypeService;
-import com.palex.practice.view.CoutriesView;
+import com.palex.practice.view.CountryView;
 import com.palex.practice.view.DocksTypeView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -22,35 +22,40 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class ApiController {
 
     private final DocksTypeService docksTypeService;
-    private final CountriesService countriesService;
+    private final CountryService countryService;
 
-    //@Autowired
-    public ApiController (DocksTypeService docksTypeService){
+    @Autowired
+    public ApiController(DocksTypeService docksTypeService, CountryService countryService) {
         this.docksTypeService = docksTypeService;
-    }
-    //@Autowired
-    public ApiController (CountriesService countriesService){
-        this.countriesService = countriesService;
+        this.countryService = countryService;
     }
 
     /**
      * Вывод справочника типов документов.
      * @return Коллекция типов документов.
+     * {
+     *     “name”:“”,
+     *     “code”:””
+     * }
      */
     @RequestMapping(
-            value = "/docs",
+            value = "/countries",
             method = {POST})    //may be GET???
     @ResponseBody
-    public List<CoutriesView> countries() {
-        return countriesService.countries();
+    public List<CountryView> countries() {
+        return countryService.countries();
     }
 
     /**
      * Вывод справочника стран.
-     * @return Коллекция стран.
+     * @return Коллекция стран в формате
+     * {
+     *     “name”:“”,
+     *     “code”:””
+     * }
      */
     @RequestMapping(
-            value = "/countries",
+            value = "/docs",
             method = {POST})
     @ResponseBody
     public List<DocksTypeView> docs(){

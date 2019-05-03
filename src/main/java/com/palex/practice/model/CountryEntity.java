@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Country")
@@ -48,4 +49,12 @@ public class CountryEntity {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "CountryEntity{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

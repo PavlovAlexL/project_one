@@ -2,7 +2,7 @@ package com.palex.practice.view;
 
 import javax.validation.constraints.NotEmpty;
 
-public class DocksTypeView {
+public class CountryView {
 
     @NotEmpty
     private Long id;
@@ -18,12 +18,12 @@ public class DocksTypeView {
         return "{id:" + id + ";code:" + code + ";name:" +name + "}";
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCode() {

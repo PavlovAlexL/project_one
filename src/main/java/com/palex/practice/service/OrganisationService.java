@@ -1,27 +1,30 @@
 package com.palex.practice.service;
 
 import com.palex.practice.model.OrganisationEntity;
+import com.palex.practice.view.OrganisationView;
+
+import java.util.List;
 
 public interface OrganisationService {
 
     /**
-     * Отобразить объекта с параметрами.
+     * Отобразить объекты по параметрам.
      */
-    void list(Object ... parametr);
+    List<OrganisationView> list(String params);
 
     /**
      *  Отобразить объект по Id.
      */
-    void getById(Integer id);
+    OrganisationView getById(Long id);
 
     /**
      * Изменить объект.
      */
-    void update(OrganisationEntity organisation);
+    String update(String params);
 
     /**
      * Создать объект.
      */
-    void save(OrganisationEntity organisation);
+    String save(OrganisationEntity organisationEntity);
 
 }

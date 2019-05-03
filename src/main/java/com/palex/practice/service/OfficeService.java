@@ -2,27 +2,32 @@ package com.palex.practice.service;
 
 
 import com.palex.practice.model.OfficeEntity;
+import com.palex.practice.view.OfficeView;
+
+import java.util.List;
+import java.util.Map;
 
 public interface OfficeService {
 
     /**
      * Отобразить объекта с параметрами.
      */
-    OfficeEntity list(String params);
+    //List<OfficeView> list(String params);
+    List<OfficeView> list(Map<String,String> params);
 
     /**
      *  Отобразить объект по Id.
      */
-    OfficeEntity getById(Integer id);
+    OfficeView getById(Long id);
 
     /**
      * Изменить объект.
      */
-    void update(OfficeEntity office);
+    String update(Map<String,String> params);
 
     /**
      * Создать объект.
      */
-    void save(OfficeEntity office);
+    String save(Map<String,String> params);
 
 }

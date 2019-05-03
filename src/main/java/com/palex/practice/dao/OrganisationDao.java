@@ -10,18 +10,11 @@ import java.util.List;
 public interface OrganisationDao {
 
     /**
-     * Получение коллекции объектов по id.
-     * @param name
+     * Получение коллекции объектов по параметрам.
+     * @param params
      * @return
      */
-    List<OrganisationEntity> getByName(String name);
-
-    /**
-     * Получение коллекции по параметрам.
-     * @param param
-     * @return
-     */
-    List<OrganisationEntity> getByParams(Object ... param);
+    List<OrganisationEntity> getByParams(Object ... params);
 
     /**
      * Получение объекта по ID.
@@ -31,15 +24,15 @@ public interface OrganisationDao {
     OrganisationEntity getById (Long id);
 
     /**
-     * Сохранить объект office.
+     * Сохраненить объект.
      * @param organisationEntity
      */
-    void save (OrganisationEntity organisationEntity);
+    String save (OrganisationEntity organisationEntity);
 
     /**
-     * Изменить объект office.
-     * @param organisationEntity
+     * Изменить объект.
+     * @param params строка с параметрами, разделенная запятой.
      */
-    void update (OrganisationEntity organisationEntity);
+    String update (String params);
 }
 

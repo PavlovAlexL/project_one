@@ -12,7 +12,7 @@ public interface UserService {
     /**
      *  Отобразить объект по Id.
      */
-    void getById(Integer id);
+    void getById(Long id);
 
     /**
      * Изменить объект.

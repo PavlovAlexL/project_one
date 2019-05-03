@@ -12,7 +12,7 @@ public interface UserDao {
      * @param id
      * @return
      */
-    List<UserEntity> getOfficeId(Long id);
+    List<UserEntity> getOfficesById(Long id);
 
     /**
      * Получение коллекции по параметрам.

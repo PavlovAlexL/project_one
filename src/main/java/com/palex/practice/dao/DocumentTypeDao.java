@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface DocumentTypeDao {
 
-    List<DocumentTypeEntity> get();
+    List<DocumentTypeEntity> getAll();
 
 }

@@ -88,7 +88,7 @@ public class UserEntity {
      * Идентификатор гражданства
      */
     @OneToOne
-    @JoinColumn(name="itizenship_id")
+    @JoinColumn(name="citizenship_id")
     private CountryEntity country;
 
     public Long getId() {

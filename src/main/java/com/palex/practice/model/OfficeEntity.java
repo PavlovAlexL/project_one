@@ -72,6 +72,18 @@ public class OfficeEntity {
     @OneToMany(mappedBy = "office", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserEntity> users;
 
+    public OfficeEntity(){
+
+    }
+
+
+    public OfficeEntity(OrganisationEntity organisation, String name, String address, String phone, Boolean is_active) {
+        this.organisation = organisation;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.is_active = is_active;
+    }
 
     public Long getId() {
         return id;
