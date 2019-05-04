@@ -104,10 +104,10 @@ public class UserController {
             value = "/update",
             method = {POST})
     @ResponseBody
-    public String userUpdate (
+    public void userUpdate (
             @RequestParam Map<String,String> params
     ) {
-        return userService.update(params);
+        userService.update(params);
     }
 
     /**
@@ -134,9 +134,9 @@ public class UserController {
             value = "/save",
             method = {POST})
     @ResponseBody
-    public String userSave(
+    public void userSave(
             @RequestParam Map<String,String> params
     ){
-        return userService.save(params);
+        userService.save(params);
     }
 }

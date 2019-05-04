@@ -24,15 +24,16 @@ public interface OrganisationDao {
     OrganisationEntity getById (Long id);
 
     /**
+     * Изменить объект.
+     * @param params строка с параметрами, разделенная запятой.
+     */
+    String update (String params);
+
+    /**
      * Сохраненить объект.
      * @param organisationEntity
      */
     String save (OrganisationEntity organisationEntity);
 
-    /**
-     * Изменить объект.
-     * @param params строка с параметрами, разделенная запятой.
-     */
-    String update (String params);
 }
 

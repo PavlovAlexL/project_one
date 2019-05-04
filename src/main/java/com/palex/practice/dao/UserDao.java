@@ -1,25 +1,23 @@
 package com.palex.practice.dao;
 
 import com.palex.practice.model.UserEntity;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * DAO для доступа UserDao
  */
+
 public interface UserDao {
-    /**
-     * Получение коллекции объектов по id.
-     * @param id
-     * @return
-     */
-    List<UserEntity> getOfficesById(Long id);
 
     /**
-     * Получение коллекции по параметрам.
-     * @param param
+     * Получение коллекции объектов по параметрам.
+     * @param params
      * @return
      */
-    List<UserEntity> getByParams(Object ... param);
+    List<UserEntity> getByParams(Map<String,String> params);
 
     /**
      * Получение объекта по ID.
@@ -29,14 +27,15 @@ public interface UserDao {
     UserEntity getById (Long id);
 
     /**
-     * Сохранить объект office.
-     * @param userEntity
+     * Сохраненить объект.
+     * @param params
      */
-    void save (UserEntity userEntity);
+    void save (Map<String,String> params);
 
     /**
-     * Изменить объект office.
-     * @param userEntity
+     * Изменить объект.
+     * @param params строка с параметрами, разделенная запятой.
      */
-    void update (UserEntity userEntity);
+    void update (Map<String,String> params);
 }
+

@@ -26,3 +26,6 @@ INSERT INTO Country (code, name) VALUES (438,	'ЛИХТЕНШТЕЙН');
 INSERT INTO Country (code, name) VALUES (440,	'ЛИТВА');
 INSERT INTO Country (code, name) VALUES (442,	'ЛЮКСЕМБУРГ');
 INSERT INTO Country (code, name) VALUES (276,	'ГЕРМАНИЯ');
+
+
+

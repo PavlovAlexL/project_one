@@ -1,6 +1,5 @@
 package com.palex.practice.controller;
 
-import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.view.OfficeView;
 import com.palex.practice.service.OfficeService;
 import org.springframework.web.bind.annotation.*;
@@ -25,33 +24,22 @@ public class OfficeController {
         this.officeService = officeService;
     }
 
-    /*
-     * Запрос списка по параметрам.
-     * @param orgId обязательный параметр.
-     * @param officeName
-     * @param officePhone
-     * @param officeStatus
+    /**
+     * Запрос списка по параметрам
+     * @param params коллекция параметров
+     * {
+     *   “orgId”:””, //обязательный параметр
+     *   “name”:””,
+     *   “phone”:””,
+     *   “isActive”
+     * }
      * @return
+     * {
+     *     “id”:””,
+     *     “name”:””,
+     *     “isActive”:”true”
+     *   },...
      */
-    /*
-    @RequestMapping(
-            value = "/list",
-            params = {"orgId", "name", "phone", "isActive"},
-            method = {POST})
-    @ResponseBody
-    public List<OfficeView> officeList (
-            @RequestParam("orgId") Long orgId,
-            @RequestParam("name") String officeName,
-            @RequestParam("phone") String officePhone,
-            @RequestParam("isActive") Boolean officeStatus
-    ) {
-        String params = orgId.toString();
-        if(officeName != null) {params += " ," + officeName;}
-        if(officePhone != null) {params += " ," + officePhone;}
-        if(officeStatus != null) {params += " ," + officeStatus;}
-        return officeService.list(params);
-    }
-    */
     @RequestMapping(
             value = "/list",
             method = {POST})
@@ -66,8 +54,15 @@ public class OfficeController {
 
     /**
      * Запрос по Id.
-     * @param officeId
+     * @param officeId идентификатор объекта
      * @return
+     * {
+     *   “id”:””,
+     *   “name”:””,
+     *   “address”:””,
+     *   “phone”,””,
+     *   “isActive”:”true”
+     * }
      */
     @RequestMapping(
             value = "/{id:\\\\d+}",
@@ -79,43 +74,20 @@ public class OfficeController {
         return officeService.getById(officeId);
     }
 
-
-
-    /*
-     * Запрос на обновление.
-     * @param officeId - обязательный параметр.
-     * @param officeName - обязательный параметр.
-     * @param officeAddress - обязательный параметр.
-     * @param officePhone
-     * @param isAvtive
-     * @return "result":"(success or none)"
-     */
-    /*
-    @RequestMapping(
-            value = "/update",
-            params = {"id", "name", "address", "phone", "isActive"},
-            method = {POST})
-    @ResponseBody
-    public String officeUpdate(
-            @PathVariable("id") Long officeId,
-            @PathVariable("name") String officeName,
-            @PathVariable("address") String officeAddress,
-            @PathVariable("phone") String officePhone,
-            @PathVariable("isActive") String isAvtive
-    ){
-        return officeService.update();
-    }
-    */
-
     /**
-     *
-     * @param params    Карта с парамерами
-     * officeId - обязательный параметр.
-     * officeName - обязательный параметр.
-     * officeAddress - обязательный параметр.
-     * officePhone
-     * isAvtive
+     * Запрос на обновление.
+     * @param params коллекция параметров.
+     * {
+     *   “id”:””, //обязательный параметр
+     *   “name”:””, //обязательный параметр
+     *   “address”:””, //обязательный параметр
+     *   “phone”,””,
+     *   “isActive”:”true” //пример
+     * }
      * @return
+     * {
+     *     “result”:”success”
+     * }
      */
     @RequestMapping(
             value = "/update",
@@ -128,10 +100,19 @@ public class OfficeController {
     }
 
     /**
-     *
-     * @param params
-     * orgId обязательный параметр
+     * Запрос на сохранение.
+     * @param params коллекция параметров.
+     * {
+     *   “orgId”:””, //обязательный параметр
+     *   “name”:””,
+     *   “address”:””,
+     *   “phone”,””,
+     *   “isActive”:”true”
+     * }
      * @return
+     * {
+     *     “result”:”success”
+     * }
      */
     @RequestMapping(
             value = "/save",

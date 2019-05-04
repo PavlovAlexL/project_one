@@ -3,9 +3,10 @@ package com.palex.practice.controller;
 import com.palex.practice.view.OrganisationView;
 import com.palex.practice.service.OrganisationService;
 import org.springframework.web.bind.annotation.*;
-import com.palex.practice.model.OrganisationEntity;
 
-
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -46,14 +47,14 @@ public class OrganisationController {
             method = {POST})
     @ResponseBody
     public List<OrganisationView> organisationList (
-            @RequestParam("name") String organisationName,
+            @RequestParam("name") @Valid @NotNull String organisationName,
             @RequestParam("inn") String organisationInn,
             @RequestParam("isActive") Boolean organisationStatus
     ) {
-        String params = organisationName;
-        if(organisationInn != null) {params += " ," + organisationInn;}
-        if(organisationStatus != null) {params += " ," + organisationStatus;}
-        return organisationService.list(params);
+        return organisationService.list(
+                organisationName,
+                organisationInn,
+                organisationStatus);
     }
 
     /**
@@ -73,7 +74,7 @@ public class OrganisationController {
             method = {GET})
     @ResponseBody
     public OrganisationView organisationGetById(
-            @PathVariable("id") Long organisationId
+            @PathVariable("id") @Valid @NotNull Long organisationId
     ){
         return organisationService.getById(organisationId);
     }
@@ -105,20 +106,25 @@ public class OrganisationController {
             params = {"id", "name", "fullName", "inn", "kpp", "address", "phone", "isActive"},
             method = {POST})
     @ResponseBody
-    public void organisatonUpdate(
-            @PathVariable("id") Long organisationId,
-            @PathVariable("name") String organisationName,
-            @PathVariable("fullName") String organisationFullName,
-            @PathVariable("inn") String organisationInn,
-            @PathVariable("kpp") String organisationKpp,
-            @PathVariable("address") String organisationAddress,
-            @PathVariable("phone") String organisationPhone,
-            @PathVariable("isActive") Boolean organisationStatus
+    public String organisatonUpdate(
+            @RequestParam("id") @Valid @NotNull Long organisationId,
+            @RequestParam("name") @Valid @NotNull String organisationName,
+            @RequestParam("fullName") @Valid @NotNull String organisationFullName,
+            @RequestParam("inn") @Valid @NotNull @Size(max = 10) String organisationInn,
+            @RequestParam("kpp") @Valid @NotNull @Size(max = 9) String organisationKpp,
+            @RequestParam("address") @Valid @NotNull String organisationAddress,
+            @RequestParam("phone") String organisationPhone,
+            @RequestParam("isActive") Boolean organisationStatus
     ){
-        String params = organisationId + " ," +  organisationName + " ," + organisationFullName + " ," + organisationInn + " ," + organisationKpp + " ," + organisationAddress;
-        if(organisationPhone != null) params += " ," + organisationPhone;
-        if(organisationStatus != null) params += " ," + organisationStatus;
-        String result = organisationService.update(params);
+        return organisationService.update(
+                organisationId,
+                organisationName,
+                organisationFullName,
+                organisationInn,
+                organisationKpp,
+                organisationAddress,
+                organisationPhone,
+                organisationStatus);
     }
 
     /**
@@ -132,9 +138,11 @@ public class OrganisationController {
      * @param organisationPhone
      * @param organisationStatus
      * {
-     *   “orgId”:””, //обязательный параметр
-     *   “name”:””,
-     *   “address”:””,
+     *   “name”:””, //обязательный параметр
+     *   “fullName”:””, //обязательный параметр
+     *   “inn”:””, //обязательный параметр
+     *   “kpp”:””, //обязательный параметр
+     *   “address”:””, //обязательный параметр
      *   “phone”,””,
      *   “isActive”:”true”
      * }
@@ -149,15 +157,21 @@ public class OrganisationController {
             method = {POST})
     @ResponseBody
     public String organisationSave(
-            @PathVariable("name") String organisationName,
-            @PathVariable("fullName") String organisationFullName,
-            @PathVariable("inn") String organisationInn,
-            @PathVariable("kpp") String organisationKpp,
-            @PathVariable("address") String organisationAddress,
-            @PathVariable("phone") String organisationPhone,
-            @PathVariable("isActive") Boolean organisationStatus
+            @RequestParam("name") @Valid @NotNull String organisationName,
+            @RequestParam("fullName") @Valid @NotNull String organisationFullName,
+            @RequestParam("inn") @Valid @NotNull @Size(max = 10) String organisationInn,
+            @RequestParam("kpp") @Valid @NotNull @Size(max = 9) String organisationKpp,
+            @RequestParam("address") @Valid @NotNull String organisationAddress,
+            @RequestParam("phone") String organisationPhone,
+            @RequestParam("isActive") Boolean organisationStatus
     ){
-        organisationService.save(new OrganisationEntity(organisationName, organisationFullName, organisationInn, organisationKpp, organisationAddress, organisationPhone, organisationStatus));
+        return organisationService.save(organisationName,
+                organisationFullName,
+                organisationInn,
+                organisationKpp,
+                organisationAddress,
+                organisationPhone,
+                organisationStatus);
     }
 
 }

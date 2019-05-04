@@ -20,8 +20,10 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     @Override
-    public List<OrganisationView> list(String params) {
-        List<OrganisationEntity> result = organisationDao.getByParams(params);
+    public List<OrganisationView> list(String organisationName,
+                                       String organisationInn,
+                                       Boolean organisationStatus) {
+        List<OrganisationEntity> result = organisationDao.getByParams(organisationName, organisationInn, organisationStatus);
         return mapperFacade.mapAsList(result, OrganisationView.class);
     }
 
@@ -32,13 +34,29 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     @Override
-    public String update(String params) {
-        return organisationDao.update(params);
+    public String update(Long organisationId,
+                         String organisationName,
+                         String organisationFullName,
+                         String organisationInn,
+                         String organisationKpp,
+                         String organisationAddress,
+                         String organisationPhone,
+                         Boolean organisationStatus) {
+        return organisationDao.update(
+                organisationId,
+                organisationName,
+                organisationFullName,
+                organisationInn,
+                organisationKpp,
+                organisationAddress,
+                organisationPhone,
+                organisationStatus);
     }
 
     @Override
-    public String save(OrganisationEntity organisation) {
-        return organisationDao.save(organisation);
-
+    public String save(String organisationName, String organisationFullName, String organisationInn, String organisationKpp,String organisationAddress, String organisationPhone, Boolean organisationStatus){
+        OrganisationEntity oe = new OrganisationEntity(organisationName, organisationFullName, organisationInn, organisationKpp, organisationAddress, organisationPhone, organisationStatus);
+        return organisationDao.save(oe);
     }
 }
+

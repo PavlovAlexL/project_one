@@ -5,9 +5,6 @@ import javax.validation.constraints.NotEmpty;
 public class DocksTypeView {
 
     @NotEmpty
-    private Long id;
-
-    @NotEmpty
     private String code;
 
     @NotEmpty
@@ -15,15 +12,7 @@ public class DocksTypeView {
 
     @Override
     public String toString() {
-        return "{id:" + id + ";code:" + code + ";name:" +name + "}";
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
+        return "{code:" + code + ";name:" +name + "}";
     }
 
     public String getCode() {

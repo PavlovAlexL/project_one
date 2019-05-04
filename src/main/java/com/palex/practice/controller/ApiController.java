@@ -7,11 +7,10 @@ import com.palex.practice.view.DocksTypeView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 
 /**
@@ -34,13 +33,15 @@ public class ApiController {
      * Вывод справочника типов документов.
      * @return Коллекция типов документов.
      * {
-     *     “name”:“”,
-     *     “code”:””
+     * data”:{
+     *          “name”:“”,
+     *          “code”:””
+     *       }
      * }
      */
     @RequestMapping(
             value = "/countries",
-            method = {POST})    //may be GET???
+            method = {GET})
     @ResponseBody
     public List<CountryView> countries() {
         return countryService.countries();
@@ -56,7 +57,7 @@ public class ApiController {
      */
     @RequestMapping(
             value = "/docs",
-            method = {POST})
+            method = {GET})
     @ResponseBody
     public List<DocksTypeView> docs(){
         return docksTypeService.docs();

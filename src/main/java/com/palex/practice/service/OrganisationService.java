@@ -10,7 +10,9 @@ public interface OrganisationService {
     /**
      * Отобразить объекты по параметрам.
      */
-    List<OrganisationView> list(String params);
+    List<OrganisationView> list( String organisationName,
+                                 String organisationInn,
+                                 Boolean organisationStatus);
 
     /**
      *  Отобразить объект по Id.
@@ -20,11 +22,24 @@ public interface OrganisationService {
     /**
      * Изменить объект.
      */
-    String update(String params);
+    String update(Long organisationId,
+                  String organisationName,
+                  String organisationFullName,
+                  String organisationInn,
+                  String organisationKpp,
+                  String organisationAddress,
+                  String organisationPhone,
+                  Boolean organisationStatus);
 
     /**
      * Создать объект.
      */
-    String save(OrganisationEntity organisationEntity);
+    String save(String organisationName,
+                String organisationFullName,
+                String organisationInn,
+                String organisationKpp,
+                String organisationAddress,
+                String organisationPhone,
+                Boolean organisationStatus);
 
 }

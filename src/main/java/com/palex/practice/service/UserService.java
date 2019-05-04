@@ -1,27 +1,30 @@
 package com.palex.practice.service;
 
-import com.palex.practice.model.UserEntity;
+import com.palex.practice.view.UserView;
+
+import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
     /**
      * Отобразить объекта с параметрами.
      */
-    void list(Object ... parametr);
+    List<UserView> list(Map<String,String> params);
 
     /**
      *  Отобразить объект по Id.
      */
-    void getById(Long id);
+    UserView getById(Long id);
 
     /**
      * Изменить объект.
      */
-    void update(UserEntity user);
+    void update(Map<String,String> params);
 
     /**
      * Создать объект.
      */
-    void save(UserEntity user);
+    void save(Map<String,String> params);
 
 }

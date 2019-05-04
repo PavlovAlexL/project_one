@@ -5,9 +5,6 @@ import javax.validation.constraints.NotEmpty;
 public class CountryView {
 
     @NotEmpty
-    private Long id;
-
-    @NotEmpty
     private String code;
 
     @NotEmpty
@@ -15,15 +12,7 @@ public class CountryView {
 
     @Override
     public String toString() {
-        return "{id:" + id + ";code:" + code + ";name:" +name + "}";
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        return "{code:" + code + ";name:" +name + "}";
     }
 
     public String getCode() {
