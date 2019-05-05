@@ -3,18 +3,19 @@ package com.palex.practice.dao;
 import com.palex.practice.model.OrganisationEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * DAO для доступа к организации.
+ * DAO для доступа к таблице организация.
  */
 public interface OrganisationDao {
 
     /**
      * Получение коллекции объектов по параметрам.
-     * @param params
+     * @param name
      * @return
      */
-    List<OrganisationEntity> getByParams(Object ... params);
+    List<OrganisationEntity> getByParams(String name);
 
     /**
      * Получение объекта по ID.
@@ -25,15 +26,15 @@ public interface OrganisationDao {
 
     /**
      * Изменить объект.
-     * @param params строка с параметрами, разделенная запятой.
+     * @param
      */
-    String update (String params);
+    void update (Map<String, String> params);
 
     /**
      * Сохраненить объект.
      * @param organisationEntity
      */
-    String save (OrganisationEntity organisationEntity);
+    void save (OrganisationEntity organisationEntity);
 
 }
 

@@ -50,8 +50,6 @@ public class OfficeController {
         return officeService.list(params);
     }
 
-
-
     /**
      * Запрос по Id.
      * @param officeId идентификатор объекта
@@ -65,7 +63,7 @@ public class OfficeController {
      * }
      */
     @RequestMapping(
-            value = "/{id:\\\\d+}",
+            value = "/{id}",
             method = {GET})
     @ResponseBody
     public OfficeView officeGetById(
@@ -96,7 +94,8 @@ public class OfficeController {
     public String officeUpdate (
             @RequestParam Map<String,String> params
     ) {
-        return officeService.update(params);
+        officeService.update(params);
+        return "officeUpdate";
     }
 
     /**
@@ -120,8 +119,11 @@ public class OfficeController {
     @ResponseBody
     public String officeSave(
             @RequestParam Map<String,String> params
-    ){
-
-        return officeService.save(params);
+    ) throws Exception {
+        System.out.println("officeController");
+        officeService.save(params);
+        return "OfficeSave";
     }
+
+
 }

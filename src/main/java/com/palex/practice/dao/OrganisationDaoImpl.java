@@ -4,8 +4,10 @@ import com.palex.practice.model.OrganisationEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class OrganisationDaoImpl implements OrganisationDao {
@@ -17,25 +19,41 @@ public class OrganisationDaoImpl implements OrganisationDao {
     }
 
     @Override
-    public List<OrganisationEntity> getByParams(Object... params) {
-        return null;
-    }
-
-    @Override
-    public OrganisationEntity getById(Long id) {
-        return null;
-    }
-
-    @Override
-    public String update(String params) {
-        return null;
+    @Transactional
+    public List<OrganisationEntity> getByParams(String name) {
+        TypedQuery<OrganisationEntity> query = em.createQuery("SELECT o FROM OrganisationEntity o where o.name = :name", OrganisationEntity.class);
+        return query.setParameter("name", name).getResultList();
     }
 
     @Override
     @Transactional
-    public String save(OrganisationEntity organisationEntity) {
-        System.out.println(organisationEntity.getFull_Name());
+    public OrganisationEntity getById(Long id) {
+        return em.find(OrganisationEntity.class, id);
+    }
+
+    @Override
+    @Transactional
+    public void update(Map<String, String> params) {
+        OrganisationEntity organisationEntity = em.find(OrganisationEntity.class, Long.parseLong(params.get("id")));
+
+        organisationEntity.setName(params.get("name"));
+        organisationEntity.setFull_Name(params.get("fullName"));
+        organisationEntity.setInn(params.get("inn"));
+        organisationEntity.setKpp(params.get("kpp"));
+        organisationEntity.setAddress(params.get("address"));
+        if(params.containsKey("phone")){
+            organisationEntity.setPhone(params.get("phone"));
+        }
+        if(params.containsKey("isActive")) {
+            organisationEntity.setIs_active(Boolean.parseBoolean(params.get("isActive")));
+        }
+        em.merge(organisationEntity);
+
+    }
+
+    @Override
+    @Transactional
+    public void save(OrganisationEntity organisationEntity) {
         em.persist(organisationEntity);
-        return "save";
     }
 }

@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -72,17 +73,18 @@ public class OfficeEntity {
     @OneToMany(mappedBy = "office", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserEntity> users;
 
+
     public OfficeEntity(){
 
     }
 
 
-    public OfficeEntity(OrganisationEntity organisation, String name, String address, String phone, Boolean is_active) {
-        this.organisation = organisation;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.is_active = is_active;
+    public OfficeEntity(Map<String, String> params, OrganisationEntity organisationEntity) {
+        this.organisation = organisationEntity;
+        this.name = params.get("name");
+        this.address = params.get("address");
+        this.phone = params.get("phone");
+        this.is_active = Boolean.parseBoolean(params.get("is_active"));
     }
 
     public Long getId() {

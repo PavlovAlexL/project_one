@@ -12,10 +12,10 @@ public interface OfficeDao {
 
     /**
      * Получение коллекции по параметрам.
-     * @param params
+     * @param orgId
      * @return
      */
-    List<OfficeEntity> getByParams(Map<String, String> params);
+    List<OfficeEntity> getByParams(String orgId);
 
     /**
      * Получение объекта по ID
@@ -25,14 +25,14 @@ public interface OfficeDao {
     OfficeEntity getById (Long id);
 
     /**
-     * Сохранить объект office
-     * @param params карта параметров
-     */
-    void save (Map<String, String> params);
-
-    /**
      * Изменить объект office
      * @param params карта параметров
      */
     void update (Map<String, String> params);
+
+    /**
+     * Сохранить объект office
+     * @param
+     */
+    void save (OfficeEntity officeEntity);
  }

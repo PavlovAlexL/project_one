@@ -1,7 +1,10 @@
 package com.palex.practice.view;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.validation.constraints.NotEmpty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CountryView {
 
     @NotEmpty
@@ -9,11 +12,6 @@ public class CountryView {
 
     @NotEmpty
     private String name;
-
-    @Override
-    public String toString() {
-        return "{code:" + code + ";name:" +name + "}";
-    }
 
     public String getCode() {
         return code;

@@ -1,18 +1,16 @@
 package com.palex.practice.service;
 
-import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.view.OrganisationView;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrganisationService {
 
     /**
      * Отобразить объекты по параметрам.
      */
-    List<OrganisationView> list( String organisationName,
-                                 String organisationInn,
-                                 Boolean organisationStatus);
+    List<OrganisationView> list(Map<String, String> params);
 
     /**
      *  Отобразить объект по Id.
@@ -22,24 +20,11 @@ public interface OrganisationService {
     /**
      * Изменить объект.
      */
-    String update(Long organisationId,
-                  String organisationName,
-                  String organisationFullName,
-                  String organisationInn,
-                  String organisationKpp,
-                  String organisationAddress,
-                  String organisationPhone,
-                  Boolean organisationStatus);
+    void update(Map<String, String> params);
 
     /**
      * Создать объект.
      */
-    String save(String organisationName,
-                String organisationFullName,
-                String organisationInn,
-                String organisationKpp,
-                String organisationAddress,
-                String organisationPhone,
-                Boolean organisationStatus);
+    void save(Map<String, String> params);
 
 }

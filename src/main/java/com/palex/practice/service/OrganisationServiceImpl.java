@@ -6,7 +6,9 @@ import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.view.OrganisationView;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrganisationServiceImpl implements OrganisationService {
@@ -20,10 +22,31 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     @Override
-    public List<OrganisationView> list(String organisationName,
-                                       String organisationInn,
-                                       Boolean organisationStatus) {
-        List<OrganisationEntity> result = organisationDao.getByParams(organisationName, organisationInn, organisationStatus);
+    public List<OrganisationView> list(Map<String, String> params) {
+        List<OrganisationEntity> result = organisationDao.getByParams(params.get("name"));
+
+        if(params.containsKey("inn")&params.get("inn") != null){
+            List<OrganisationEntity> temp = new ArrayList<>();
+            String inn = params.get("inn");
+            for(OrganisationEntity oe : result){
+                if(oe.getInn().equals(inn)){
+                    temp.add(oe);
+                }
+            }
+            result = temp;
+        }
+
+        if(params.containsKey("isActive")&params.get("isActive") != null){
+            List<OrganisationEntity> temp = new ArrayList<>();
+            Boolean status = Boolean.parseBoolean(params.get("isActive"));
+            for(OrganisationEntity oe : result){
+                if(oe.getIs_active().equals(status)){
+                    temp.add(oe);
+                }
+            }
+            result = temp;
+        }
+
         return mapperFacade.mapAsList(result, OrganisationView.class);
     }
 
@@ -34,29 +57,15 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     @Override
-    public String update(Long organisationId,
-                         String organisationName,
-                         String organisationFullName,
-                         String organisationInn,
-                         String organisationKpp,
-                         String organisationAddress,
-                         String organisationPhone,
-                         Boolean organisationStatus) {
-        return organisationDao.update(
-                organisationId,
-                organisationName,
-                organisationFullName,
-                organisationInn,
-                organisationKpp,
-                organisationAddress,
-                organisationPhone,
-                organisationStatus);
+    public void update(Map<String, String> params) {
+        organisationDao.update(params);
     }
 
     @Override
-    public String save(String organisationName, String organisationFullName, String organisationInn, String organisationKpp,String organisationAddress, String organisationPhone, Boolean organisationStatus){
-        OrganisationEntity oe = new OrganisationEntity(organisationName, organisationFullName, organisationInn, organisationKpp, organisationAddress, organisationPhone, organisationStatus);
-        return organisationDao.save(oe);
+    public void save(Map<String, String> params){
+        OrganisationEntity oe = new OrganisationEntity(params);
+        organisationDao.save(oe);
     }
+
 }
 

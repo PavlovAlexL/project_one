@@ -9,6 +9,7 @@ import javax.persistence.Version;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -82,15 +83,19 @@ public class OrganisationEntity {
     public OrganisationEntity(){
     }
 
-    public OrganisationEntity(String name, String full_Name, String inn, String kpp, String address, String phone, Boolean is_active) {
-        this.name = name;
-        this.full_Name = full_Name;
-        this.inn = inn;
-        this.kpp = kpp;
-        this.address = address;
-        this.phone = phone;
-        this.is_active = is_active;
+    public OrganisationEntity(Map<String, String> params){
+                if(params.containsKey("id")) {
+                    this.id = Long.parseLong(params.get("id"));
+                }
+                this.name = params.get("name");
+                this.full_Name = params.get("fullName");
+                this.inn = params.get("inn");
+                this.kpp = params.get("kpp");
+                this.address = params.get("address");
+                this.phone = params.get("phone");
+                this.is_active = Boolean.parseBoolean(params.get("isActive"));
     }
+
 
     public Long getId() {
         return id;

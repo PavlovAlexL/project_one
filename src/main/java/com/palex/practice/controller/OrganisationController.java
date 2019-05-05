@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -25,9 +25,7 @@ public class OrganisationController {
 
     /**
      * Запрос списка по параметрам.
-     * @param organisationName обязательный параметр.
-     * @param organisationInn
-     * @param organisationStatus
+     * @param params
      * {
      *   “orgId”:””, //обязательный параметр
      *   “name”:””,
@@ -43,18 +41,12 @@ public class OrganisationController {
      */
     @RequestMapping(
             value = "/list",
-            params = {"name", "inn", "isActive"},
             method = {POST})
     @ResponseBody
     public List<OrganisationView> organisationList (
-            @RequestParam("name") @Valid @NotNull String organisationName,
-            @RequestParam("inn") String organisationInn,
-            @RequestParam("isActive") Boolean organisationStatus
+            @RequestParam Map<String, String> params
     ) {
-        return organisationService.list(
-                organisationName,
-                organisationInn,
-                organisationStatus);
+        return organisationService.list(params);
     }
 
     /**
@@ -70,7 +62,7 @@ public class OrganisationController {
      * }
      */
     @RequestMapping(
-            value = "/{id:\\\\d+}",
+            value = "/{id}",
             method = {GET})
     @ResponseBody
     public OrganisationView organisationGetById(
@@ -81,14 +73,7 @@ public class OrganisationController {
 
     /**
      * Запрос на обновление
-     * @param organisationId обязательный параметр
-     * @param organisationName обязательный параметр
-     * @param organisationFullName обязательный параметр
-     * @param organisationInn обязательный параметр
-     * @param organisationKpp обязательный параметр
-     * @param organisationAddress обязательный параметр
-     * @param organisationPhone
-     * @param organisationStatus
+     * @param params
      * {
      *   “id”:””, //обязательный параметр
      *   “name”:””, //обязательный параметр
@@ -103,40 +88,18 @@ public class OrganisationController {
      */
     @RequestMapping(
             value = "/update",
-            params = {"id", "name", "fullName", "inn", "kpp", "address", "phone", "isActive"},
             method = {POST})
     @ResponseBody
     public String organisatonUpdate(
-            @RequestParam("id") @Valid @NotNull Long organisationId,
-            @RequestParam("name") @Valid @NotNull String organisationName,
-            @RequestParam("fullName") @Valid @NotNull String organisationFullName,
-            @RequestParam("inn") @Valid @NotNull @Size(max = 10) String organisationInn,
-            @RequestParam("kpp") @Valid @NotNull @Size(max = 9) String organisationKpp,
-            @RequestParam("address") @Valid @NotNull String organisationAddress,
-            @RequestParam("phone") String organisationPhone,
-            @RequestParam("isActive") Boolean organisationStatus
+            @RequestParam Map<String, String> params
     ){
-        return organisationService.update(
-                organisationId,
-                organisationName,
-                organisationFullName,
-                organisationInn,
-                organisationKpp,
-                organisationAddress,
-                organisationPhone,
-                organisationStatus);
+        organisationService.update(params);
+        return "organisatonUpdate";
     }
 
     /**
      * Запрос на сохранение
-     *
-     * @param organisationName обязательный параметр
-     * @param organisationFullName обязательный параметр
-     * @param organisationInn обязательный параметр
-     * @param organisationKpp обязательный параметр
-     * @param organisationAddress обязательный параметр
-     * @param organisationPhone
-     * @param organisationStatus
+     * @param params collection of parameters
      * {
      *   “name”:””, //обязательный параметр
      *   “fullName”:””, //обязательный параметр
@@ -153,25 +116,13 @@ public class OrganisationController {
      */
     @RequestMapping(
             value = "/save",
-            params = {"name", "fullName", "inn", "kpp", "address", "phone", "isActive"},
             method = {POST})
     @ResponseBody
     public String organisationSave(
-            @RequestParam("name") @Valid @NotNull String organisationName,
-            @RequestParam("fullName") @Valid @NotNull String organisationFullName,
-            @RequestParam("inn") @Valid @NotNull @Size(max = 10) String organisationInn,
-            @RequestParam("kpp") @Valid @NotNull @Size(max = 9) String organisationKpp,
-            @RequestParam("address") @Valid @NotNull String organisationAddress,
-            @RequestParam("phone") String organisationPhone,
-            @RequestParam("isActive") Boolean organisationStatus
+            @RequestParam Map<String, String> params
     ){
-        return organisationService.save(organisationName,
-                organisationFullName,
-                organisationInn,
-                organisationKpp,
-                organisationAddress,
-                organisationPhone,
-                organisationStatus);
+        organisationService.save(params);
+        return "organisationSave";
     }
 
 }
