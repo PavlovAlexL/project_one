@@ -1,6 +1,7 @@
 package com.palex.practice.dao;
 
 import com.palex.practice.model.OfficeEntity;
+import com.palex.practice.model.OrganisationEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,10 @@ public interface OfficeDao {
 
     /**
      * Получение коллекции по параметрам.
-     * @param orgId
+     * @param
      * @return
      */
-    List<OfficeEntity> getByParams(String orgId);
+    List<OfficeEntity> getByParams(OrganisationEntity organisationEntity);
 
     /**
      * Получение объекта по ID

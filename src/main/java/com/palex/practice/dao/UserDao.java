@@ -27,15 +27,15 @@ public interface UserDao {
     UserEntity getById (Long id);
 
     /**
-     * Сохраненить объект.
-     * @param params
-     */
-    void save (Map<String,String> params);
-
-    /**
      * Изменить объект.
      * @param params строка с параметрами, разделенная запятой.
      */
     void update (Map<String,String> params);
+
+    /**
+     * Сохраненить объект.
+     * @param
+     */
+    void save (UserEntity userEntity);
 }
 

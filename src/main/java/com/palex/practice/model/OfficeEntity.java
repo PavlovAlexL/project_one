@@ -1,16 +1,6 @@
 package com.palex.practice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Version;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.CascadeType;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
@@ -25,7 +15,7 @@ public class OfficeEntity {
      * Уникальный идентификатор
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -150,4 +140,17 @@ public class OfficeEntity {
         this.users = users;
     }
 
+    @Override
+    public String toString() {
+        return "OfficeEntity{" +
+                "id=" + id +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", is_active=" + is_active +
+                ", organisation=" + organisation +
+                ", users=" + users +
+                '}';
+    }
 }

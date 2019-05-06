@@ -23,7 +23,7 @@ public class UserController {
 
     /**
      * Запрос списка по параметрам
-     *  “userId”:””, //обязательный параметр
+     *   “userId”:””, //обязательный параметр
      *   “firstName”:””,
      *   “lastName”:””,
      *   “middleName”:””,
@@ -71,7 +71,7 @@ public class UserController {
      * }
      */
     @RequestMapping(
-            value = "/{id:\\\\d+}",
+            value = "/{id}",
             method = {GET})
     @ResponseBody
     public UserView userGetById(
@@ -104,10 +104,11 @@ public class UserController {
             value = "/update",
             method = {POST})
     @ResponseBody
-    public void userUpdate (
+    public String userUpdate (
             @RequestParam Map<String,String> params
     ) {
         userService.update(params);
+        return "userUpdate";
     }
 
     /**
@@ -134,9 +135,10 @@ public class UserController {
             value = "/save",
             method = {POST})
     @ResponseBody
-    public void userSave(
+    public String userSave(
             @RequestParam Map<String,String> params
     ){
         userService.save(params);
+        return "UserSave";
     }
 }

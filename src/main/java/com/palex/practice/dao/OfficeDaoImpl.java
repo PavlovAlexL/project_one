@@ -1,11 +1,13 @@
 package com.palex.practice.dao;
 
 import com.palex.practice.model.OfficeEntity;
+import com.palex.practice.model.OrganisationEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,9 +22,9 @@ public class OfficeDaoImpl implements OfficeDao{
 
     @Override
     @Transactional
-    public List<OfficeEntity> getByParams(String orgId) {
-        TypedQuery<OfficeEntity> query = em.createQuery("SELECT o FROM OfficeEntity o where o.orgId = :orgId", OfficeEntity.class);
-        return query.setParameter("orgId", Long.parseLong(orgId)).getResultList();
+    public List<OfficeEntity> getByParams(OrganisationEntity organisationEntity) {
+        TypedQuery<OfficeEntity> query = em.createQuery("SELECT o FROM OfficeEntity o where o.organisation = :organisation", OfficeEntity.class);
+        return query.setParameter("organisation", organisationEntity).getResultList();
     }
 
     @Override
@@ -50,7 +52,6 @@ public class OfficeDaoImpl implements OfficeDao{
     @Override
     @Transactional
     public void save(OfficeEntity officeEntity) {
-        System.out.println("officeDao");
         em.persist(officeEntity);
     }
 }

@@ -9,6 +9,7 @@ import com.palex.practice.view.OfficeView;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,15 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public List<OfficeView> list(Map<String, String> params) {
-        List<OfficeEntity> result = officeDao.getByParams(params.get("orgId"));
+        //OrganisationEntity organisationEntity = organisationDao.getById(Long.parseLong(params.get("orgId")));
+        //System.out.println(organisationEntity);
+        ////List<OfficeEntity> result = officeDao.getByParams(organisationEntity);
+        //List<OfficeEntity> result = new ArrayList<>(organisationEntity.getOffices());
+        //System.out.println(result);
+        List<OfficeEntity> result = new ArrayList<>();
 
+
+        System.out.println(result);
         if(params.containsKey("name")&params.get("name") != null){
             List<OfficeEntity> temp = new ArrayList<>();
             String name = params.get("name");
@@ -75,12 +83,9 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public void save(Map<String, String> params) {
-        System.out.println("officeService");
-        System.out.println(params);
         OrganisationEntity organisationEntity = organisationDao.getById(Long.parseLong(params.get("orgId")));
-        System.out.println("officeService2");
-        OfficeEntity oe = new OfficeEntity(params, organisationEntity);
-        officeDao.save(oe);
+        OfficeEntity officeEntity = new OfficeEntity(params, organisationEntity);
+        officeDao.save(officeEntity);
     }
 
 }

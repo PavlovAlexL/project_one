@@ -1,13 +1,6 @@
 package com.palex.practice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Version;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
@@ -21,7 +14,7 @@ public class OrganisationEntity {
      * Уникальный идентификатор
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -149,10 +142,7 @@ public class OrganisationEntity {
         this.address = address;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
+    public String getPhone() { return phone; }
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -169,4 +159,23 @@ public class OrganisationEntity {
         this.offices = offices;
     }
 
+    public Set<OfficeEntity> getOffices() {
+        return offices;
+    }
+
+    @Override
+    public String toString() {
+        return "OrganisationEntity{" +
+                "id=" + id +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", full_Name='" + full_Name + '\'' +
+                ", inn='" + inn + '\'' +
+                ", kpp='" + kpp + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", is_active=" + is_active +
+                ", offices=" + offices +
+                '}';
+    }
 }

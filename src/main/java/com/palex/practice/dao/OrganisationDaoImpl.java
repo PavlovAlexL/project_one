@@ -18,17 +18,19 @@ public class OrganisationDaoImpl implements OrganisationDao {
         this.em = em;
     }
 
+
     @Override
     @Transactional
     public List<OrganisationEntity> getByParams(String name) {
         TypedQuery<OrganisationEntity> query = em.createQuery("SELECT o FROM OrganisationEntity o where o.name = :name", OrganisationEntity.class);
-        return query.setParameter("name", name).getResultList();
+        List<OrganisationEntity> result = query.setParameter("name", name).getResultList();
+        return result;
     }
 
     @Override
     @Transactional
     public OrganisationEntity getById(Long id) {
-        return em.find(OrganisationEntity.class, id);
+         return em.find(OrganisationEntity.class, id);
     }
 
     @Override
@@ -54,6 +56,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
     @Override
     @Transactional
     public void save(OrganisationEntity organisationEntity) {
+        System.out.println(organisationEntity);
         em.persist(organisationEntity);
     }
 }
