@@ -44,6 +44,14 @@ public class UserDocumentEntity {
     @JoinColumn(name="doc_type_id", nullable = false)
     private DocumentTypeEntity documentType;
 
+    public UserDocumentEntity(){
+    }
+
+    public UserDocumentEntity(String docCode, String docName, Date docNumber, String docDate) {
+        this.doc_number = doc_number;
+        this.doc_date = doc_date;
+        this.documentType = documentType;
+    }
 
     public Long getId() {
         return id;

@@ -1,6 +1,9 @@
 package com.palex.practice.model;
 
+import com.palex.practice.service.DocksTypeService;
+
 import javax.persistence.*;
+import java.util.Map;
 
 /**
  * Класс сотрудник.
@@ -81,6 +84,25 @@ public class UserEntity {
     @OneToOne
     @JoinColumn(name="citizenship_id")
     private CountryEntity country;
+
+    public UserEntity(){
+    }
+
+
+    public UserEntity(Map<String, String> params, OfficeEntity officeEntity, CountryEntity countryEntity, UserDocumentEntity userDocumentEntity){
+
+        this.first_Name = params.get("first_Name");
+        this.position = params.get("position");
+
+        this.second_Name = params.get("second_Name");
+        this.middle_Name = params.get("middle_Name");
+        this.phone = params.get("phone");
+        this.is_identified = Boolean.parseBoolean(params.get("is_identified"));
+
+        this.userDocument = userDocumentEntity;
+        this.country = countryEntity;
+        this.office = officeEntity;
+    }
 
     public Long getId() {
         return id;

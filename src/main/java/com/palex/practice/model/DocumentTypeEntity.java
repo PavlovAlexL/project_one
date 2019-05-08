@@ -28,6 +28,14 @@ public class DocumentTypeEntity {
     @Column(name="name", length = 100, nullable = false)
     private String name;
 
+    public DocumentTypeEntity(){
+    }
+
+    public DocumentTypeEntity(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

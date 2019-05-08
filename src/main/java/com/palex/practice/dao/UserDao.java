@@ -1,5 +1,6 @@
 package com.palex.practice.dao;
 
+import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.model.UserEntity;
 import org.springframework.stereotype.Repository;
 
@@ -30,7 +31,7 @@ public interface UserDao {
      * Изменить объект.
      * @param params строка с параметрами, разделенная запятой.
      */
-    void update (Map<String,String> params);
+    void update (Map<String,String> params, OfficeEntity officeEntity);
 
     /**
      * Сохраненить объект.

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<UserEntity> getByParams(Map<String, String> params) {
-        return null;
+        return new ArrayList<UserEntity>();
     }
 
     @Override
@@ -29,14 +30,30 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(Map<String, String> params) {
-        UserEntity userEntity = em.find(UserEntity.class, Long.parseLong(params.get("officeId")));
+    public void update(Map<String, String> params, OfficeEntity officeEntity) {
+        UserEntity userEntity = em.find(UserEntity.class, Long.parseLong(params.get("id")));
 
-        userEntity.
+        userEntity.setFirstName(params.get("firstName"));
+        userEntity.setPosition(params.get("position"));
+
+        if(officeEntity != null) {
+            userEntity.setOffice(officeEntity);
+        }
+        if(params.containsKey("secondName")){
+            userEntity.setSecondName(params.get("secondName"));
+        }
+        if(params.containsKey("middleName")){
+            userEntity.setMiddleName(params.get("middleName"));
+        }
+        if(params.containsKey("phone")){
+            userEntity.setPhone(params.get("phone"));
+        }
+        em.merge(userEntity);
+
     }
 
     @Override
     public void save(UserEntity userEntity) {
-
+        em.persist(userEntity);
     }
 }
