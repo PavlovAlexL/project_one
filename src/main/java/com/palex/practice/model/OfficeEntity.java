@@ -68,7 +68,6 @@ public class OfficeEntity {
 
     }
 
-
     public OfficeEntity(Map<String, String> params, OrganisationEntity organisationEntity) {
         this.organisation = organisationEntity;
         this.name = params.get("name");

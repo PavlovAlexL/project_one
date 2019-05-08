@@ -40,33 +40,53 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void update(Map<String, String> params) {
-        OfficeEntity officeEntity = null;
-        Long id = Long.parseLong(params.get("OfficeId"));
-        if(id != null){
-            officeEntity = officeDao.getById(id);
+        UserEntity userEntity = userDao.getById(Long.parseLong(params.get("id")));
+
+        if(params.containsKey("officeId") & params.get("officeId") != null ){
+            userEntity.setOffice(officeDao.getById(Long.parseLong(params.get("officeId"))));
         }
-        userDao.update(params, officeEntity);
+
+        userEntity.setFirstName(params.get("firstName"));
+
+        if(params.containsKey("secondName")){
+            userEntity.setSecondName(params.get("secondName"));
+        }
+        if(params.containsKey("middleName")){
+            userEntity.setMiddleName(params.get("middleName"));
+        }
+        userEntity.setPosition(params.get("position"));
+        if(params.containsKey("phone")){
+            userEntity.setPhone(params.get("phone"));
+        }
+        if(params.containsKey("isIdentified")){
+            userEntity.setMiddleName(params.get("isIdentified"));
+        }
+
+        if(params.containsKey("docName")){
+            userEntity.getUserDocument().setDocumentType(documentTypeDao.getByName(params.get("docName")));
+        }
+        if(params.containsKey("docNumber")){
+            userEntity.getUserDocument().setDoc_number(params.get("docNumber"));
+        }
+        if(params.containsKey("docDate")){
+            userEntity.getUserDocument().setDoc_date(params.get("docDate"));
+        }
+        
+        userDao.update(userEntity);
     }
 
     @Override
     public void save(Map<String, String> params) {
-        OfficeEntity officeEntity = officeDao.getById(Long.parseLong(params.get("officeId")));
-        CountryEntity countryEntity = countryDao.getByCode(params.get("citizenshipCode"));
+        Long id = Long.parseLong(params.get("officeId"));
+        OfficeEntity officeEntity = officeDao.getById(id);
+        UserDocumentEntity userDocumentEntity = new UserDocumentEntity();
 
-        if(params.get("docCode") != null | params.get("docName") != null | params.get("docNumber") != null | params.get("docDate") != null){
-            UserDocumentEntity userDocumentEntity = new UserDocumentEntity(params.get("docCode"), params.get("docName"), params.get("docNumber"), params.get("docDate"));
+        if(params.get("docCode") != null | params.get("docNumber") != null | params.get("docDate") != null){
+            DocumentTypeEntity documentTypeEntity = documentTypeDao.getByCode(params.get("docCode"));
+            userDocumentEntity = new UserDocumentEntity(params.get("docNumber"), params.get("docDate"), documentTypeEntity);
         }
-
-
-
-        UserDocumentEntity userDocumentEntity = new UserDocumentEntity(params.get("docCode"), params.get("docNumber"), params.get("docDate"), documentTypeEntity);
-
-
-
-
-
-        UserDocumentEntity userDocumentEntity = new UserDocumentEntity()
-        UserEntity userEntity = new UserEntity(params, officeEntity, countryEntity);
+        CountryEntity countryEntity = countryDao.getByCode(params.get("citizenshipCode"));
+        UserEntity userEntity = new UserEntity(params, officeEntity, userDocumentEntity, countryEntity);
         userDao.save(userEntity);
 
     }

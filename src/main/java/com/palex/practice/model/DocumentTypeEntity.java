@@ -56,4 +56,12 @@ public class DocumentTypeEntity {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "DocumentTypeEntity{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

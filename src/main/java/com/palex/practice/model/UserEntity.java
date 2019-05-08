@@ -74,14 +74,14 @@ public class UserEntity {
     /**
      * Идентификатор документа в таблице документов
      */
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="document_id")
     private UserDocumentEntity userDocument;
 
     /**
      * Идентификатор гражданства
      */
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="citizenship_id")
     private CountryEntity country;
 
@@ -89,19 +89,18 @@ public class UserEntity {
     }
 
 
-    public UserEntity(Map<String, String> params, OfficeEntity officeEntity, CountryEntity countryEntity, UserDocumentEntity userDocumentEntity){
+    public UserEntity(Map<String, String> params, OfficeEntity officeEntity, UserDocumentEntity userDocumentEntity, CountryEntity countryEntity){
 
-        this.first_Name = params.get("first_Name");
+        this.office = officeEntity;
+        this.first_Name = params.get("firstName");
+        this.second_Name = params.get("secondName");
+        this.middle_Name = params.get("middleName");
         this.position = params.get("position");
-
-        this.second_Name = params.get("second_Name");
-        this.middle_Name = params.get("middle_Name");
         this.phone = params.get("phone");
-        this.is_identified = Boolean.parseBoolean(params.get("is_identified"));
-
         this.userDocument = userDocumentEntity;
         this.country = countryEntity;
-        this.office = officeEntity;
+        this.is_identified = Boolean.parseBoolean(params.get("isidentified"));
+
     }
 
     public Long getId() {
@@ -188,4 +187,20 @@ public class UserEntity {
         this.country = country;
     }
 
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", version=" + version +
+                ", office=" + office +
+                ", first_Name='" + first_Name + '\'' +
+                ", second_Name='" + second_Name + '\'' +
+                ", middle_Name='" + middle_Name + '\'' +
+                ", position='" + position + '\'' +
+                ", phone='" + phone + '\'' +
+                ", is_identified=" + is_identified +
+                ", userDocument=" + userDocument +
+                ", country=" + country +
+                '}';
+    }
 }

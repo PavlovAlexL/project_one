@@ -11,4 +11,8 @@ public interface DocumentTypeDao {
 
     List<DocumentTypeEntity> getAll();
 
+    DocumentTypeEntity getByCode(String code);
+
+    DocumentTypeEntity getByName(String name);
+
 }

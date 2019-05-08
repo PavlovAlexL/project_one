@@ -8,5 +8,5 @@ import java.sql.Date;
 public interface UserDocumentDao {
     UserDocumentEntity getById(Long id);
     void save(String number, Date date, DocumentTypeEntity documentTypeEntity);
-    void update (String number, Date date, DocumentTypeEntity documentTypeEntity);
+    void update (String number, String date, DocumentTypeEntity documentTypeEntity);
 }

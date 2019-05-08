@@ -29,9 +29,9 @@ public interface UserDao {
 
     /**
      * Изменить объект.
-     * @param params строка с параметрами, разделенная запятой.
+     * @param
      */
-    void update (Map<String,String> params, OfficeEntity officeEntity);
+    void update (UserEntity userEntity);
 
     /**
      * Сохраненить объект.

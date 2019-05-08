@@ -1,6 +1,9 @@
 package com.palex.practice.model;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -40,17 +43,23 @@ public class UserDocumentEntity {
     /**
      * Связь с таблицей типов докумнетов
      */
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="doc_type_id", nullable = false)
     private DocumentTypeEntity documentType;
 
     public UserDocumentEntity(){
     }
 
-    public UserDocumentEntity(String docCode, String docName, Date docNumber, String docDate) {
-        this.doc_number = doc_number;
-        this.doc_date = doc_date;
-        this.documentType = documentType;
+    public UserDocumentEntity(String docNumber, String docDate, DocumentTypeEntity documentTypeEntity) {
+
+        this.documentType = documentTypeEntity;
+        this.doc_number = docNumber;
+        try {
+            DateFormat format = new SimpleDateFormat("dd.MM.yy");
+            this.doc_date = format.parse(docDate);
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
     }
 
     public Long getId() {
@@ -81,6 +90,15 @@ public class UserDocumentEntity {
         this.doc_date = doc_date;
     }
 
+    public void setDoc_date(String date) {
+        DateFormat format = new SimpleDateFormat("dd.MM.yy");
+        try {
+            this.doc_date = format.parse(date);
+        }catch (ParseException e){
+            e.getStackTrace();
+        }
+    }
+
     public DocumentTypeEntity getDocumentType() {
         return documentType;
     }
@@ -89,4 +107,14 @@ public class UserDocumentEntity {
         this.documentType = documentType;
     }
 
+    @Override
+    public String toString() {
+        return "UserDocumentEntity{" +
+                "id=" + id +
+                ", version=" + version +
+                ", doc_number='" + doc_number + '\'' +
+                ", doc_date=" + doc_date +
+                ", documentType=" + documentType +
+                '}';
+    }
 }

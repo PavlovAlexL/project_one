@@ -119,10 +119,9 @@ public class OfficeController {
     @ResponseBody
     public String officeSave(
             @RequestParam Map<String,String> params
-    ) throws Exception {
+    ) {
         officeService.save(params);
-        return "OfficeSave";
+        return "officeSave";
     }
-
 
 }
