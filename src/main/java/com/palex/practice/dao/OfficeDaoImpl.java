@@ -5,7 +5,10 @@ import com.palex.practice.model.OrganisationEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +26,10 @@ public class OfficeDaoImpl implements OfficeDao{
     @Override
     @Transactional
     public List<OfficeEntity> getByParams(OrganisationEntity organisationEntity) {
-        TypedQuery<OfficeEntity> query = em.createQuery("SELECT o FROM OfficeEntity o where o.organisation = :organisation", OfficeEntity.class);
+        Query query = em.createQuery("SELECT o FROM OfficeEntity o where o.organisation = :organisation", OfficeEntity.class);
         return query.setParameter("organisation", organisationEntity).getResultList();
+        //CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        //CriteriaQuery<OfficeEntity>
     }
 
     @Override

@@ -28,15 +28,9 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public List<OfficeView> list(Map<String, String> params) {
-        //OrganisationEntity organisationEntity = organisationDao.getById(Long.parseLong(params.get("orgId")));
-        //System.out.println(organisationEntity);
-        ////List<OfficeEntity> result = officeDao.getByParams(organisationEntity);
-        //List<OfficeEntity> result = new ArrayList<>(organisationEntity.getOffices());
-        //System.out.println(result);
-        List<OfficeEntity> result = new ArrayList<>();
+        OrganisationEntity organisationEntity = organisationDao.getById(Long.parseLong(params.get("orgId")));
+        List<OfficeEntity> result = officeDao.getByParams(organisationEntity);
 
-
-        System.out.println(result);
         if(params.containsKey("name")&params.get("name") != null){
             List<OfficeEntity> temp = new ArrayList<>();
             String name = params.get("name");

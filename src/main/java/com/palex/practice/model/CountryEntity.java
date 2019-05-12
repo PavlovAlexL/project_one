@@ -48,12 +48,4 @@ public class CountryEntity {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "CountryEntity{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

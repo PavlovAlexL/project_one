@@ -97,11 +97,19 @@ public class UserEntity {
         this.middle_Name = params.get("middleName");
         this.position = params.get("position");
         this.phone = params.get("phone");
-        this.userDocument = userDocumentEntity;
-        this.country = countryEntity;
-        this.is_identified = Boolean.parseBoolean(params.get("isidentified"));
+        if(userDocumentEntity != null){
+            System.out.println("one");
+            this.userDocument = userDocumentEntity;
+        }
+        if(countryEntity != null){
+            System.out.println("two");
+            this.country = countryEntity;
+        }
+        this.is_identified = Boolean.parseBoolean(params.get("isIdentified"));
+
 
     }
+
 
     public Long getId() {
         return id;
@@ -187,20 +195,4 @@ public class UserEntity {
         this.country = country;
     }
 
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", version=" + version +
-                ", office=" + office +
-                ", first_Name='" + first_Name + '\'' +
-                ", second_Name='" + second_Name + '\'' +
-                ", middle_Name='" + middle_Name + '\'' +
-                ", position='" + position + '\'' +
-                ", phone='" + phone + '\'' +
-                ", is_identified=" + is_identified +
-                ", userDocument=" + userDocument +
-                ", country=" + country +
-                '}';
-    }
 }

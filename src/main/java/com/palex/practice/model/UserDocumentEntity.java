@@ -107,14 +107,4 @@ public class UserDocumentEntity {
         this.documentType = documentType;
     }
 
-    @Override
-    public String toString() {
-        return "UserDocumentEntity{" +
-                "id=" + id +
-                ", version=" + version +
-                ", doc_number='" + doc_number + '\'' +
-                ", doc_date=" + doc_date +
-                ", documentType=" + documentType +
-                '}';
-    }
 }

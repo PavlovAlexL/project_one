@@ -163,19 +163,4 @@ public class OrganisationEntity {
         return offices;
     }
 
-    @Override
-    public String toString() {
-        return "OrganisationEntity{" +
-                "id=" + id +
-                ", version=" + version +
-                ", name='" + name + '\'' +
-                ", full_Name='" + full_Name + '\'' +
-                ", inn='" + inn + '\'' +
-                ", kpp='" + kpp + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", is_active=" + is_active +
-                ", offices=" + offices +
-                '}';
-    }
 }

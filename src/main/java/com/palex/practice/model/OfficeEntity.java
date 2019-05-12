@@ -139,17 +139,4 @@ public class OfficeEntity {
         this.users = users;
     }
 
-    @Override
-    public String toString() {
-        return "OfficeEntity{" +
-                "id=" + id +
-                ", version=" + version +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", is_active=" + is_active +
-                ", organisation=" + organisation +
-                ", users=" + users +
-                '}';
-    }
 }

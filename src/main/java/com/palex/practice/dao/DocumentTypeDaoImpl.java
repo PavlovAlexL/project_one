@@ -31,6 +31,7 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
         return query.setParameter("code", code).getSingleResult();
     }
 
+    @Transactional
     @Override
     public DocumentTypeEntity getByName(String name) {
         TypedQuery<DocumentTypeEntity> query = em.createQuery("SELECT d FROM DocumentTypeEntity d WHERE d.name = :name", DocumentTypeEntity.class);
