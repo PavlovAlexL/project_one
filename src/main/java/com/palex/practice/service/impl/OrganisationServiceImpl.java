@@ -1,8 +1,9 @@
-package com.palex.practice.service;
+package com.palex.practice.service.impl;
 
 import com.palex.practice.dao.OrganisationDao;
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.model.mapper.MapperFacade;
+import com.palex.practice.service.OrganisationService;
 import com.palex.practice.view.OrganisationView;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,7 @@ public class OrganisationServiceImpl implements OrganisationService {
             List<OrganisationEntity> temp = new ArrayList<>();
             Boolean status = Boolean.parseBoolean(params.get("isActive"));
             for(OrganisationEntity oe : result){
-                if(oe.getIs_active().equals(status)){
+                if(oe.getIsActive().equals(status)){
                     temp.add(oe);
                 }
             }

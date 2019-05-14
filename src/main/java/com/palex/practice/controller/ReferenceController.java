@@ -18,13 +18,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  */
 @RestController
 @RequestMapping(value = "/api", produces = APPLICATION_JSON_VALUE)
-public class ApiController {
+public class ReferenceController {
 
     private final DocksTypeService docksTypeService;
     private final CountryService countryService;
 
     @Autowired
-    public ApiController(DocksTypeService docksTypeService, CountryService countryService) {
+    public ReferenceController(DocksTypeService docksTypeService, CountryService countryService) {
         this.docksTypeService = docksTypeService;
         this.countryService = countryService;
     }

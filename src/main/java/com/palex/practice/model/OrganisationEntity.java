@@ -1,9 +1,7 @@
 package com.palex.practice.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -35,7 +33,7 @@ public class OrganisationEntity {
      * Полное название
      */
     @Column(name="full_Name", nullable = false)
-    private String full_Name;
+    private String fullName;
 
     /**
      * ИНН
@@ -65,7 +63,7 @@ public class OrganisationEntity {
      * Статус
      */
     @Column(name="is_active")
-    private Boolean is_active;
+    private Boolean isActive;
 
     /**
      * Множество офисов, принадлежащих данной организации
@@ -81,12 +79,12 @@ public class OrganisationEntity {
                     this.id = Long.parseLong(params.get("id"));
                 }
                 this.name = params.get("name");
-                this.full_Name = params.get("fullName");
+                this.fullName = params.get("fullName");
                 this.inn = params.get("inn");
                 this.kpp = params.get("kpp");
                 this.address = params.get("address");
                 this.phone = params.get("phone");
-                this.is_active = Boolean.parseBoolean(params.get("isActive"));
+                this.isActive = Boolean.parseBoolean(params.get("isActive"));
     }
 
 
@@ -110,12 +108,12 @@ public class OrganisationEntity {
         this.name = name;
     }
 
-    public String getFull_Name() {
-        return full_Name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_Name(String full_Name) {
-        this.full_Name = full_Name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getInn() {
@@ -147,12 +145,12 @@ public class OrganisationEntity {
         this.phone = phone;
     }
 
-    public Boolean getIs_active() {
-        return is_active;
+    public Boolean getIsActive() {
+        return isActive;
     }
 
-    public void setIs_active(Boolean is_active) {
-        this.is_active = is_active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public void setOffices(Set<OfficeEntity> offices) {

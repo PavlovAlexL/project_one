@@ -1,17 +1,17 @@
-package com.palex.practice.service;
+package com.palex.practice.service.impl;
 
 import com.palex.practice.dao.*;
 import com.palex.practice.model.*;
 import com.palex.practice.model.mapper.MapperFacade;
+import com.palex.practice.service.UserService;
 import com.palex.practice.view.UserView;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
     private final OfficeDao officeDao;
@@ -30,6 +30,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserView> list(Map<String,String> params) {
         List<UserEntity> result = userDao.getByParams(params);
+        if(result.size() == 0){
+            throw new RuntimeException("No user available");
+        }
         return mapperFacade.mapAsList(result, UserView.class);
     }
 

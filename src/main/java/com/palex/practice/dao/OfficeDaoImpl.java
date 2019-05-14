@@ -6,11 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +45,7 @@ public class OfficeDaoImpl implements OfficeDao{
             officeEntity.setPhone(params.get("phone"));
         }
         if(params.containsKey("isActive")) {
-            officeEntity.setIs_active(Boolean.parseBoolean(params.get("isActive")));
+            officeEntity.setIsActive(Boolean.parseBoolean(params.get("isActive")));
         }
         em.merge(officeEntity);
     }

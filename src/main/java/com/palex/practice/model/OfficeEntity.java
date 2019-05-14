@@ -3,7 +3,6 @@ package com.palex.practice.model;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 
@@ -47,8 +46,8 @@ public class OfficeEntity {
     /**
      * Статус
      */
-    @Column (name="is_active")
-    private Boolean is_active;
+    @Column (name="isActive")
+    private Boolean isActive;
 
     /**
      * Принадлежность к организации
@@ -73,7 +72,7 @@ public class OfficeEntity {
         this.name = params.get("name");
         this.address = params.get("address");
         this.phone = params.get("phone");
-        this.is_active = Boolean.parseBoolean(params.get("is_active"));
+        this.isActive = Boolean.parseBoolean(params.get("isActive"));
     }
 
     public Long getId() {
@@ -112,12 +111,12 @@ public class OfficeEntity {
         this.phone = phone;
     }
 
-    public Boolean getIs_active() {
-        return is_active;
+    public Boolean getIsActive() {
+        return isActive;
     }
 
-    public void setIs_active(Boolean is_active) {
-        this.is_active = is_active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public OrganisationEntity getOrganisation() {

@@ -31,14 +31,14 @@ public class UserDocumentEntity {
      * Номер документа
      */
     @Column(name = "doc_number", length = 20)
-    private String doc_number;
+    private String docNumber;
 
     /**
      * Дата документа
      */
     @Column(name="doc_date")
     @Temporal(TemporalType.DATE)
-    private Date doc_date;
+    private Date docDate;
 
     /**
      * Связь с таблицей типов докумнетов
@@ -53,10 +53,10 @@ public class UserDocumentEntity {
     public UserDocumentEntity(String docNumber, String docDate, DocumentTypeEntity documentTypeEntity) {
 
         this.documentType = documentTypeEntity;
-        this.doc_number = docNumber;
+        this.docNumber = docNumber;
         try {
             DateFormat format = new SimpleDateFormat("dd.MM.yy");
-            this.doc_date = format.parse(docDate);
+            this.docDate = format.parse(docDate);
         } catch (ParseException e){
             e.printStackTrace();
         }
@@ -74,26 +74,26 @@ public class UserDocumentEntity {
         this.version = version;
     }
 
-    public String getDoc_number() {
-        return doc_number;
+    public String getDocNumber() {
+        return docNumber;
     }
 
-    public void setDoc_number(String doc_number) {
-        this.doc_number = doc_number;
+    public void setDocNumber(String docNumber) {
+        this.docNumber = docNumber;
     }
 
-    public Date getDoc_date() {
-        return doc_date;
+    public Date getDocDate() {
+        return docDate;
     }
 
-    public void setDoc_date(Date doc_date) {
-        this.doc_date = doc_date;
+    public void setDocDate(Date docDate) {
+        this.docDate = docDate;
     }
 
     public void setDoc_date(String date) {
         DateFormat format = new SimpleDateFormat("dd.MM.yy");
         try {
-            this.doc_date = format.parse(date);
+            this.docDate = format.parse(date);
         }catch (ParseException e){
             e.getStackTrace();
         }

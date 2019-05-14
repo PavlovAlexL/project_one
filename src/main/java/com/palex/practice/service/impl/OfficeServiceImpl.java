@@ -1,15 +1,15 @@
-package com.palex.practice.service;
+package com.palex.practice.service.impl;
 
 import com.palex.practice.dao.OfficeDao;
 import com.palex.practice.dao.OrganisationDao;
 import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.model.mapper.MapperFacade;
+import com.palex.practice.service.OfficeService;
 import com.palex.practice.view.OfficeView;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +55,7 @@ public class OfficeServiceImpl implements OfficeService {
             List<OfficeEntity> temp = new ArrayList<>();
             Boolean status = Boolean.parseBoolean(params.get("phone"));
             for(OfficeEntity oe : result){
-                if(oe.getIs_active().equals(status)){
+                if(oe.getIsActive().equals(status)){
                     temp.add(oe);
                 }
             }

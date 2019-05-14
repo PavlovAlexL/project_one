@@ -39,7 +39,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
         OrganisationEntity organisationEntity = em.find(OrganisationEntity.class, Long.parseLong(params.get("id")));
 
         organisationEntity.setName(params.get("name"));
-        organisationEntity.setFull_Name(params.get("fullName"));
+        organisationEntity.setFullName(params.get("fullName"));
         organisationEntity.setInn(params.get("inn"));
         organisationEntity.setKpp(params.get("kpp"));
         organisationEntity.setAddress(params.get("address"));
@@ -47,7 +47,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
             organisationEntity.setPhone(params.get("phone"));
         }
         if(params.containsKey("isActive")) {
-            organisationEntity.setIs_active(Boolean.parseBoolean(params.get("isActive")));
+            organisationEntity.setIsActive(Boolean.parseBoolean(params.get("isActive")));
         }
         em.merge(organisationEntity);
 

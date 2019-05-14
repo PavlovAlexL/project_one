@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS Organisation (
   kpp         VARCHAR(9)  NOT NULL,
   address     VARCHAR(200) NOT NULL,
   phone       VARCHAR(20) ,
-  is_active   BOOLEAN
+  isActive   BOOLEAN
 );
 COMMENT ON TABLE  Organisation IS 'Организация';
 COMMENT ON COLUMN Organisation.id IS 'id';
@@ -53,7 +53,7 @@ COMMENT ON COLUMN Organisation.inn IS 'ИНН организации';
 COMMENT ON COLUMN Organisation.kpp IS 'КПП организации';
 COMMENT ON COLUMN Organisation.address IS 'Адрес';
 COMMENT ON COLUMN Organisation.phone IS 'Телефон';
-COMMENT ON COLUMN Organisation.is_active IS 'Статус';
+COMMENT ON COLUMN Organisation.isActive IS 'Статус';
 
 
 CREATE TABLE IF NOT EXISTS Office (
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS Office (
   name        VARCHAR(50),
   address     VARCHAR(200),
   phone       VARCHAR(20),
-  is_active    BOOLEAN
+  isActive    BOOLEAN
 );
 COMMENT ON TABLE Office IS 'Офис';
 COMMENT ON COLUMN Office.id IS 'id';
@@ -72,7 +72,7 @@ COMMENT ON COLUMN Office.org_id IS 'Идентификатор организа�
 COMMENT ON COLUMN Office.name IS 'Название';
 COMMENT ON COLUMN Office.address IS 'Адрес';
 COMMENT ON COLUMN Office.phone IS 'Телефон';
-COMMENT ON COLUMN Office.is_active IS 'Статус';
+COMMENT ON COLUMN Office.isActive IS 'Статус';
 CREATE INDEX IX_Office_org_id ON Office(org_id);
 
 

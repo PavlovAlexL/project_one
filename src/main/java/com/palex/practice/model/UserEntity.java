@@ -1,7 +1,5 @@
 package com.palex.practice.model;
 
-import com.palex.practice.service.DocksTypeService;
-
 import javax.persistence.*;
 import java.util.Map;
 
@@ -39,19 +37,19 @@ public class UserEntity {
      *Имя
      */
     @Column(name = "first_Name", length = 50, nullable = false)
-    private String first_Name;
+    private String firstName;
 
     /**
      * Фамилия
      */
     @Column(name = "second_Name", length = 50)
-    private String second_Name;
+    private String secondName;
 
     /**
      * Отчество
      */
     @Column(name = "middle_Name", length = 50)
-    private String middle_Name;
+    private String middleName;
 
     /**
      * Должность
@@ -69,7 +67,7 @@ public class UserEntity {
      * Прошел ли сотрудник идентификацию
      */
     @Column (name="is_identified")
-    private Boolean is_identified;
+    private Boolean isIdentified;
 
     /**
      * Идентификатор документа в таблице документов
@@ -81,7 +79,7 @@ public class UserEntity {
     /**
      * Идентификатор гражданства
      */
-    @OneToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name="citizenship_id")
     private CountryEntity country;
 
@@ -92,9 +90,9 @@ public class UserEntity {
     public UserEntity(Map<String, String> params, OfficeEntity officeEntity, UserDocumentEntity userDocumentEntity, CountryEntity countryEntity){
 
         this.office = officeEntity;
-        this.first_Name = params.get("firstName");
-        this.second_Name = params.get("secondName");
-        this.middle_Name = params.get("middleName");
+        this.firstName = params.get("firstName");
+        this.secondName = params.get("secondName");
+        this.middleName = params.get("middleName");
         this.position = params.get("position");
         this.phone = params.get("phone");
         if(userDocumentEntity != null){
@@ -105,7 +103,7 @@ public class UserEntity {
             System.out.println("two");
             this.country = countryEntity;
         }
-        this.is_identified = Boolean.parseBoolean(params.get("isIdentified"));
+        this.isIdentified = Boolean.parseBoolean(params.get("isIdentified"));
 
 
     }
@@ -132,27 +130,27 @@ public class UserEntity {
     }
 
     public String getFirstName() {
-        return first_Name;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.first_Name = firstName;
+        this.firstName = firstName;
     }
 
     public String getSecondName() {
-        return second_Name;
+        return secondName;
     }
 
     public void setSecondName(String secondName) {
-        this.second_Name = secondName;
+        this.secondName = secondName;
     }
 
     public String getMiddleName() {
-        return middle_Name;
+        return middleName;
     }
 
     public void setMiddleName(String middleName) {
-        this.middle_Name = middleName;
+        this.middleName = middleName;
     }
 
     public String getPosition() {
@@ -171,12 +169,12 @@ public class UserEntity {
         this.phone = phone;
     }
 
-    public Boolean getIs_identified() {
-        return is_identified;
+    public Boolean getIsIdentified() {
+        return isIdentified;
     }
 
-    public void setIs_identified(Boolean is_identified) {
-        this.is_identified = is_identified;
+    public void setIsIdentified(Boolean isIdentified) {
+        this.isIdentified = isIdentified;
     }
 
     public UserDocumentEntity getUserDocument() {
