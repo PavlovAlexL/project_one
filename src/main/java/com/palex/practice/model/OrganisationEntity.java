@@ -65,12 +65,6 @@ public class OrganisationEntity {
     @Column(name="is_active")
     private Boolean isActive;
 
-    /**
-     * Множество офисов, принадлежащих данной организации
-     */
-    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OfficeEntity> offices;
-
     public OrganisationEntity(){
     }
 
@@ -151,14 +145,6 @@ public class OrganisationEntity {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
-    }
-
-    public void setOffices(Set<OfficeEntity> offices) {
-        this.offices = offices;
-    }
-
-    public Set<OfficeEntity> getOffices() {
-        return offices;
     }
 
 }

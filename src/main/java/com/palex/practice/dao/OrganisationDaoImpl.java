@@ -18,7 +18,6 @@ public class OrganisationDaoImpl implements OrganisationDao {
         this.em = em;
     }
 
-
     @Override
     @Transactional
     public List<OrganisationEntity> getByParams(String name) {

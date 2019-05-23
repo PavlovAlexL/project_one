@@ -27,18 +27,7 @@ public class OfficeController {
     /**
      * Запрос списка по параметрам
      * @param params коллекция параметров
-     * {
-     *   “orgId”:””, //обязательный параметр
-     *   “name”:””,
-     *   “phone”:””,
-     *   “isActive”
-     * }
-     * @return
-     * {
-     *     “id”:””,
-     *     “name”:””,
-     *     “isActive”:”true”
-     *   },...
+     * @return List<OfficeView>
      */
     @RequestMapping(
             value = "/list",
@@ -53,14 +42,7 @@ public class OfficeController {
     /**
      * Запрос по Id.
      * @param officeId идентификатор объекта
-     * @return
-     * {
-     *   “id”:””,
-     *   “name”:””,
-     *   “address”:””,
-     *   “phone”,””,
-     *   “isActive”:”true”
-     * }
+     * @return OfficeView
      */
     @RequestMapping(
             value = "/{id}",
@@ -75,17 +57,6 @@ public class OfficeController {
     /**
      * Запрос на обновление.
      * @param params коллекция параметров.
-     * {
-     *   “id”:””, //обязательный параметр
-     *   “name”:””, //обязательный параметр
-     *   “address”:””, //обязательный параметр
-     *   “phone”,””,
-     *   “isActive”:”true” //пример
-     * }
-     * @return
-     * {
-     *     “result”:”success”
-     * }
      */
     @RequestMapping(
             value = "/update",
@@ -101,17 +72,7 @@ public class OfficeController {
     /**
      * Запрос на сохранение.
      * @param params коллекция параметров.
-     * {
-     *   “orgId”:””, //обязательный параметр
-     *   “name”:””,
-     *   “address”:””,
-     *   “phone”,””,
-     *   “isActive”:”true”
-     * }
      * @return
-     * {
-     *     “result”:”success”
-     * }
      */
     @RequestMapping(
             value = "/save",

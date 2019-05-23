@@ -1,7 +1,8 @@
 package com.palex.practice.view;
 
-import javax.validation.constraints.NotEmpty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
+import javax.validation.constraints.NotEmpty;
 public class DocksTypeView {
 
     @NotEmpty

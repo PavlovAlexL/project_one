@@ -23,22 +23,8 @@ public class UserController {
 
     /**
      * Запрос списка по параметрам
-     *   “userId”:””, //обязательный параметр
-     *   “firstName”:””,
-     *   “lastName”:””,
-     *   “middleName”:””,
-     *   “position”,””,
-     *   “docCode”:””,
-     *   “citizenshipCode”:””
      * @param params коллекция параметров
      * @return
-     * {
-     *   “id”:””,
-     *   “firstName”:””,
-     *   “secondName”:””,
-     *   “middleName”:””,
-     *   “position”:””
-     * },...
      */
     @RequestMapping(
             value = "/list",
@@ -55,20 +41,6 @@ public class UserController {
      * Запрос по Id.
      * @param userId
      * @return
-     * {
-     *   “id”:””,
-     *   “firstName”:””,
-     *   “secondName”:””,
-     *   “middleName”:””,
-     *   “position”:””
-     *   “phone”,””,
-     *   “docName”:””,
-     *   “docNumber”:””,
-     *   “docDate”:””,
-     *   “citizenshipName”:””,
-     *   “citizenshipCode”:””,
-     *   “isIdentified”:”true”
-     * }
      */
     @RequestMapping(
             value = "/{id}",
@@ -82,23 +54,8 @@ public class UserController {
 
     /**
      *Запрос на обновление
-     * “id”:””, //обязательный парамет
-     * “userId”:””,
-     * “firstName”:””, //обязательный параметр
-     * “secondName”:””,
-     * “middleName”:””,
-     * “position”:”” //обязательный параметр
-     * “phone”,””,
-     * “docName”:””,
-     * “docNumber”:””,
-     * “docDate”:””,
-     * “citizenshipCode”:””,
-     * “isIdentified”:”true”
      * @param params Карта с парамерами
      * @return
-     * {
-     *     “result”:”success”
-     * }
      */
     @RequestMapping(
             value = "/update",
@@ -113,23 +70,8 @@ public class UserController {
 
     /**
      * Запрос на сохранение
-     * “id”:””, //обязательный параметр
-     * “officeId”:””,
-     * “firstName”:””, //обязательный параметр
-     * “secondName”:””,
-     * “middleName”:””,
-     * “position”:”” //обязательный параметр
-     * “phone”,””,
-     * “docName”:””,
-     * “docNumber”:””,
-     * “docDate”:””,
-     * “citizenshipCode”:””,
-     * “isIdentified”:”true” //пример
      * @param params карта с параметрами
      * @return
-     * {
-     *     “result”:”success”
-     * }
      */
     @RequestMapping(
             value = "/save",

@@ -32,12 +32,6 @@ public class ReferenceController {
     /**
      * Вывод справочника типов документов.
      * @return Коллекция типов документов.
-     * {
-     * data”:{
-     *          “name”:“”,
-     *          “code”:””
-     *       }
-     * }
      */
     @RequestMapping(
             value = "/countries",
@@ -50,10 +44,6 @@ public class ReferenceController {
     /**
      * Вывод справочника стран.
      * @return Коллекция стран в формате
-     * {
-     *     “name”:“”,
-     *     “code”:””
-     * }
      */
     @RequestMapping(
             value = "/docs",

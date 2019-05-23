@@ -1,5 +1,7 @@
 package com.palex.practice.model;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Map;

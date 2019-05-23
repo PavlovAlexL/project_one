@@ -23,8 +23,6 @@ public class UserDaoImpl implements UserDao {
         this.em = em;
     }
 
-
-
     @Transactional
     @Override
     public List<UserEntity> getByParams(Map<String, String> params) {
@@ -62,11 +60,6 @@ public class UserDaoImpl implements UserDao {
         }
 
         return em.createQuery(userEntityCriteriaQuery).getResultList();
-
-
-
-
-
 
         //return new ArrayList<UserEntity>();
     }

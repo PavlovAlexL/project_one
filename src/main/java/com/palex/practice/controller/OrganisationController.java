@@ -26,18 +26,7 @@ public class OrganisationController {
     /**
      * Запрос списка по параметрам.
      * @param params
-     * {
-     *   “orgId”:””, //обязательный параметр
-     *   “name”:””,
-     *   “phone”:””,
-     *   “isActive”
-     * }
      * @return
-     * {
-     *     “id”:””,
-     *     “name”:””,
-     *     “isActive”:”true”
-     *   },...
      */
     @RequestMapping(
             value = "/list",
@@ -53,13 +42,6 @@ public class OrganisationController {
      * Запрос по Id.
      * @param organisationId
      * @return
-     * {
-     *   “id”:””,
-     *   “name”:””,
-     *   “address”:””,
-     *   “phone”,””,
-     *   “isActive”:”true”
-     * }
      */
     @RequestMapping(
             value = "/{id}",
@@ -74,17 +56,7 @@ public class OrganisationController {
     /**
      * Запрос на обновление
      * @param params
-     * {
-     *   “id”:””, //обязательный параметр
-     *   “name”:””, //обязательный параметр
-     *   “address”:””, //обязательный параметр
-     *   “phone”,””,
-     *   “isActive”:”true” //пример
-     * }
      * @return
-     * {
-     *     “result”:”success”
-     * }
      */
     @RequestMapping(
             value = "/update",
@@ -100,19 +72,7 @@ public class OrganisationController {
     /**
      * Запрос на сохранение
      * @param params collection of parameters
-     * {
-     *   “name”:””, //обязательный параметр
-     *   “fullName”:””, //обязательный параметр
-     *   “inn”:””, //обязательный параметр
-     *   “kpp”:””, //обязательный параметр
-     *   “address”:””, //обязательный параметр
-     *   “phone”,””,
-     *   “isActive”:”true”
-     * }
      * @return
-     * {
-     *     “result”:”success”
-     * }
      */
     @RequestMapping(
             value = "/save",
