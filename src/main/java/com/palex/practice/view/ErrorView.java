@@ -1,4 +1,4 @@
-package com.palex.practice.Error;
+package com.palex.practice.view;
 
 public class ErrorView {
 

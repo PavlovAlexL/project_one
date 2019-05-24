@@ -37,8 +37,8 @@ public class UserDaoImpl implements UserDao {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<UserEntity> userEntityCriteriaQuery = cb.createQuery(UserEntity.class);
         Root<UserEntity> userEntityRoot = userEntityCriteriaQuery.from(UserEntity.class);
-
         userEntityCriteriaQuery.select(userEntityRoot);
+
         userEntityCriteriaQuery.where(cb.equal(userEntityRoot.get("office").get("id"), officeId));
         if(firstName != null) {
             userEntityCriteriaQuery.where(cb.equal(userEntityRoot.get("first_Name"), firstName));

@@ -1,15 +1,13 @@
 package com.palex.practice.service.impl;
 
 import com.palex.practice.dao.OrganisationDao;
-import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.service.OrganisationService;
-import com.palex.practice.view.OrganisationView;
+import com.palex.practice.view.Organisation.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class OrganisationServiceImpl implements OrganisationService {
@@ -23,49 +21,27 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     @Override
-    public List<OrganisationView> list(Map<String, String> params) {
-        List<OrganisationEntity> result = organisationDao.getByParams(params.get("name"));
-
-        if(params.containsKey("inn")&params.get("inn") != null){
-            List<OrganisationEntity> temp = new ArrayList<>();
-            String inn = params.get("inn");
-            for(OrganisationEntity oe : result){
-                if(oe.getInn().equals(inn)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
-        }
-
-        if(params.containsKey("isActive")&params.get("isActive") != null){
-            List<OrganisationEntity> temp = new ArrayList<>();
-            Boolean status = Boolean.parseBoolean(params.get("isActive"));
-            for(OrganisationEntity oe : result){
-                if(oe.getIsActive().equals(status)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
-        }
-
-        return mapperFacade.mapAsList(result, OrganisationView.class);
+    @Transactional
+    public List<OrganisationListView> list(OrganisationListFilterView organisationListFilterView) {
+        return mapperFacade.mapAsList(organisationDao.getByParams(organisationListFilterView), OrganisationListView.class);
     }
 
     @Override
+    @Transactional
     public OrganisationView getById(Long id) {
-        OrganisationEntity result = organisationDao.getById(id);
-        return mapperFacade.map(result, OrganisationView.class);
+        return mapperFacade.map(organisationDao.getById(id), OrganisationView.class);
     }
 
     @Override
-    public void update(Map<String, String> params) {
-        organisationDao.update(params);
+    @Transactional
+    public void update(OrganisationUpdateFilterView organisationUpdateFilterView) {
+        organisationDao.update(organisationUpdateFilterView);
     }
 
     @Override
-    public void save(Map<String, String> params){
-        OrganisationEntity oe = new OrganisationEntity(params);
-        organisationDao.save(oe);
+    @Transactional
+    public void save(OrganisationSaveFilterView organisationSaveFilterView) {
+        organisationDao.save(organisationSaveFilterView);
     }
 
 }

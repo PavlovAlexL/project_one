@@ -1,40 +1,21 @@
 package com.palex.practice.dao;
 
 import com.palex.practice.model.OrganisationEntity;
+import com.palex.practice.view.Organisation.OrganisationListFilterView;
+import com.palex.practice.view.Organisation.OrganisationSaveFilterView;
+import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;
 
 import java.util.List;
-import java.util.Map;
 
-/**
- * DAO для доступа к таблице организация.
- */
 public interface OrganisationDao {
 
-    /**
-     * Получение коллекции объектов по параметрам.
-     * @param name
-     * @return
-     */
-    List<OrganisationEntity> getByParams(String name);
+    List<OrganisationEntity> getByParams(OrganisationListFilterView organisationListFilterView);
 
-    /**
-     * Получение объекта по ID.
-     * @param id
-     * @return
-     */
     OrganisationEntity getById (Long id);
 
-    /**
-     * Изменить объект.
-     * @param
-     */
-    void update (Map<String, String> params);
+    void update (OrganisationUpdateFilterView organisationUpdateFilterView);
 
-    /**
-     * Сохраненить объект.
-     * @param organisationEntity
-     */
-    void save (OrganisationEntity organisationEntity);
+    void save (OrganisationSaveFilterView organisationSaveFilterView);
 
 }
 

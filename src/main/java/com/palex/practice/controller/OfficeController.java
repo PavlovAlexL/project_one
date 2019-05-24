@@ -1,7 +1,7 @@
 package com.palex.practice.controller;
 
-import com.palex.practice.view.OfficeView;
 import com.palex.practice.service.OfficeService;
+import com.palex.practice.view.OfficeView;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +26,7 @@ public class OfficeController {
 
     /**
      * Запрос списка по параметрам
+     *
      * @param params коллекция параметров
      * @return List<OfficeView>
      */
@@ -33,14 +34,15 @@ public class OfficeController {
             value = "/list",
             method = {POST})
     @ResponseBody
-     public List<OfficeView> officeList (
-            @RequestParam Map<String,String> params
+    public List<OfficeView> officeList(
+            @RequestParam Map<String, String> params
     ) {
         return officeService.list(params);
     }
 
     /**
      * Запрос по Id.
+     *
      * @param officeId идентификатор объекта
      * @return OfficeView
      */
@@ -50,20 +52,21 @@ public class OfficeController {
     @ResponseBody
     public OfficeView officeGetById(
             @PathVariable("id") Long officeId
-    ){
+    ) {
         return officeService.getById(officeId);
     }
 
     /**
      * Запрос на обновление.
+     *
      * @param params коллекция параметров.
      */
     @RequestMapping(
             value = "/update",
             method = {POST})
     @ResponseBody
-    public String officeUpdate (
-            @RequestParam Map<String,String> params
+    public String officeUpdate(
+            @RequestParam Map<String, String> params
     ) {
         officeService.update(params);
         return "officeUpdate";
@@ -71,6 +74,7 @@ public class OfficeController {
 
     /**
      * Запрос на сохранение.
+     *
      * @param params коллекция параметров.
      * @return
      */
@@ -79,7 +83,7 @@ public class OfficeController {
             method = {POST})
     @ResponseBody
     public String officeSave(
-            @RequestParam Map<String,String> params
+            @RequestParam Map<String, String> params
     ) {
         officeService.save(params);
         return "officeSave";
