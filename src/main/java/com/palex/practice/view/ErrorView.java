@@ -2,7 +2,7 @@ package com.palex.practice.view;
 
 public class ErrorView {
 
-    private String error;
+    public String error;
 
     public ErrorView(String message) {
         this.error = message;

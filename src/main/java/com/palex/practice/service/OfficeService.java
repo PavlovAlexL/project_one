@@ -1,16 +1,15 @@
 package com.palex.practice.service;
 
-import com.palex.practice.view.OfficeView;
+import com.palex.practice.view.Office.*;
 
 import java.util.List;
-import java.util.Map;
 
 public interface OfficeService {
 
     /**
      * Отобразить объекта с параметрами.
      */
-    List<OfficeView> list(Map<String,String> params);
+    List<OfficeListView> list(OfficeListFilterView officeListFilterView);
 
     /**
      *  Отобразить объект по Id.
@@ -20,11 +19,11 @@ public interface OfficeService {
     /**
      * Изменить объект.
      */
-    void update(Map<String,String> params);
+    void update(OfficeUpdateFilterView officeUpdateFilterView);
 
     /**
      * Создать объект.
      */
-    void save(Map<String,String> params);
+    void save(OfficeSaveFilterView officeSaveFilterView);
 
 }

@@ -2,13 +2,16 @@ package com.palex.practice.dao;
 
 import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.model.OrganisationEntity;
+import com.palex.practice.view.Office.OfficeListFilterView;
+import com.palex.practice.view.Office.OfficeUpdateFilterView;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.transaction.Transactional;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class OfficeDaoImpl implements OfficeDao{
@@ -20,39 +23,50 @@ public class OfficeDaoImpl implements OfficeDao{
     }
 
     @Override
-    @Transactional
-    public List<OfficeEntity> getByParams(OrganisationEntity organisationEntity) {
-        Query query = em.createQuery("SELECT o FROM OfficeEntity o where o.organisation = :organisation", OfficeEntity.class);
-        return query.setParameter("organisation", organisationEntity).getResultList();
-        //CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        //CriteriaQuery<OfficeEntity>
+    public List<OfficeEntity> getByParams(OfficeListFilterView officeListFilterView) {
+        Long orgId = officeListFilterView.orgId;
+        OrganisationEntity organisationEntity = em.find(OrganisationEntity.class, orgId);
+        String name = officeListFilterView.name;
+        String phone = officeListFilterView.phone;
+        String isActive = officeListFilterView.isActive;
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<OfficeEntity> query = cb.createQuery(OfficeEntity.class);
+        Root<OfficeEntity> officeEntityRoot = query.from(OfficeEntity.class);
+
+        Predicate predicate = cb.conjunction();
+        predicate = cb.and(predicate, cb.equal(officeEntityRoot.get("organisation"), organisationEntity));
+        if (name.length() > 0) {
+            predicate = cb.and(predicate, cb.equal(officeEntityRoot.get("name"), name));
+        }
+        if (phone.length() > 0) {
+            predicate = cb.and(predicate, cb.equal(officeEntityRoot.get("phone"), phone));
+        }
+        if (isActive.length() > 0) {
+            predicate = cb.and(predicate, cb.equal(officeEntityRoot.get("isActive"), isActive));
+        }
+        query.where(predicate);
+        return em.createQuery(query).getResultList();
     }
 
     @Override
-    @Transactional
     public OfficeEntity getById(Long id) {
         return em.find(OfficeEntity.class, id);
     }
 
     @Override
-    @Transactional
-    public void update(Map<String, String> params) {
-        OfficeEntity officeEntity = em.find(OfficeEntity.class, Long.parseLong(params.get("id")));
-
-        officeEntity.setName(params.get("name"));
-        officeEntity.setAddress(params.get("address"));
-        if(params.containsKey("phone")){
-            officeEntity.setPhone(params.get("phone"));
-        }
-        if(params.containsKey("isActive")) {
-            officeEntity.setIsActive(Boolean.parseBoolean(params.get("isActive")));
-        }
+    public void update(OfficeUpdateFilterView officeUpdateFilterView) {
+        OfficeEntity officeEntity = em.find(OfficeEntity.class, officeUpdateFilterView.id);
+        officeEntity.setName(officeUpdateFilterView.name);
+        officeEntity.setAddress(officeUpdateFilterView.address);
+        officeEntity.setPhone(officeUpdateFilterView.phone);
+        officeEntity.setIsActive(Boolean.parseBoolean(officeUpdateFilterView.isActive));
         em.merge(officeEntity);
     }
 
     @Override
-    @Transactional
     public void save(OfficeEntity officeEntity) {
         em.persist(officeEntity);
     }
+
 }

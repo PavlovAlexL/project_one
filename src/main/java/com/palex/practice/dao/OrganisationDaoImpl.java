@@ -2,16 +2,16 @@ package com.palex.practice.dao;
 
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.view.Organisation.OrganisationListFilterView;
-import com.palex.practice.view.Organisation.OrganisationSaveFilterView;
 import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class OrganisationDaoImpl implements OrganisationDao {
@@ -30,15 +30,10 @@ public class OrganisationDaoImpl implements OrganisationDao {
 
         System.out.println(name + inn + isActive);
 
-        CriteriaBuilder cb = em.getCriteriaBuilder();   //QueryBuilder, который представляет собой фабрику для инстанциирования CriteriaQuery.
-        CriteriaQuery<OrganisationEntity> query = cb.createQuery(OrganisationEntity.class); //фабрика QueryBuilder создает типизированный экземпляр CriteriaQuery.
-        Root<OrganisationEntity> organisationEntityRoot = query.from(OrganisationEntity.class); //для экземпляра CriteriaQuery задаются выражения запроса (query expressions).
-        //помощи метода from указывается, что поиск будет осуществляться среди хранимых объектов типа OrganisationEntity.class.
-        // Root представляет собой выражение, описывающее область определения некоторого множества сохраняемых объектов.
-        // Выражение Root<T> фактически означает, что данный запрос должен выполняться над всеми объектами типа T, тем самым напоминая выражение FROM в запросах SQL и JPQL
-            //query.select(organisationEntityRoot);
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<OrganisationEntity> query = cb.createQuery(OrganisationEntity.class);
+        Root<OrganisationEntity> organisationEntityRoot = query.from(OrganisationEntity.class);
         Predicate predicate = cb.conjunction();
-        //ParameterExpression<String> p = cb.parameter(String.class, "name");
         predicate = cb.and(predicate, cb.equal(organisationEntityRoot.get("name"), name));
         if(inn.length() > 0){
             predicate = cb.and(predicate, cb.equal(organisationEntityRoot.get("inn"), inn));
@@ -64,30 +59,15 @@ public class OrganisationDaoImpl implements OrganisationDao {
         organisationEntity.setInn(organisationUpdateFilterView.inn);
         organisationEntity.setKpp(organisationUpdateFilterView.kpp);
         organisationEntity.setAddress(organisationUpdateFilterView.address);
-        if(organisationUpdateFilterView.phone.length() > 0){
-            organisationEntity.setPhone(organisationUpdateFilterView.phone);
-        }
-        if(organisationUpdateFilterView.isActive.length() > 0) {
-            organisationEntity.setIsActive(Boolean.parseBoolean(organisationUpdateFilterView.isActive));
-        }
+        organisationEntity.setPhone(organisationUpdateFilterView.phone);
+        organisationEntity.setIsActive(Boolean.parseBoolean(organisationUpdateFilterView.isActive));
         em.merge(organisationEntity);
-
     }
 
     @Override
     @Transactional
-    public void save(OrganisationSaveFilterView organisationSaveFilterView) {
-        String name = organisationSaveFilterView.name;
-        String fullName = organisationSaveFilterView.fullName;
-        String inn = organisationSaveFilterView.inn;
-        String kpp = organisationSaveFilterView.kpp;
-        String address = organisationSaveFilterView.address;
-        String phone = organisationSaveFilterView.phone;
-        Boolean isActive = Boolean.parseBoolean(organisationSaveFilterView.isActive);
-
-        OrganisationEntity organisationEntity = new OrganisationEntity(name, fullName, inn, kpp, address, phone, isActive);
+    public void save(OrganisationEntity organisationEntity) {
         em.persist(organisationEntity);
     }
-
 
 }

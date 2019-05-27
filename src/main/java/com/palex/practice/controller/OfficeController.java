@@ -1,19 +1,18 @@
 package com.palex.practice.controller;
 
 import com.palex.practice.service.OfficeService;
-import com.palex.practice.view.OfficeView;
+import com.palex.practice.view.Office.OfficeListFilterView;
+import com.palex.practice.view.Office.OfficeSaveFilterView;
+import com.palex.practice.view.Office.OfficeUpdateFilterView;
+import com.palex.practice.view.ResultView;
+import com.palex.practice.view.SuccessView;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-/**
- * Контроллер для office
- */
 @RestController
 @RequestMapping(value = "/api/office", produces = APPLICATION_JSON_VALUE)
 public class OfficeController {
@@ -24,69 +23,45 @@ public class OfficeController {
         this.officeService = officeService;
     }
 
-    /**
-     * Запрос списка по параметрам
-     *
-     * @param params коллекция параметров
-     * @return List<OfficeView>
-     */
     @RequestMapping(
             value = "/list",
-            method = {POST})
-    @ResponseBody
-    public List<OfficeView> officeList(
-            @RequestParam Map<String, String> params
-    ) {
-        return officeService.list(params);
+            method = RequestMethod.POST
+    )
+    public ResultView officeList(
+            @RequestBody @Valid OfficeListFilterView officeListFilterView) {
+        return new ResultView(officeService.list(officeListFilterView));
     }
 
-    /**
-     * Запрос по Id.
-     *
-     * @param officeId идентификатор объекта
-     * @return OfficeView
-     */
     @RequestMapping(
             value = "/{id}",
-            method = {GET})
-    @ResponseBody
-    public OfficeView officeGetById(
-            @PathVariable("id") Long officeId
+            method = RequestMethod.GET
+    )
+    public ResultView officeGetById(
+            @PathVariable("id") @Valid @NotNull Long id
     ) {
-        return officeService.getById(officeId);
+        return new ResultView(officeService.getById(id));
     }
 
-    /**
-     * Запрос на обновление.
-     *
-     * @param params коллекция параметров.
-     */
     @RequestMapping(
             value = "/update",
-            method = {POST})
-    @ResponseBody
-    public String officeUpdate(
-            @RequestParam Map<String, String> params
+            method = RequestMethod.POST
+    )
+    public SuccessView officeUpdate(
+            @RequestBody @Valid OfficeUpdateFilterView officeUpdateFilterView
     ) {
-        officeService.update(params);
-        return "officeUpdate";
+        officeService.update(officeUpdateFilterView);
+        return new SuccessView();
     }
 
-    /**
-     * Запрос на сохранение.
-     *
-     * @param params коллекция параметров.
-     * @return
-     */
     @RequestMapping(
             value = "/save",
-            method = {POST})
-    @ResponseBody
-    public String officeSave(
-            @RequestParam Map<String, String> params
+            method = RequestMethod.POST
+    )
+    public SuccessView officeSave(
+            @RequestBody @Valid OfficeSaveFilterView officeSaveFilterView
     ) {
-        officeService.save(params);
-        return "officeSave";
+        officeService.save(officeSaveFilterView);
+        return new SuccessView();
     }
 
 }

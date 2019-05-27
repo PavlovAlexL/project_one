@@ -1,39 +1,18 @@
 package com.palex.practice.dao;
 
 import com.palex.practice.model.OfficeEntity;
-import com.palex.practice.model.OrganisationEntity;
+import com.palex.practice.view.Office.OfficeListFilterView;
+import com.palex.practice.view.Office.OfficeUpdateFilterView;
 
 import java.util.List;
-import java.util.Map;
 
-/**
- * DAO для работы с office
- */
 public interface OfficeDao {
 
-    /**
-     * Получение коллекции по параметрам.
-     * @param
-     * @return
-     */
-    List<OfficeEntity> getByParams(OrganisationEntity organisationEntity);
+    List<OfficeEntity> getByParams(OfficeListFilterView officeListFilterView);
 
-    /**
-     * Получение объекта по ID
-     * @param id идентификатор объекта
-     * @return
-     */
     OfficeEntity getById (Long id);
 
-    /**
-     * Изменить объект office
-     * @param params карта параметров
-     */
-    void update (Map<String, String> params);
+    void update(OfficeUpdateFilterView officeUpdateFilterView);
 
-    /**
-     * Сохранить объект office
-     * @param
-     */
     void save (OfficeEntity officeEntity);
  }

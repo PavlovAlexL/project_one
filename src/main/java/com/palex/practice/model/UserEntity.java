@@ -42,8 +42,8 @@ public class UserEntity {
     /**
      * Фамилия
      */
-    @Column(name = "second_Name", length = 50)
-    private String secondName;
+    @Column(name = "last_Name", length = 50)
+    private String lastName;
 
     /**
      * Отчество
@@ -91,7 +91,7 @@ public class UserEntity {
 
         this.office = officeEntity;
         this.firstName = params.get("firstName");
-        this.secondName = params.get("secondName");
+        this.lastName = params.get("lastName");
         this.middleName = params.get("middleName");
         this.position = params.get("position");
         this.phone = params.get("phone");
@@ -137,12 +137,12 @@ public class UserEntity {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getMiddleName() {

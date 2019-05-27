@@ -1,16 +1,15 @@
 package com.palex.practice.service;
 
-import com.palex.practice.view.UserView;
+import com.palex.practice.view.User.*;
 
 import java.util.List;
-import java.util.Map;
 
 public interface UserService {
 
     /**
      * Отобразить объекта с параметрами.
      */
-    List<UserView> list(Map<String,String> params);
+    List<UserListView> list(UserListFilterView userListFilterView);
 
     /**
      *  Отобразить объект по Id.
@@ -20,11 +19,11 @@ public interface UserService {
     /**
      * Изменить объект.
      */
-    void update(Map<String,String> params);
+    void update(UserUpdateFilterView userUpdateFilterView);
 
     /**
      * Создать объект.
      */
-    void save(Map<String,String> params);
+    void save(UserSaveFilterView userSaveFilterView);
 
 }

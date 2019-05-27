@@ -1,17 +1,21 @@
 package com.palex.practice.service.impl;
 
-import com.palex.practice.dao.*;
+import com.palex.practice.dao.CountryDao;
+import com.palex.practice.dao.DocumentTypeDao;
+import com.palex.practice.dao.OfficeDao;
+import com.palex.practice.dao.UserDao;
 import com.palex.practice.model.*;
 import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.service.UserService;
-import com.palex.practice.view.UserView;
+import com.palex.practice.view.User.*;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
+
 
     private final UserDao userDao;
     private final OfficeDao officeDao;
@@ -27,99 +31,116 @@ public class UserServiceImpl implements UserService {
         this.documentTypeDao = documentTypeDao;
     }
 
+    @Transactional
     @Override
-    public List<UserView> list(Map<String,String> params) {
-        List<UserEntity> result = userDao.getByParams(params);
-        if(result.size() == 0){
-            throw new RuntimeException("No user available");
-        }
-        return mapperFacade.mapAsList(result, UserView.class);
+    public List<UserListView> list(UserListFilterView userListFilterView) {
+        return mapperFacade.mapAsList(userDao.getByParams(userListFilterView), UserListView.class);
     }
 
+    @Transactional
     @Override
     public UserView getById(Long id) {
+
         UserEntity result = userDao.getById(id);
         return mapperFacade.map(result, UserView.class);
+
     }
 
+    @Transactional
     @Override
-    public void update(Map<String, String> params) {
-        UserEntity userEntity = userDao.getById(Long.parseLong(params.get("id")));
+    public void update(UserUpdateFilterView userUpdateFilterView) {
 
-        if(params.containsKey("officeId")){
-            userEntity.setOffice(officeDao.getById(Long.parseLong(params.get("officeId"))));
+        Long id = userUpdateFilterView.id;
+        Long officeId = userUpdateFilterView.officeId;
+        String firstName = userUpdateFilterView.firstName;
+        String middleName = userUpdateFilterView.middleName;
+        String position = userUpdateFilterView.position;
+        String phone = userUpdateFilterView.phone;
+        String docName = userUpdateFilterView.docName;
+        String docNumber = userUpdateFilterView.docNumber;
+        String docDate = userUpdateFilterView.docDate;
+        String citizenshipCode = userUpdateFilterView.citizenshipCode;
+        String isIdentified = userUpdateFilterView.isIdentified;
+
+        UserEntity userEntity = userDao.getById(id);
+
+        if (officeId > 0) {
+            userEntity.setOffice(
+                    officeDao.getById(officeId));
         }
 
-        userEntity.setFirstName(params.get("firstName"));
+        userEntity.setFirstName(firstName);
 
-        if(params.containsKey("secondName")){
-            userEntity.setSecondName(params.get("secondName"));
-        }
-        if(params.containsKey("middleName")){
-            userEntity.setMiddleName(params.get("middleName"));
+        if (middleName.length() > 0) {
+            userEntity.setLastName(middleName);
         }
 
-        userEntity.setPosition(params.get("position"));
-
-        if(params.containsKey("phone")){
-            userEntity.setPhone(params.get("phone"));
-        }
-        if(params.containsKey("isIdentified")){
-            userEntity.setMiddleName(params.get("isIdentified"));
+        if (middleName.length() > 0) {
+            userEntity.setMiddleName(middleName);
         }
 
-        if(params.get("docNumber") != null || params.get("docDate") != null || params.get("docName") != null){
-            DocumentTypeEntity documentTypeEntity;
-            String docNumber;
-            String docDate;
-            if(params.get("docNumber") != null){
-                docNumber = params.get("docNumber");
-            } else throw new RuntimeException("docNumber cannot be NULL");
-            if(params.get("docDate") != null){
-                docDate = params.get("docDate");
-            } else throw new RuntimeException("docDate cannot be NULL");
-            if(params.get("docName") != null){
-                documentTypeEntity = documentTypeDao.getByName(params.get("docName"));
-            } else throw new RuntimeException("docName not be NULL");
-            userEntity.setUserDocument(new UserDocumentEntity(docNumber, docDate, documentTypeEntity));
+        userEntity.setPosition(position);
+        if (phone.length() > 0) {
+            userEntity.setPhone(phone);
         }
 
-        if(params.containsKey("citizenshipCode")){
-            userEntity.setCountry(countryDao.getByCode(params.get("citizenshipCode")));
+        if (isIdentified.length() > 0) {
+            userEntity.setMiddleName(isIdentified);
+        }
+        if (docNumber.length() > 0 || docDate.length() > 0 || docName.length() > 0) {
+            if (docNumber.length() > 0 & docDate.length() > 0 & docName.length() > 0) {
+                userEntity.setUserDocument(
+                        new UserDocumentEntity(
+                                docNumber,
+                                docDate,
+                                documentTypeDao.getByName(docName)));
+            } else throw new RuntimeException("for update document must needs enter all documents fields");
+        }
+
+        if (citizenshipCode.length() > 0) {
+            userEntity.setCountry(countryDao.getByCode(citizenshipCode));
         }
 
         userDao.update(userEntity);
     }
 
+    @Transactional
     @Override
-    public void save(Map<String, String> params) {
-        Long id = Long.parseLong(params.get("officeId"));
-        OfficeEntity officeEntity = officeDao.getById(id);
-        UserDocumentEntity userDocumentEntity = null;
+    public void save(UserSaveFilterView userSaveFilterView) {
+
+        UserEntity userEntity = mapperFacade.map(userSaveFilterView, UserEntity.class);
+        OfficeEntity officeEntity = officeDao.getById(userSaveFilterView.officeId);
+        userEntity.setOffice(officeEntity);
+
         DocumentTypeEntity documentTypeEntity = null;
-        CountryEntity countryEntity = null;
-        String docNumber;
-        String docDate;
+        UserDocumentEntity userDocumentEntity;
+        CountryEntity countryEntity;
 
-        if((params.get("docNumber") != null & params.get("docDate") != null)){
-            docNumber = params.get("docNumber");
-            docDate = params.get("docDate");
-            if(params.get("docCode") != null){
-                documentTypeEntity = documentTypeDao.getByCode(params.get("docCode"));
-            } else if(params.get("docName") != null){
-                    documentTypeEntity = documentTypeDao.getByName(params.get("docName"));
-                }
-            } else throw new RuntimeException("docCode or docName cannot be NULL");
-            userDocumentEntity = new UserDocumentEntity(docNumber, docDate, documentTypeEntity);
+        String docCode = userSaveFilterView.docCode;
+        String docName = userSaveFilterView.docName;
+        String docNumber = userSaveFilterView.docNumber;
+        String docDate = userSaveFilterView.docDate;
+        String citizenshipCode = userSaveFilterView.citizenshipCode;
 
+        if (docCode.length() > 0 || docName.length() > 0 || docDate.length() > 0 || docNumber.length() > 0) {
 
+            if (docCode.length() > 0) {
+                documentTypeEntity = documentTypeDao.getByCode(docCode);
+            } else if (docName.length() > 0) {
+                documentTypeEntity = documentTypeDao.getByName(docName);
+            } else throw new RuntimeException("for saving document must needs docName or docCode");
 
-        if(params.containsKey("citizenshipCode")){
-            countryEntity = countryDao.getByCode(params.get("citizenshipCode"));
+            if (documentTypeEntity != null & docNumber.length() > 0 & docDate.length() > 0) {
+                userDocumentEntity = new UserDocumentEntity(docNumber, docDate, documentTypeEntity);
+                userEntity.setUserDocument(userDocumentEntity);
+            } else throw new RuntimeException("for saving document must needs enter docNumber and docDate");
         }
 
-        UserEntity userEntity = new UserEntity(params, officeEntity, userDocumentEntity, countryEntity);
-        userDao.save(userEntity);
+        if (citizenshipCode.length() > 0) {
+            countryEntity = countryDao.getByCode(citizenshipCode);
+            userEntity.setCountry(countryEntity);
+        }
 
+        userDao.save(userEntity);
     }
 }

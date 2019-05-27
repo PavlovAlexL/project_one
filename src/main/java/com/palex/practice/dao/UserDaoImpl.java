@@ -2,17 +2,15 @@ package com.palex.practice.dao;
 
 import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.model.UserEntity;
+import com.palex.practice.view.User.UserListFilterView;
 import org.springframework.stereotype.Repository;
 
-import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -23,60 +21,60 @@ public class UserDaoImpl implements UserDao {
         this.em = em;
     }
 
-    @Transactional
     @Override
-    public List<UserEntity> getByParams(Map<String, String> params) {
-        String officeId = params.get("officeId");
-        String firstName = params.get("firstName");
-        String lastName = params.get("lastName");
-        String middleName = params.get("middleName");
-        String position = params.get("position");
-        String docCode = params.get("docCode");
-        String citizenshipCode = params.get("citizenshipCode");
+    public List<UserEntity> getByParams(UserListFilterView userListFilterView) {
+
+        Long officeId = userListFilterView.officeId;
+        OfficeEntity officeEntity = em.find(OfficeEntity.class, officeId);
+        String firstName = userListFilterView.firstName;
+        String lastName = userListFilterView.lastName;
+        String middleName = userListFilterView.middleName;
+        String position = userListFilterView.middleName;
+        String docCode = userListFilterView.docCode;
+        String citizenshipCode = userListFilterView.citizenshipCode;
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<UserEntity> userEntityCriteriaQuery = cb.createQuery(UserEntity.class);
-        Root<UserEntity> userEntityRoot = userEntityCriteriaQuery.from(UserEntity.class);
-        userEntityCriteriaQuery.select(userEntityRoot);
+        CriteriaQuery<UserEntity> query = cb.createQuery(UserEntity.class);
+        Root<UserEntity> userEntityRoot = query.from(UserEntity.class);
 
-        userEntityCriteriaQuery.where(cb.equal(userEntityRoot.get("office").get("id"), officeId));
-        if(firstName != null) {
-            userEntityCriteriaQuery.where(cb.equal(userEntityRoot.get("first_Name"), firstName));
+        Predicate predicate = cb.conjunction();
+
+        predicate = cb.and(predicate, cb.equal(userEntityRoot.get("office"), officeEntity));
+
+        if (firstName.length() > 0) {
+            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("first_Name"), firstName));
         }
-        if(lastName != null){
-            userEntityCriteriaQuery.where(cb.equal(userEntityRoot.get("last_Name"), lastName));
+        if (lastName.length() > 0) {
+            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("last_Name"), lastName));
         }
-        if(middleName != null){
-            userEntityCriteriaQuery.where(cb.equal(userEntityRoot.get("middle_Name"), middleName));
+        if (middleName.length() > 0) {
+            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("middle_Name"), middleName));
         }
-        if(position != null){
-            userEntityCriteriaQuery.where(cb.equal(userEntityRoot.get("position"), position));
+        if (position.length() > 0) {
+            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("position"), position));
         }
-        if(docCode != null){
-            userEntityCriteriaQuery.where(cb.equal(userEntityRoot.get("userDocument").get("documentType").get("code"), docCode));
+        if (docCode.length() > 0) {
+            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("userDocument").get("documentType").get("code"), docCode));
         }
-        if(citizenshipCode != null){
-            userEntityCriteriaQuery.where(cb.equal(userEntityRoot.get("country").get("code"), citizenshipCode));
+        if (citizenshipCode.length() > 0) {
+            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("country").get("code"), citizenshipCode));
         }
 
-        return em.createQuery(userEntityCriteriaQuery).getResultList();
+        query.where(predicate);
 
-        //return new ArrayList<UserEntity>();
+        return em.createQuery(query).getResultList();
     }
 
-    @Transactional
     @Override
     public UserEntity getById(Long id) {
         return em.find(UserEntity.class, id);
     }
 
-    @Transactional
     @Override
     public void update(UserEntity userEntity) {
         em.merge(userEntity);
     }
 
-    @Transactional
     @Override
     public void save(UserEntity userEntity) {
         em.persist(userEntity);

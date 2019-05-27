@@ -6,12 +6,11 @@ import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.service.OfficeService;
-import com.palex.practice.view.OfficeView;
+import com.palex.practice.view.Office.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class OfficeServiceImpl implements OfficeService {
@@ -27,58 +26,30 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public List<OfficeView> list(Map<String, String> params) {
-        OrganisationEntity organisationEntity = organisationDao.getById(Long.parseLong(params.get("orgId")));
-        List<OfficeEntity> result = officeDao.getByParams(organisationEntity);
-
-        if(params.containsKey("name")&params.get("name") != null){
-            List<OfficeEntity> temp = new ArrayList<>();
-            String name = params.get("name");
-            for(OfficeEntity oe : result){
-                if(oe.getName().equals(name)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
-        }
-        if(params.containsKey("phone")&params.get("phone") != null){
-            List<OfficeEntity> temp = new ArrayList<>();
-            String phone = params.get("phone");
-            for(OfficeEntity oe : result){
-                if(oe.getPhone().equals(phone)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
-        }
-        if(params.containsKey("isActive")&params.get("isActive") != null){
-            List<OfficeEntity> temp = new ArrayList<>();
-            Boolean status = Boolean.parseBoolean(params.get("phone"));
-            for(OfficeEntity oe : result){
-                if(oe.getIsActive().equals(status)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
-        }
-        return mapperFacade.mapAsList(result, OfficeView.class);
+    @Transactional
+    public List<OfficeListView> list(OfficeListFilterView officeListFilterView) {
+        return mapperFacade.mapAsList(
+                officeDao.getByParams(officeListFilterView), OfficeListView.class);
     }
 
     @Override
+    @Transactional
     public OfficeView getById(Long id) {
-        OfficeEntity result = officeDao.getById(id);
-        return mapperFacade.map(result, OfficeView.class);
+        return mapperFacade.map(officeDao.getById(id), OfficeView.class);
     }
 
     @Override
-    public void update(Map<String, String> params) {
-        officeDao.update(params);
+    @Transactional
+    public void update(OfficeUpdateFilterView officeUpdateFilterView) {
+        officeDao.update(officeUpdateFilterView);
     }
 
     @Override
-    public void save(Map<String, String> params) {
-        OrganisationEntity organisationEntity = organisationDao.getById(Long.parseLong(params.get("orgId")));
-        OfficeEntity officeEntity = new OfficeEntity(params, organisationEntity);
+    @Transactional
+    public void save(OfficeSaveFilterView officeSaveFilterView) {
+        OfficeEntity officeEntity = mapperFacade.map(officeSaveFilterView, OfficeEntity.class);
+        OrganisationEntity organisationEntity = organisationDao.getById(officeSaveFilterView.orgId);
+        officeEntity.setOrganisation(organisationEntity);
         officeDao.save(officeEntity);
     }
 

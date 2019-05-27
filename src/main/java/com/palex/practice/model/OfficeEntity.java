@@ -1,7 +1,5 @@
 package com.palex.practice.model;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Map;
@@ -140,4 +138,17 @@ public class OfficeEntity {
         this.users = users;
     }
 
+    @Override
+    public String toString() {
+        return "OfficeEntity{" +
+                "id=" + id +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isActive=" + isActive +
+                ", organisation=" + organisation +
+                ", users=" + users +
+                '}';
+    }
 }

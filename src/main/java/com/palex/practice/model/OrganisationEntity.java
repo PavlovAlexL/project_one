@@ -1,8 +1,6 @@
 package com.palex.practice.model;
 
 import javax.persistence.*;
-import java.util.Map;
-import java.util.Set;
 
 @Entity
 @Table(name="Organisation")
@@ -143,4 +141,19 @@ public class OrganisationEntity {
         this.isActive = isActive;
     }
 
+
+    @Override
+    public String toString() {
+        return "OrganisationEntity{" +
+                "id=" + id +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", inn='" + inn + '\'' +
+                ", kpp='" + kpp + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isActive=" + isActive +
+                '}';
+    }
 }

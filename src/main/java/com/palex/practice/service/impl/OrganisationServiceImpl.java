@@ -1,6 +1,7 @@
 package com.palex.practice.service.impl;
 
 import com.palex.practice.dao.OrganisationDao;
+import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.service.OrganisationService;
 import com.palex.practice.view.Organisation.*;
@@ -41,7 +42,8 @@ public class OrganisationServiceImpl implements OrganisationService {
     @Override
     @Transactional
     public void save(OrganisationSaveFilterView organisationSaveFilterView) {
-        organisationDao.save(organisationSaveFilterView);
+        OrganisationEntity organisationEntity = mapperFacade.map(organisationSaveFilterView, OrganisationEntity.class);
+        organisationDao.save(organisationEntity);
     }
 
 }

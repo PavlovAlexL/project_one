@@ -14,6 +14,4 @@ public class OrganisationListFilterView {
 
     public String isActive;
 
-    public OrganisationListFilterView() {
-    }
 }
