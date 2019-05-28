@@ -1,7 +1,6 @@
 package com.palex.practice.model;
 
 import javax.persistence.*;
-import java.util.Map;
 
 /**
  * Класс сотрудник.
@@ -87,26 +86,26 @@ public class UserEntity {
     }
 
 
-    public UserEntity(Map<String, String> params, OfficeEntity officeEntity, UserDocumentEntity userDocumentEntity, CountryEntity countryEntity){
+//    public UserEntity(Map<String, String> params, OfficeEntity officeEntity, UserDocumentEntity userDocumentEntity, CountryEntity countryEntity){//
 
-        this.office = officeEntity;
-        this.firstName = params.get("firstName");
-        this.lastName = params.get("lastName");
-        this.middleName = params.get("middleName");
-        this.position = params.get("position");
-        this.phone = params.get("phone");
-        if(userDocumentEntity != null){
-            System.out.println("one");
-            this.userDocument = userDocumentEntity;
-        }
-        if(countryEntity != null){
-            System.out.println("two");
-            this.country = countryEntity;
-        }
-        this.isIdentified = Boolean.parseBoolean(params.get("isIdentified"));
+//        this.office = officeEntity;
+//        this.firstName = params.get("firstName");
+//        this.lastName = params.get("lastName");
+//        this.middleName = params.get("middleName");
+//        this.position = params.get("position");
+//        this.phone = params.get("phone");
+//        if(userDocumentEntity != null){
+//            System.out.println("one");
+//            this.userDocument = userDocumentEntity;
+//        }
+//        if(countryEntity != null){
+//            System.out.println("two");
+//            this.country = countryEntity;
+//        }
+//        this.isIdentified = Boolean.parseBoolean(params.get("isIdentified"));//
+//
 
-
-    }
+//    }
 
 
     public Long getId() {

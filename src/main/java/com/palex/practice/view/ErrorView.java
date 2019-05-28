@@ -2,11 +2,7 @@ package com.palex.practice.view;
 
 public class ErrorView {
 
-    public String error;
-
-    public ErrorView(String message) {
-        this.error = message;
-    }
+    public String error = "Error occured";
 
     public String getError() {
         return error;

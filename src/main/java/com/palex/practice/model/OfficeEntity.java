@@ -1,9 +1,6 @@
 package com.palex.practice.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 
 @Entity
@@ -56,24 +53,24 @@ public class OfficeEntity {
     @JoinColumn(name = "org_id", nullable = false)
     private OrganisationEntity organisation;
 
-    /**
-     * Множество пользователей, принадлежащих данному офису
-     */
-    @OneToMany(mappedBy = "office", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserEntity> users;
+//    /**
+//     * Множество пользователей, принадлежащих данному офису
+//     */
+//    @OneToMany(mappedBy = "office", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<UserEntity> users;
 
 
     public OfficeEntity(){
 
     }
 
-    public OfficeEntity(Map<String, String> params, OrganisationEntity organisationEntity) {
-        this.organisation = organisationEntity;
-        this.name = params.get("name");
-        this.address = params.get("address");
-        this.phone = params.get("phone");
-        this.isActive = Boolean.parseBoolean(params.get("isActive"));
-    }
+    //public OfficeEntity(Map<String, String> params, OrganisationEntity organisationEntity) {
+    //    this.organisation = organisationEntity;
+    //    this.name = params.get("name");
+    //    this.address = params.get("address");
+    //    this.phone = params.get("phone");
+    //    this.isActive = Boolean.parseBoolean(params.get("isActive"));
+    //}
 
     public Long getId() {
         return id;
@@ -127,28 +124,15 @@ public class OfficeEntity {
         this.organisation = organisation;
     }
 
-    public Set<UserEntity> getUsers() {
-        if(users == null){
-            users = new HashSet<>();
-        }
-        return users;
-    }
+    //public Set<UserEntity> getUsers() {
+    //    if(users == null){
+    //        users = new HashSet<>();
+    //    }
+    //    return users;
+    //}
+//
+    //public void setUsers(Set<UserEntity> users) {
+    //    this.users = users;
+    //}
 
-    public void setUsers(Set<UserEntity> users) {
-        this.users = users;
-    }
-
-    @Override
-    public String toString() {
-        return "OfficeEntity{" +
-                "id=" + id +
-                ", version=" + version +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", isActive=" + isActive +
-                ", organisation=" + organisation +
-                ", users=" + users +
-                '}';
-    }
 }

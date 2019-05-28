@@ -66,15 +66,15 @@ public class OrganisationEntity {
     public OrganisationEntity(){
     }
 
-    public OrganisationEntity(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
-        this.name = name;
-        this.fullName = fullName;
-        this.inn = inn;
-        this.kpp = kpp;
-        this.address = address;
-        this.phone = phone;
-        this.isActive = isActive;
-    }
+    //public OrganisationEntity(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+    //    this.name = name;
+    //    this.fullName = fullName;
+    //    this.inn = inn;
+    //    this.kpp = kpp;
+    //    this.address = address;
+    //    this.phone = phone;
+    //    this.isActive = isActive;
+    //}
 
     public Long getId() {
         return id;
@@ -142,18 +142,18 @@ public class OrganisationEntity {
     }
 
 
-    @Override
-    public String toString() {
-        return "OrganisationEntity{" +
-                "id=" + id +
-                ", version=" + version +
-                ", name='" + name + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", inn='" + inn + '\'' +
-                ", kpp='" + kpp + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", isActive=" + isActive +
-                '}';
-    }
+    //@Override
+    //public String toString() {
+    //    return "OrganisationEntity{" +
+    //            "id=" + id +
+    //            ", version=" + version +
+    //            ", name='" + name + '\'' +
+    //            ", fullName='" + fullName + '\'' +
+    //            ", inn='" + inn + '\'' +
+    //            ", kpp='" + kpp + '\'' +
+    //            ", address='" + address + '\'' +
+    //            ", phone='" + phone + '\'' +
+    //            ", isActive=" + isActive +
+    //            '}';
+    //}
 }
