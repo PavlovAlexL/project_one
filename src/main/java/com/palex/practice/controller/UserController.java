@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = APPLICATION_JSON_VALUE)
@@ -56,7 +55,8 @@ public class UserController {
 
     @RequestMapping(
             value = "/save",
-            method = {POST})
+            method = RequestMethod.POST
+    )
     public SuccessView userSave(
             @RequestBody @Valid UserSaveFilterView userSaveFilterView
     ) {

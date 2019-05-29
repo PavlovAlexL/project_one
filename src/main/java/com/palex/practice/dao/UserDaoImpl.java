@@ -42,13 +42,13 @@ public class UserDaoImpl implements UserDao {
         predicate = cb.and(predicate, cb.equal(userEntityRoot.get("office"), officeEntity));
 
         if (firstName.length() > 0) {
-            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("first_Name"), firstName));
+            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("firstName"), firstName));
         }
         if (lastName.length() > 0) {
-            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("last_Name"), lastName));
+            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("lastName"), lastName));
         }
         if (middleName.length() > 0) {
-            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("middle_Name"), middleName));
+            predicate = cb.and(predicate, cb.equal(userEntityRoot.get("middleName"), middleName));
         }
         if (position.length() > 0) {
             predicate = cb.and(predicate, cb.equal(userEntityRoot.get("position"), position));

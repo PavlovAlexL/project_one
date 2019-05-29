@@ -9,9 +9,15 @@ public class OrganisationListFilterView {
     @Size(min = 2, max = 50)
     public String name;
 
-    @Size(max = 10)
     public String inn;
 
     public String isActive;
 
+    public void setInn(String inn) {
+        if (inn.length() == 0) {
+            this.inn = inn;
+        } else if (inn.matches("\\d{10}")) {
+            this.inn = inn;
+        } else throw new RuntimeException("Not valid inn");
+    }
 }

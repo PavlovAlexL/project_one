@@ -47,9 +47,6 @@ public class UserDocumentEntity {
     @JoinColumn(name="doc_type_id", nullable = false)
     private DocumentTypeEntity documentType;
 
-    public UserDocumentEntity(){
-    }
-
     public UserDocumentEntity(String docNumber, String docDate, DocumentTypeEntity documentTypeEntity) {
 
         this.documentType = documentTypeEntity;

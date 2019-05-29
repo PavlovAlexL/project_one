@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public List<UserListView> list(UserListFilterView userListFilterView) {
+        System.out.println(userListFilterView);
         return mapperFacade.mapAsList(userDao.getByParams(userListFilterView), UserListView.class);
     }
 
@@ -49,10 +50,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void update(UserUpdateFilterView userUpdateFilterView) {
-
         Long id = userUpdateFilterView.id;
         Long officeId = userUpdateFilterView.officeId;
         String firstName = userUpdateFilterView.firstName;
+        String lastName = userUpdateFilterView.lastName;
         String middleName = userUpdateFilterView.middleName;
         String position = userUpdateFilterView.position;
         String phone = userUpdateFilterView.phone;
@@ -64,15 +65,15 @@ public class UserServiceImpl implements UserService {
 
         UserEntity userEntity = userDao.getById(id);
 
-        if (officeId > 0) {
+        if (officeId != null) {
             userEntity.setOffice(
                     officeDao.getById(officeId));
         }
 
         userEntity.setFirstName(firstName);
 
-        if (middleName.length() > 0) {
-            userEntity.setLastName(middleName);
+        if (lastName.length() > 0) {
+            userEntity.setLastName(lastName);
         }
 
         if (middleName.length() > 0) {
@@ -80,13 +81,15 @@ public class UserServiceImpl implements UserService {
         }
 
         userEntity.setPosition(position);
+
         if (phone.length() > 0) {
             userEntity.setPhone(phone);
         }
 
         if (isIdentified.length() > 0) {
-            userEntity.setMiddleName(isIdentified);
+            userEntity.setIsIdentified(Boolean.parseBoolean(isIdentified));
         }
+
         if (docNumber.length() > 0 || docDate.length() > 0 || docName.length() > 0) {
             if (docNumber.length() > 0 & docDate.length() > 0 & docName.length() > 0) {
                 userEntity.setUserDocument(
@@ -94,13 +97,12 @@ public class UserServiceImpl implements UserService {
                                 docNumber,
                                 docDate,
                                 documentTypeDao.getByName(docName)));
-            } else throw new RuntimeException("for update document must needs enter all documents fields");
+            } else throw new RuntimeException("for update document must needs enter all document fields");
         }
 
         if (citizenshipCode.length() > 0) {
             userEntity.setCountry(countryDao.getByCode(citizenshipCode));
         }
-
         userDao.update(userEntity);
     }
 
@@ -109,6 +111,7 @@ public class UserServiceImpl implements UserService {
     public void save(UserSaveFilterView userSaveFilterView) {
 
         UserEntity userEntity = mapperFacade.map(userSaveFilterView, UserEntity.class);
+
         OfficeEntity officeEntity = officeDao.getById(userSaveFilterView.officeId);
         userEntity.setOffice(officeEntity);
 
@@ -123,7 +126,6 @@ public class UserServiceImpl implements UserService {
         String citizenshipCode = userSaveFilterView.citizenshipCode;
 
         if (docCode.length() > 0 || docName.length() > 0 || docDate.length() > 0 || docNumber.length() > 0) {
-
             if (docCode.length() > 0) {
                 documentTypeEntity = documentTypeDao.getByCode(docCode);
             } else if (docName.length() > 0) {

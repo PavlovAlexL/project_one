@@ -31,7 +31,7 @@ INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, is_Active) 
 INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, is_Active) VALUES ('Крок', 'ООО "Крок"',                       '3333333333','222232222','г. Москва, ул. Таганская','84953778899','true');
 INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, is_Active) VALUES ('HPE',  'ООО "Хюлед Паккард Энтерпрайз"',   '1111671111','222223322','г. Москва, ул. Южная','84959955635','true');
 INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, is_Active) VALUES ('MS',   'ООО "Майкрософт РУС"',             '3333863333','222236822','г. Москва, ул. Каширская','84953222322','true');
-INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, is_Active) VALUES ('Белл', 'ООО "Белл Интегратор Рус"',            '1111111111','222222222','г. Москва, ул. Южнопортовая','84957778899','false');
+INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, is_Active) VALUES ('Белл', 'ООО "Белл Интегратор Рус"',        '2111111111','222222222','г. Москва, ул. Южнопортовая','84957778899','false');
 
 INSERT INTO Office (org_id, name, address, phone,is_Active ) VALUES (2, 'Kiev', 'Kiev, Maidan square, 1', 800012345611, true);
 INSERT INTO Office (org_id, name, address, phone,is_Active ) VALUES (2, 'Москва', 'г. Москва, ул. Угрешская, д1. к.5', 84952223334, true);

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -14,6 +17,7 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
 
     public DocumentTypeDaoImpl(EntityManager em) {
         this.em = em;
+
     }
 
     @Override
@@ -24,13 +28,27 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
 
     @Override
     public DocumentTypeEntity getByCode(String code) {
-        TypedQuery<DocumentTypeEntity> query = em.createQuery("SELECT d FROM DocumentTypeEntity d WHERE d.code = :code", DocumentTypeEntity.class);
-        return query.setParameter("code", code).getSingleResult();
+        CriteriaQuery<DocumentTypeEntity> criteria = buildCriteria("code", code);
+        TypedQuery<DocumentTypeEntity> query = em.createQuery(criteria);
+        return query.getSingleResult();
     }
 
     @Override
     public DocumentTypeEntity getByName(String name) {
-        TypedQuery<DocumentTypeEntity> query = em.createQuery("SELECT d FROM DocumentTypeEntity d WHERE d.name = :name", DocumentTypeEntity.class);
-        return query.setParameter("name", name).getSingleResult();
+        CriteriaQuery<DocumentTypeEntity> criteria = buildCriteria("name", name);
+        TypedQuery<DocumentTypeEntity> query = em.createQuery(criteria);
+        return query.getSingleResult();
     }
+
+
+    private CriteriaQuery<DocumentTypeEntity> buildCriteria(String parametr, String data) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<DocumentTypeEntity> criteria = builder.createQuery(DocumentTypeEntity.class);
+        Root<DocumentTypeEntity> root = criteria.from(DocumentTypeEntity.class);
+        criteria.where(builder.equal(root.get(parametr), data));
+        return criteria;
+    }
+
+
+
 }

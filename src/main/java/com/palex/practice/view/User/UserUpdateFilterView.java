@@ -1,17 +1,21 @@
 package com.palex.practice.view.User;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserUpdateFilterView {
 
     @NotNull
+    @Min(1)
     public Long id;
 
+    @Min(1)
     public Long officeId;
 
-    @NotEmpty
+    @NotNull
+    @NotBlank
     @Size(max = 50)
     public String firstName;
 
@@ -21,7 +25,8 @@ public class UserUpdateFilterView {
     @Size(max = 50)
     public String middleName;
 
-    @NotEmpty
+    @NotNull
+    @NotBlank
     @Size(max = 100)
     public String position;
 
@@ -42,6 +47,13 @@ public class UserUpdateFilterView {
 
     public String isIdentified;
 
+    public void setPhone(String phone) {
+        if (phone.length() == 0) {
+            this.phone = phone;
+        } else if (phone.matches("^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")) {
+            this.phone = phone;
+        } else throw new RuntimeException("Not valid phone string");
+    }
 
     @Override
     public String toString() {
