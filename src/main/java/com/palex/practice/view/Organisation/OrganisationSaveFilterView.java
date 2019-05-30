@@ -47,4 +47,5 @@ public class OrganisationSaveFilterView {
             this.phone = phone;
         } else throw new RuntimeException("Not valid phone string");
     }
+
 }

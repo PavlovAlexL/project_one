@@ -6,9 +6,11 @@ import com.palex.practice.view.Organisation.OrganisationSaveFilterView;
 import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;
 import com.palex.practice.view.ResultView;
 import com.palex.practice.view.SuccessView;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -27,7 +29,6 @@ public class OrganisationController {
             value = "/list",
             method = RequestMethod.POST
     )
-    @ResponseBody
     public ResultView organisationList(
             @RequestBody @Valid OrganisationListFilterView organisationListFilterView) {
         return new ResultView(organisationService.list(organisationListFilterView));
@@ -37,8 +38,9 @@ public class OrganisationController {
             value = "/{id}",
             method = RequestMethod.GET
     )
+    @ResponseBody
     public ResultView organisationGetById(
-            @PathVariable("id") @Valid @NotNull Long id
+            @PathVariable("id") @Valid @NotNull @Min(1) Long id
     ) {
         return new ResultView(organisationService.getById(id));
     }
@@ -58,7 +60,8 @@ public class OrganisationController {
 
     @RequestMapping(
             value = "/save",
-            method = RequestMethod.POST
+            method = RequestMethod.POST,
+            produces = {MediaType.APPLICATION_JSON_VALUE}
     )
     public SuccessView organisationSave(
             @RequestBody @Valid OrganisationSaveFilterView organisationSaveFilterView
