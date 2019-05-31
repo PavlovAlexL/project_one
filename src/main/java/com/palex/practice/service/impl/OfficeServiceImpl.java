@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * Реализация сервиса
+ */
 @Service
 public class OfficeServiceImpl implements OfficeService {
 
@@ -25,6 +28,9 @@ public class OfficeServiceImpl implements OfficeService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * Отобразить объекты с параметрами.
+     */
     @Override
     @Transactional
     public List<OfficeListView> list(OfficeListFilterView officeListFilterView) {
@@ -32,18 +38,27 @@ public class OfficeServiceImpl implements OfficeService {
                 officeDao.getByParams(officeListFilterView), OfficeListView.class);
     }
 
+    /**
+     *  Отобразить объект по Id.
+     */
     @Override
     @Transactional
     public OfficeView getById(Long id) {
         return mapperFacade.map(officeDao.getById(id), OfficeView.class);
     }
 
+    /**
+     * Изменить объект.
+     */
     @Override
     @Transactional
     public void update(OfficeUpdateFilterView officeUpdateFilterView) {
         officeDao.update(officeUpdateFilterView);
     }
 
+    /**
+     * Создать объект.
+     */
     @Override
     @Transactional
     public void save(OfficeSaveFilterView officeSaveFilterView) {

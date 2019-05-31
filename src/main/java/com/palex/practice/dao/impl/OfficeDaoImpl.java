@@ -1,5 +1,6 @@
-package com.palex.practice.dao;
+package com.palex.practice.dao.impl;
 
+import com.palex.practice.dao.OfficeDao;
 import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.view.Office.OfficeListFilterView;
@@ -14,7 +15,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class OfficeDaoImpl implements OfficeDao{
+public class OfficeDaoImpl implements OfficeDao {
 
     private final EntityManager em;
 

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * Реализация сервиса
+ */
 @Service
 public class OrganisationServiceImpl implements OrganisationService {
 
@@ -21,24 +24,36 @@ public class OrganisationServiceImpl implements OrganisationService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * Отобразить объекты по параметрам.
+     */
     @Override
     @Transactional
     public List<OrganisationListView> list(OrganisationListFilterView organisationListFilterView) {
         return mapperFacade.mapAsList(organisationDao.getByParams(organisationListFilterView), OrganisationListView.class);
     }
 
+    /**
+     *  Отобразить объект по Id.
+     */
     @Override
     @Transactional
     public OrganisationView getById(Long id) {
         return mapperFacade.map(organisationDao.getById(id), OrganisationView.class);
     }
 
+    /**
+     * Изменить объект.
+     */
     @Override
     @Transactional
     public void update(OrganisationUpdateFilterView organisationUpdateFilterView) {
         organisationDao.update(organisationUpdateFilterView);
     }
 
+    /**
+     * Создать объект.
+     */
     @Override
     @Transactional
     public void save(OrganisationSaveFilterView organisationSaveFilterView) {

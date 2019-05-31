@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Реализация сервиса
+ */
 @Service
 public class DocksTypeServiceImpl implements DocksTypeService {
 
@@ -22,6 +25,9 @@ public class DocksTypeServiceImpl implements DocksTypeService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * Плучить список типов документов
+     */
     @Override
     public List<DocksTypeView> docs() {
         List<DocumentTypeEntity> all = documentTypeDao.getAll();

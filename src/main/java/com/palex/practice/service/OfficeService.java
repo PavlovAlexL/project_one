@@ -4,10 +4,13 @@ import com.palex.practice.view.Office.*;
 
 import java.util.List;
 
+/**
+ * Сервис
+ */
 public interface OfficeService {
 
     /**
-     * Отобразить объекта с параметрами.
+     * Отобразить объекты с параметрами.
      */
     List<OfficeListView> list(OfficeListFilterView officeListFilterView);
 

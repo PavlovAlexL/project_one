@@ -1,5 +1,6 @@
-package com.palex.practice.dao;
+package com.palex.practice.dao.impl;
 
+import com.palex.practice.dao.CountryDao;
 import com.palex.practice.model.CountryEntity;
 import org.springframework.stereotype.Repository;
 

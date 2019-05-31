@@ -1,5 +1,6 @@
-package com.palex.practice.dao;
+package com.palex.practice.dao.impl;
 
+import com.palex.practice.dao.OrganisationDao;
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.view.Organisation.OrganisationListFilterView;
 import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;

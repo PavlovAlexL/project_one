@@ -3,6 +3,9 @@ package com.palex.practice.model;
 import javax.persistence.*;
 
 
+/**
+ * Класс
+ */
 @Entity
 @Table(name = "Office")
 public class OfficeEntity {

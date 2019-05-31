@@ -5,6 +5,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
+
+/**
+ * Класс - справочник, сопоставляющий наименование и код страны
+ */
 @Entity
 @Table(name = "Country")
 public class CountryEntity {
@@ -23,7 +27,7 @@ public class CountryEntity {
     private String code;
 
     /**
-     * Название страны
+     * Наименование страны
      */
     @Column(name="name", length = 50)
     private String name;

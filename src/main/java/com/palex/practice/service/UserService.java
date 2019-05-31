@@ -4,10 +4,13 @@ import com.palex.practice.view.User.*;
 
 import java.util.List;
 
+/**
+ * Сервис
+ */
 public interface UserService {
 
     /**
-     * Отобразить объекта с параметрами.
+     * Отобразить объекты с параметрами.
      */
     List<UserListView> list(UserListFilterView userListFilterView);
 

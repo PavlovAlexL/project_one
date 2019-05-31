@@ -22,13 +22,13 @@ public class OrganisationEntity {
     private Integer version;
 
     /**
-     * Название
+     * Наименование организации
      */
     @Column (name="name", nullable = false)
     private String name;
 
     /**
-     * Полное название
+     * Полное наименование организации
      */
     @Column(name="full_Name", nullable = false)
     private String fullName;
@@ -62,9 +62,6 @@ public class OrganisationEntity {
      */
     @Column(name="is_active")
     private Boolean isActive;
-
-    public OrganisationEntity(){
-    }
 
     public Long getId() {
         return id;

@@ -1,13 +1,26 @@
 package com.palex.practice.model;
 
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-
+/**
+ * Класс, описывающий документы пользователя
+ */
 @Entity
 @Table(name = "User_document")
 public class UserDocumentEntity {
@@ -21,7 +34,7 @@ public class UserDocumentEntity {
     private Long id;
 
     /**
-     * Специальный класс Hibernate
+     * Служебное поле Hibernate
      */
     @Version
     @Column (name="version", nullable = false)
@@ -47,6 +60,12 @@ public class UserDocumentEntity {
     @JoinColumn(name="doc_type_id", nullable = false)
     private DocumentTypeEntity documentType;
 
+    /**
+     * Конструктор объекта
+     * @param docNumber Номер документа
+     * @param docDate Дата документа
+     * @param documentTypeEntity Тип документа
+     */
     public UserDocumentEntity(String docNumber, String docDate, DocumentTypeEntity documentTypeEntity) {
 
         this.documentType = documentTypeEntity;
@@ -55,8 +74,14 @@ public class UserDocumentEntity {
             DateFormat format = new SimpleDateFormat("dd.MM.yy");
             this.docDate = format.parse(docDate);
         } catch (ParseException e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Конструктор поумолчанию, нужен для Hibernate
+     */
+    public UserDocumentEntity() {
     }
 
     public Long getId() {
@@ -91,8 +116,8 @@ public class UserDocumentEntity {
         DateFormat format = new SimpleDateFormat("dd.MM.yy");
         try {
             this.docDate = format.parse(date);
-        }catch (ParseException e){
-            e.getStackTrace();
+        } catch (ParseException e){
+            throw new RuntimeException(e);
         }
     }
 

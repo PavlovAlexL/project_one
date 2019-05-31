@@ -4,6 +4,9 @@ import com.palex.practice.view.Organisation.*;
 
 import java.util.List;
 
+/**
+ * Сервис
+ */
 public interface OrganisationService {
 
     /**

@@ -19,7 +19,7 @@ public class UserEntity {
     private Long id;
 
     /**
-     * Специальный поле Hibernate
+     * Служебное поле Hibernate
      */
     @Version
     @Column (name="version", nullable = false)
@@ -81,9 +81,6 @@ public class UserEntity {
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name="citizenship_id")
     private CountryEntity country;
-
-    public UserEntity(){
-    }
 
     public Long getId() {
         return id;

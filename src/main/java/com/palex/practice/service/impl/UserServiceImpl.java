@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * Реализация сервиса
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -31,6 +34,9 @@ public class UserServiceImpl implements UserService {
         this.documentTypeDao = documentTypeDao;
     }
 
+    /**
+     * Отобразить объекты с параметрами.
+     */
     @Transactional
     @Override
     public List<UserListView> list(UserListFilterView userListFilterView) {
@@ -38,6 +44,9 @@ public class UserServiceImpl implements UserService {
         return mapperFacade.mapAsList(userDao.getByParams(userListFilterView), UserListView.class);
     }
 
+    /**
+     *  Отобразить объект по Id.
+     */
     @Transactional
     @Override
     public UserView getById(Long id) {
@@ -47,6 +56,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     * Изменить объект.
+     */
     @Transactional
     @Override
     public void update(UserUpdateFilterView userUpdateFilterView) {
@@ -106,6 +118,9 @@ public class UserServiceImpl implements UserService {
         userDao.update(userEntity);
     }
 
+    /**
+     * Создать объект.
+     */
     @Transactional
     @Override
     public void save(UserSaveFilterView userSaveFilterView) {
@@ -115,7 +130,7 @@ public class UserServiceImpl implements UserService {
         OfficeEntity officeEntity = officeDao.getById(userSaveFilterView.officeId);
         userEntity.setOffice(officeEntity);
 
-        DocumentTypeEntity documentTypeEntity = null;
+        DocumentTypeEntity documentTypeEntity;
         UserDocumentEntity userDocumentEntity;
         CountryEntity countryEntity;
 

@@ -1,5 +1,6 @@
-package com.palex.practice.dao;
+package com.palex.practice.dao.impl;
 
+import com.palex.practice.dao.UserDao;
 import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.model.UserEntity;
 import com.palex.practice.view.User.UserListFilterView;
