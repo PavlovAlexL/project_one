@@ -11,6 +11,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * Реализация DAO для доступа к типам документов.
+ */
 @Repository
 public class DocumentTypeDaoImpl implements DocumentTypeDao {
 
@@ -18,15 +21,24 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
 
     public DocumentTypeDaoImpl(EntityManager em) {
         this.em = em;
-
     }
 
+    /**
+     * Получение коллекции объектов.
+     *
+     * @return
+     */
     @Override
     public List<DocumentTypeEntity> getAll() {
         TypedQuery<DocumentTypeEntity> query = em.createQuery("SELECT d FROM DocumentTypeEntity d", DocumentTypeEntity.class);
         return query.getResultList();
     }
 
+    /**
+     * Получить по коду документа.
+     * @param code Код.
+     * @return объект.
+     */
     @Override
     public DocumentTypeEntity getByCode(String code) {
         CriteriaQuery<DocumentTypeEntity> criteria = buildCriteria("code", code);
@@ -34,6 +46,11 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
         return query.getSingleResult();
     }
 
+    /**
+     * Получить по имени документу.
+     * @param name Иия.
+     * @return объект.
+     */
     @Override
     public DocumentTypeEntity getByName(String name) {
         CriteriaQuery<DocumentTypeEntity> criteria = buildCriteria("name", name);
@@ -49,7 +66,6 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
         criteria.where(builder.equal(root.get(parametr), data));
         return criteria;
     }
-
 
 
 }

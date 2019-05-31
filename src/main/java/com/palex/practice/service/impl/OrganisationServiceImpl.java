@@ -4,7 +4,11 @@ import com.palex.practice.dao.OrganisationDao;
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.service.OrganisationService;
-import com.palex.practice.view.Organisation.*;
+import com.palex.practice.view.Organisation.OrganisationListFilterView;
+import com.palex.practice.view.Organisation.OrganisationListView;
+import com.palex.practice.view.Organisation.OrganisationSaveFilterView;
+import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;
+import com.palex.practice.view.Organisation.OrganisationView;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -30,7 +34,9 @@ public class OrganisationServiceImpl implements OrganisationService {
     @Override
     @Transactional
     public List<OrganisationListView> list(OrganisationListFilterView organisationListFilterView) {
-        return mapperFacade.mapAsList(organisationDao.getByParams(organisationListFilterView), OrganisationListView.class);
+        OrganisationEntity organisationEntity = mapperFacade.map(organisationListFilterView, OrganisationEntity.class);
+        List<OrganisationEntity> organisationEntities = organisationDao.getByParams(organisationEntity);
+        return mapperFacade.mapAsList(organisationEntities, OrganisationListView.class);
     }
 
     /**
@@ -39,7 +45,8 @@ public class OrganisationServiceImpl implements OrganisationService {
     @Override
     @Transactional
     public OrganisationView getById(Long id) {
-        return mapperFacade.map(organisationDao.getById(id), OrganisationView.class);
+        OrganisationEntity organisationEntity = organisationDao.getById(id);
+        return mapperFacade.map(organisationEntity, OrganisationView.class);
     }
 
     /**
@@ -48,7 +55,8 @@ public class OrganisationServiceImpl implements OrganisationService {
     @Override
     @Transactional
     public void update(OrganisationUpdateFilterView organisationUpdateFilterView) {
-        organisationDao.update(organisationUpdateFilterView);
+        OrganisationEntity organisationEntity = mapperFacade.map(organisationUpdateFilterView, OrganisationEntity.class);
+        organisationDao.update(organisationEntity);
     }
 
     /**

@@ -1,7 +1,6 @@
 package com.palex.practice.dao;
 
 import com.palex.practice.model.CountryEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
@@ -10,7 +9,17 @@ import java.util.List;
  */
 public interface CountryDao {
 
+    /**
+     * Получить список.
+     *
+     * @return коллекцию объектов.
+     */
     List<CountryEntity> getAll();
 
+    /**
+     * Получить по коду.
+     * @param code код.
+     * @return объект
+     */
     CountryEntity getByCode(String code);
 }

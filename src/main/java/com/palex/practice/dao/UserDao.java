@@ -1,21 +1,19 @@
 package com.palex.practice.dao;
 
 import com.palex.practice.model.UserEntity;
-import com.palex.practice.view.User.UserListFilterView;
 
 import java.util.List;
 
 /**
- * DAO для доступа UserDao
+ * DAO для доступа к User
  */
-
 public interface UserDao {
 
     /**
      * Получение коллекции объектов по параметрам.
      * @return
      */
-    List<UserEntity> getByParams(UserListFilterView userListFilterView);
+    List<UserEntity> getByParams(UserEntity userEntity);
 
     /**
      * Получение объекта по ID.

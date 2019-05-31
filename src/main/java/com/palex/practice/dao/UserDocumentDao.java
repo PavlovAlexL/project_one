@@ -3,8 +3,6 @@ package com.palex.practice.dao;
 import com.palex.practice.model.DocumentTypeEntity;
 import com.palex.practice.model.UserDocumentEntity;
 
-import java.sql.Date;
-
 /**
  * DAO для работы с UserDocument
  */

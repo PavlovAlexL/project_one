@@ -6,10 +6,9 @@ import com.palex.practice.model.UserDocumentEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import java.sql.Date;
 
 /**
- * DAO для работы с UserDocument
+ * DAO для работы с UserDocument.
  */
 @Repository
 public class UserDocumentDaoImpl implements UserDocumentDao {
@@ -21,8 +20,8 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     }
 
     /**
-     * Запрос по id
-     * @param id
+     * Запрос по id.
+     * @param id Идентификатор.
      * @return
      */
     @Override
@@ -31,7 +30,7 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     }
 
     /**
-     *
+     * Сохранить объект.
      * @param number
      * @param date
      * @param documentTypeEntity
@@ -42,7 +41,7 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     }
 
     /**
-     *
+     * Обновить объект.
      * @param number
      * @param date
      * @param documentTypeEntity

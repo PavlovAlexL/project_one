@@ -6,7 +6,11 @@ import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.service.OfficeService;
-import com.palex.practice.view.Office.*;
+import com.palex.practice.view.Office.OfficeListFilterView;
+import com.palex.practice.view.Office.OfficeListView;
+import com.palex.practice.view.Office.OfficeSaveFilterView;
+import com.palex.practice.view.Office.OfficeUpdateFilterView;
+import com.palex.practice.view.Office.OfficeView;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -34,8 +38,12 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public List<OfficeListView> list(OfficeListFilterView officeListFilterView) {
-        return mapperFacade.mapAsList(
-                officeDao.getByParams(officeListFilterView), OfficeListView.class);
+        OfficeEntity officeEntity = mapperFacade.map(officeListFilterView, OfficeEntity.class);
+        if (officeListFilterView.orgId != null) {
+            officeEntity.setOrganisation(organisationDao.getById(officeListFilterView.orgId));
+        }
+        List<OfficeEntity> officeEntities = officeDao.getByParams(officeEntity);
+        return mapperFacade.mapAsList(officeEntities, OfficeListView.class);
     }
 
     /**
@@ -44,7 +52,8 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public OfficeView getById(Long id) {
-        return mapperFacade.map(officeDao.getById(id), OfficeView.class);
+        OfficeEntity officeEntity = officeDao.getById(id);
+        return mapperFacade.map(officeEntity, OfficeView.class);
     }
 
     /**
@@ -53,7 +62,8 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void update(OfficeUpdateFilterView officeUpdateFilterView) {
-        officeDao.update(officeUpdateFilterView);
+        OfficeEntity officeEntity = mapperFacade.map(officeUpdateFilterView, OfficeEntity.class);
+        officeDao.update(officeEntity);
     }
 
     /**

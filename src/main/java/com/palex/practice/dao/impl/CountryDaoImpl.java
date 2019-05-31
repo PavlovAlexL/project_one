@@ -8,6 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ * Реализация DAO для доступа к справочникам стран.
+ */
 @Repository
 public class CountryDaoImpl implements CountryDao {
 
@@ -17,12 +20,22 @@ public class CountryDaoImpl implements CountryDao {
         this.em = em;
     }
 
+    /**
+     * Получить список.
+     *
+     * @return коллекцию объектов.
+     */
     @Override
     public List<CountryEntity> getAll() {
         TypedQuery<CountryEntity> query = em.createQuery("SELECT c FROM CountryEntity c", CountryEntity.class);
         return query.getResultList();
     }
 
+    /**
+     * Получить по коду.
+     * @param code код.
+     * @return объект
+     */
     @Override
     public CountryEntity getByCode(String code) {
         TypedQuery<CountryEntity> query = em.createQuery("SELECT c FROM CountryEntity c where c.code = :code", CountryEntity.class);

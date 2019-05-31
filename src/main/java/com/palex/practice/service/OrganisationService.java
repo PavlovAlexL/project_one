@@ -1,6 +1,10 @@
 package com.palex.practice.service;
 
-import com.palex.practice.view.Organisation.*;
+import com.palex.practice.view.Organisation.OrganisationListFilterView;
+import com.palex.practice.view.Organisation.OrganisationListView;
+import com.palex.practice.view.Organisation.OrganisationSaveFilterView;
+import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;
+import com.palex.practice.view.Organisation.OrganisationView;
 
 import java.util.List;
 

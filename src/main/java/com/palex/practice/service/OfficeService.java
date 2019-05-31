@@ -1,6 +1,11 @@
 package com.palex.practice.service;
 
-import com.palex.practice.view.Office.*;
+
+import com.palex.practice.view.Office.OfficeListFilterView;
+import com.palex.practice.view.Office.OfficeListView;
+import com.palex.practice.view.Office.OfficeSaveFilterView;
+import com.palex.practice.view.Office.OfficeUpdateFilterView;
+import com.palex.practice.view.Office.OfficeView;
 
 import java.util.List;
 

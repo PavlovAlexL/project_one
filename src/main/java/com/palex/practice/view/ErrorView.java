@@ -1,14 +1,16 @@
 package com.palex.practice.view;
 
+/**
+ * View для отправки сообщения об ощибке
+ */
 public class ErrorView {
 
-    public String error = "Error occured";
+    /**
+     * Строка, которая отправляется при возникновении ошибки.
+     */
+    public String error;
 
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
+    public ErrorView(String error) {
+        this.error = "Error occured";
     }
 }
