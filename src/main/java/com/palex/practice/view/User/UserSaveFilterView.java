@@ -87,28 +87,111 @@ public class UserSaveFilterView {
      */
     public String isIdentified;
 
-    /**
-     * Устанвка телефона с валлидацией.
-     *
-     * @param phone
-     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        if(lastName.length() == 0){
+            this.lastName = null;
+        } else {
+            this.lastName = lastName;
+        }
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        if(middleName.length() == 0){
+            this.middleName = null;
+        } else {
+            this.middleName = middleName;
+        }
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
     public void setPhone(String phone) {
         if (phone.length() == 0) {
-            this.phone = phone;
+            this.phone = null;
         } else if (phone.matches("^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")) {
             this.phone = phone;
         } else throw new RuntimeException("Not valid phone");
     }
 
-    /**
-     * Установка даты документа с валлидацией.
-     * @param docDate
-     */
+    public String getDocCode() {
+        return docCode;
+    }
+
+    public void setDocCode(String docCode) {
+        if(docCode.length() == 0){
+            this.docCode = null;
+        } else {
+            this.docCode = docCode;
+        }
+    }
+
+    public String getDocName() {
+        return docName;
+    }
+
+    public void setDocName(String docName) {
+        if(docName.length() == 0){
+            this.docName = null;
+        } else {
+            this.docName = docName;
+        }
+    }
+
+    public String getDocNumber() {
+        return docNumber;
+    }
+
+    public void setDocNumber(String docNumber) {
+        if(docNumber.length() == 0){
+            this.docNumber = null;
+        } else {
+            this.docNumber = docNumber;
+        }
+    }
+
+    public String getDocDate() {
+        return docDate;
+    }
+
     public void setDocDate(String docDate) {
         if (docDate.length() == 0) {
-            this.docDate = docDate;
+            this.docDate = null;
         } else if (docDate.matches("(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d")) {
             this.docDate = docDate;
         } else throw new RuntimeException("Not valid docDate");
+    }
+
+    public String getCitizenshipCode() {
+        return citizenshipCode;
+    }
+
+    public void setCitizenshipCode(String citizenshipCode) {
+        if(citizenshipCode.length() == 0){
+            this.citizenshipCode = null;
+        } else {
+            this.citizenshipCode = citizenshipCode;
+        }
+    }
+
+    public String getIsIdentified() {
+        return isIdentified;
+    }
+
+    public void setIsIdentified(String isIdentified) {
+        if(isIdentified.length() == 0){
+            this.isIdentified = null;
+        } else {
+            this.isIdentified = isIdentified;
+        }
     }
 }

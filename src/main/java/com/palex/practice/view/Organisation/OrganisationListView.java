@@ -1,5 +1,8 @@
 package com.palex.practice.view.Organisation;
 
+/**
+ * View для.
+ */
 public class OrganisationListView {
 
     public Long id;

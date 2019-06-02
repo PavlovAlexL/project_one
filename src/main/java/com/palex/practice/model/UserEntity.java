@@ -95,16 +95,12 @@ public class UserEntity {
     @JoinColumn(name="citizenship_id")
     private CountryEntity country;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public OfficeEntity getOffice() {
@@ -155,14 +151,6 @@ public class UserEntity {
         this.phone = phone;
     }
 
-    public Boolean getIsIdentified() {
-        return isIdentified;
-    }
-
-    public void setIsIdentified(Boolean isIdentified) {
-        this.isIdentified = isIdentified;
-    }
-
     public UserDocumentEntity getUserDocument() {
         return userDocument;
     }
@@ -179,4 +167,11 @@ public class UserEntity {
         this.country = country;
     }
 
+    public Boolean getIsIdentified() {
+        return isIdentified;
+    }
+
+    public void setIsIdentified(Boolean isIdentified) {
+        this.isIdentified = isIdentified;
+    }
 }

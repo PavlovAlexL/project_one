@@ -1,13 +1,19 @@
 package com.palex.practice.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="Organisation")
 public class OrganisationEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,50 +21,50 @@ public class OrganisationEntity {
     private Long id;
 
     /**
-     * Служебное поле Hibernate
+     * Служебное поле Hibernate.
      */
     @Version
     @Column (name="version", nullable = false)
     private Integer version;
 
     /**
-     * Наименование организации
+     * Наименование организации.
      */
     @Column (name="name", nullable = false)
     private String name;
 
     /**
-     * Полное наименование организации
+     * Полное наименование организации.
      */
     @Column(name="full_Name", nullable = false)
     private String fullName;
 
     /**
-     * ИНН
+     * ИНН.
      */
     @Column(name="inn", nullable = false)
     private String inn;
 
     /**
-     * КПП
+     * КПП.
      */
     @Column(name="kpp", nullable = false)
     private String kpp;
 
     /**
-     * Адресс
+     * Адрес.
      */
     @Column(nullable = false)
     private String address;
 
     /**
-     * Телефон
+     * Телефон.
      */
     @Column(name="phone")
     private String phone;
 
     /**
-     * Статус
+     * Статус.
      */
     @Column(name="is_active")
     private Boolean isActive;
@@ -67,12 +73,8 @@ public class OrganisationEntity {
         return id;
     }
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -116,6 +118,7 @@ public class OrganisationEntity {
     }
 
     public String getPhone() { return phone; }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -127,5 +130,6 @@ public class OrganisationEntity {
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
+
 
 }

@@ -1,11 +1,12 @@
 package com.palex.practice.controller;
 
 import com.palex.practice.service.UserService;
-import com.palex.practice.view.ResultView;
 import com.palex.practice.view.SuccessView;
 import com.palex.practice.view.User.UserListFilterView;
+import com.palex.practice.view.User.UserListView;
 import com.palex.practice.view.User.UserSaveFilterView;
 import com.palex.practice.view.User.UserUpdateFilterView;
+import com.palex.practice.view.User.UserView;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -36,8 +39,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public ResultView userList(@RequestBody @Valid UserListFilterView userListFilterView) {
-        return new ResultView(userService.list(userListFilterView));
+    public List<UserListView> userList(@RequestBody @Valid UserListFilterView userListFilterView) {
+        return userService.list(userListFilterView);
     }
 
     /**
@@ -47,8 +50,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResultView userGetById(@PathVariable("id") Long id){
-        return new ResultView(userService.getById(id));
+    public UserView userGetById(@PathVariable("id") Long id){
+        return userService.getById(id);
     }
 
     /**

@@ -33,9 +33,7 @@ public class ReferenceController {
      * Вывод справочника типов документов.
      * @return Коллекция типов документов.
      */
-    @RequestMapping(
-            value = "/countries",
-            method = {GET})
+    @RequestMapping(value = "/countries",method = {GET})
     @ResponseBody
     public List<CountryView> countries() {
         return countryService.countries();
@@ -45,9 +43,7 @@ public class ReferenceController {
      * Вывод справочника стран.
      * @return Коллекция стран в формате
      */
-    @RequestMapping(
-            value = "/docs",
-            method = {GET})
+    @RequestMapping(value = "/docs",method = {GET})
     @ResponseBody
     public List<DocksTypeView> docs(){
         return docksTypeService.docs();

@@ -10,7 +10,7 @@ public class ErrorView {
      */
     public String error;
 
-    public ErrorView(String error) {
+    public ErrorView() {
         this.error = "Error occured";
     }
 }

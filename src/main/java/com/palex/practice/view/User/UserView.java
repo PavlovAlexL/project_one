@@ -3,7 +3,6 @@ package com.palex.practice.view.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.palex.practice.model.CountryEntity;
 import com.palex.practice.model.UserDocumentEntity;
-
 import java.util.Date;
 
 /**
@@ -78,42 +77,54 @@ public class UserView {
     public UserDocumentEntity userDocument;
 
     /**
-     *
+     * Объект гражданства.
      */
     public CountryEntity country;
 
     /**
-     *
+     *  Геттер имени документа.
      */
     public String getDocName() {
-        return userDocument.getDocumentType().getName();
+        if (userDocument != null){
+            return userDocument.getDocumentType().getName();
+        } else return null;
     }
 
     /**
-     *
+     * Геттер номера документа.
      */
     public String getDocNumber() {
-        return userDocument.getDocNumber();
+        if (userDocument != null){
+            return userDocument.getDocNumber();
+        } else return null;
+
     }
 
     /**
-     *
+     * Геттер даты документа.
      */
     public Date getDocDate() {
+        if (userDocument != null){
         return userDocument.getDocDate();
+        } else return null;
     }
 
     /**
-     *
+     * Геттер наименования гражданства.
      */
     public String getCitizenshipName() {
-        return country.getName();
+        if (country != null){
+            return country.getName();
+        } else return null;
+
     }
 
     /**
-     *
+     * Геттер кода гражданства.
      */
     public String getCitizenshipCode() {
+        if (country != null){
         return country.getCode();
+        } else return null;
     }
 }

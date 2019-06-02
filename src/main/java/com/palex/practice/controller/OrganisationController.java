@@ -2,9 +2,10 @@ package com.palex.practice.controller;
 
 import com.palex.practice.service.OrganisationService;
 import com.palex.practice.view.Organisation.OrganisationListFilterView;
+import com.palex.practice.view.Organisation.OrganisationListView;
 import com.palex.practice.view.Organisation.OrganisationSaveFilterView;
 import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;
-import com.palex.practice.view.ResultView;
+import com.palex.practice.view.Organisation.OrganisationView;
 import com.palex.practice.view.SuccessView;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -40,8 +42,8 @@ public class OrganisationController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public ResultView organisationList(@RequestBody @Valid OrganisationListFilterView organisationListFilterView) {
-        return new ResultView(organisationService.list(organisationListFilterView));
+    public List<OrganisationListView> organisationList(@RequestBody @Valid OrganisationListFilterView organisationListFilterView) {
+        return organisationService.list(organisationListFilterView);
     }
 
     /**
@@ -52,8 +54,8 @@ public class OrganisationController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ResultView organisationGetById(@PathVariable("id") @Valid @NotNull @Min(1) Long id) {
-        return new ResultView(organisationService.getById(id));
+    public OrganisationView organisationGetById(@PathVariable("id") @Valid @NotNull @Min(1) Long id) {
+        return organisationService.getById(id);
     }
 
     /**

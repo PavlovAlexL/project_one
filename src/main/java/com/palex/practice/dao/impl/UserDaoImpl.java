@@ -131,7 +131,6 @@ public class UserDaoImpl implements UserDao {
         if (isIdentified != null) {
             originalUserEntity.setIsIdentified(isIdentified);
         }
-
         em.merge(originalUserEntity);
     }
 

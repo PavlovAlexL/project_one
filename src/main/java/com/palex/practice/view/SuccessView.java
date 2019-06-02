@@ -10,11 +10,9 @@ public class SuccessView {
     public final String result;
 
     /**
-     * Конструктор, кот. устанавливает значение результата.
-     *
-     * @param result
+     * Конструктор.
      */
-    public SuccessView(String result) {
+    public SuccessView() {
         this.result = "success";
     }
 }
