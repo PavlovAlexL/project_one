@@ -1,9 +1,9 @@
 package com.palex.practice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Column;
 
 /**
  * Класс справочник, сопоставляющий наименование и код документа
@@ -49,6 +49,10 @@ public class DocumentTypeEntity {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCode() {

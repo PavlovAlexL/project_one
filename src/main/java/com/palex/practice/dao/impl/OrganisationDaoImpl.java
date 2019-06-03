@@ -79,7 +79,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
         if (organisationEntity.getIsActive() != null) {
             originalOrganisationEntity.setIsActive(organisationEntity.getIsActive());
         }
-        em.merge(organisationEntity);
+        em.merge(originalOrganisationEntity);
     }
 
     /**
@@ -90,6 +90,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
     @Transactional
     public void save(OrganisationEntity organisationEntity) {
         em.persist(organisationEntity);
+        em.close();
     }
 
 }

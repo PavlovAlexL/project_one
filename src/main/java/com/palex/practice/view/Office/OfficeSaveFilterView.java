@@ -1,7 +1,6 @@
 package com.palex.practice.view.Office;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -20,8 +19,6 @@ public class OfficeSaveFilterView {
     /**
      * Наименование.
      */
-    @NotNull
-    @NotBlank
     @Size(max = 50)
     public String name;
 

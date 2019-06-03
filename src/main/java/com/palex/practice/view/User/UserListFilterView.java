@@ -107,9 +107,9 @@ public class UserListFilterView {
     public void setDocCode(String docCode) {
         if (docCode.length() == 0) {
             this.docCode = null;
-        } else if (docCode.matches("\\d")) {
+        } else {
             this.docCode = docCode;
-        } else throw new RuntimeException("Not valid docCode");
+        }
     }
 
     public String getCitizenshipCode() {
@@ -119,8 +119,8 @@ public class UserListFilterView {
     public void setCitizenshipCode(String citizenshipCode) {
         if (citizenshipCode.length() == 0) {
             this.citizenshipCode = null;
-        } else if (citizenshipCode.matches("\\d")) {
+        } else {
             this.citizenshipCode = citizenshipCode;
-        } else throw new RuntimeException("Not valid CitizenshipCode");
+        }
     }
 }

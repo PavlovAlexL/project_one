@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setOffice(officeEntity);
         if (userListFilterView.docCode != null) {
             DocumentTypeEntity documentTypeEntity = documentTypeDao.getByCode(userListFilterView.docCode);
-            UserDocumentEntity userDocumentEntity = userDocumentDao.getById(documentTypeEntity.getId());
+            UserDocumentEntity userDocumentEntity = new UserDocumentEntity(documentTypeEntity);
             userEntity.setUserDocument(userDocumentEntity);
         }
         if (userListFilterView.citizenshipCode != null) {

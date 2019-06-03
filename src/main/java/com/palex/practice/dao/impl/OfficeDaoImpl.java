@@ -31,8 +31,7 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public List<OfficeEntity> getByParams(OfficeEntity officeEntity) {
-        Long orgId = officeEntity.getId();
-        OrganisationEntity organisationEntity = em.find(OrganisationEntity.class, orgId);
+        OrganisationEntity organisationEntity = officeEntity.getOrganisation();
         String name = officeEntity.getName();
         String phone = officeEntity.getPhone();
         Boolean isActive = officeEntity.getIsActive();

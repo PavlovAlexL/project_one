@@ -131,7 +131,7 @@ public class UserSaveFilterView {
         if(docCode.length() == 0){
             this.docCode = null;
         } else {
-            this.docCode = docCode;
+            this.docCode = String.valueOf(Integer.parseInt(docCode));
         }
     }
 

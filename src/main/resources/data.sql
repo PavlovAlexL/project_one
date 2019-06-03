@@ -11,6 +11,7 @@ INSERT INTO Document_type (code, name) VALUES (21, 'Паспорт гражда�
 INSERT INTO Document_type (code, name) VALUES (23, 'Свидетельство о рождении, выданное уполномоченным органом иностранного государства');
 INSERT INTO Document_type (code, name) VALUES (24, 'Удостоверение личности военнослужащего Российской Федерации');
 INSERT INTO Document_type (code, name) VALUES (91, 'Иные документы');
+INSERT INTO Document_type (code, name) VALUES (77, 'Test Document');
 
 INSERT INTO Country (code, name) VALUES (616,	'ПОЛЬША');
 INSERT INTO Country (code, name) VALUES (643,	'РОССИЯ');

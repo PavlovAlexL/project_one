@@ -26,6 +26,15 @@ import java.util.Date;
 public class UserDocumentEntity {
 
     /**
+     * Конструктор
+     *
+     * @param documentTypeEntity
+     */
+    public UserDocumentEntity(DocumentTypeEntity documentTypeEntity) {
+        this.documentType = documentTypeEntity;
+    }
+
+    /**
      * Уникальный идентификатор
      */
     @Id
@@ -76,6 +85,17 @@ public class UserDocumentEntity {
         } catch (ParseException e){
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "UserDocumentEntity{" +
+                "id=" + id +
+                ", version=" + version +
+                ", docNumber='" + docNumber + '\'' +
+                ", docDate=" + docDate +
+                ", documentType=" + documentType +
+                '}';
     }
 
     /**

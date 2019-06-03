@@ -38,8 +38,14 @@ public class UserDaoImpl implements UserDao {
         String lastName = userEntity.getLastName();
         String middleName = userEntity.getMiddleName();
         String position = userEntity.getPosition();
-        String docCode = userEntity.getUserDocument().getDocumentType().getCode();
-        String citizenshipCode = userEntity.getCountry().getCode();
+        String docCode;
+        if (userEntity.getUserDocument() != null) {
+            docCode = userEntity.getUserDocument().getDocumentType().getCode();
+        } else docCode = null;
+        String citizenshipCode;
+        if (userEntity.getCountry() != null) {
+            citizenshipCode = userEntity.getCountry().getCode();
+        } else citizenshipCode = null;
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<UserEntity> query = cb.createQuery(UserEntity.class);
@@ -48,7 +54,6 @@ public class UserDaoImpl implements UserDao {
         Predicate predicate = cb.conjunction();
 
         predicate = cb.and(predicate, cb.equal(userEntityRoot.get("office"), officeEntity));
-
         if (firstName != null) {
             predicate = cb.and(predicate, cb.equal(userEntityRoot.get("firstName"), firstName));
         }

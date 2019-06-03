@@ -58,7 +58,6 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
         return query.getSingleResult();
     }
 
-
     private CriteriaQuery<DocumentTypeEntity> buildCriteria(String parametr, String data) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<DocumentTypeEntity> criteria = builder.createQuery(DocumentTypeEntity.class);
