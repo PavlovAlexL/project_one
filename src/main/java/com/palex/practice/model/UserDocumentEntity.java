@@ -19,14 +19,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Класс, описывающий документы пользователя
+ * Класс, описывающий документы пользователя.
  */
 @Entity
 @Table(name = "User_document")
 public class UserDocumentEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,43 +35,43 @@ public class UserDocumentEntity {
     private Long id;
 
     /**
-     * Служебное поле Hibernate
+     * Служебное поле Hibernate.
      */
     @Version
     @Column (name="version", nullable = false)
     private Integer version;
 
     /**
-     * Номер документа
+     * Номер документа.
      */
     @Column(name = "doc_number", length = 20)
     private String docNumber;
 
     /**
-     * Дата документа
+     * Дата документа.
      */
     @Column(name="doc_date")
     @Temporal(TemporalType.DATE)
     private Date docDate;
 
     /**
-     * Связь с таблицей типов докумнетов
+     * Связь с таблицей типов докумнетов.
      */
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="doc_type_id", nullable = false)
     private DocumentTypeEntity documentType;
 
     /**
-     * Конструктор поумолчанию, нужен для Hibernate
+     * Конструктор поумолчанию, нужен для Hibernate.
      */
     public UserDocumentEntity() {
     }
 
     /**
-     * Конструктор объекта
-     * @param docNumber Номер документа
-     * @param docDate Дата документа
-     * @param documentTypeEntity Тип документа
+     * Конструктор объекта.
+     * @param docNumber Номер документа.
+     * @param docDate Дата документа.
+     * @param documentTypeEntity Тип документа.
      */
     public UserDocumentEntity(String docNumber, String docDate, DocumentTypeEntity documentTypeEntity) {
 
@@ -86,9 +86,8 @@ public class UserDocumentEntity {
     }
 
     /**
-     * Конструктор
-     *
-     * @param documentTypeEntity
+     * Конструктор нужен для вывода списка пользователей по типу документа.
+     * @param documentTypeEntity тип документа.
      */
     public UserDocumentEntity(DocumentTypeEntity documentTypeEntity) {
         this.documentType = documentTypeEntity;
@@ -96,14 +95,6 @@ public class UserDocumentEntity {
 
     public Long getId() {
         return id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public String getDocNumber() {

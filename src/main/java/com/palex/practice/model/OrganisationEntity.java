@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+/**
+ * Организация.
+ */
 @Entity
 @Table(name="Organisation")
 public class OrganisationEntity {
@@ -76,7 +79,7 @@ public class OrganisationEntity {
     }
 
     /**
-     * Конструктор
+     * Конструктор с параметрами.
      *
      * @param name     Имя.
      * @param fullName полное имя.

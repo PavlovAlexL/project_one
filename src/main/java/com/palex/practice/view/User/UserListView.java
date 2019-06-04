@@ -1,7 +1,7 @@
 package com.palex.practice.view.User;
 
 /**
- * View для отображение коллекции User.
+ * View для отображение списка пользователей.
  */
 public class UserListView {
 

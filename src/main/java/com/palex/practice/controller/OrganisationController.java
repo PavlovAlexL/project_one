@@ -22,7 +22,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
- * Контроллер для обработки запросов для Organisation
+ * Контроллер для обработки запросов для Organisation.
  */
 @RestController
 @RequestMapping(value = "/api/organisation", produces = APPLICATION_JSON_VALUE)
@@ -37,8 +37,8 @@ public class OrganisationController {
     /**
      * Возврат коллекции обектов по параметрам.
      *
-     * @param organisationListFilterView
-     * @return
+     * @param organisationListFilterView Представление с фильтрацией входящих параметров для организации.
+     * @return коллекция запрошенных представлений организаций по параметрам.
      */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public List<OrganisationListView> organisationList(@RequestBody @Valid OrganisationListFilterView organisationListFilterView) {
@@ -48,8 +48,8 @@ public class OrganisationController {
     /**
      * Возврат объекта по Id.
      *
-     * @param id
-     * @return
+     * @param id идентификатор.
+     * @return Представление запрошенной организации.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -60,8 +60,7 @@ public class OrganisationController {
     /**
      * Запрос на операцию обновления объекта.
      *
-     * @param organisationUpdateFilterView
-     * @return статус операции.
+     * @param organisationUpdateFilterView Представление с фильтрацией входящих параметров для сохранения организации.
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void organisatonUpdate(@RequestBody @Valid OrganisationUpdateFilterView organisationUpdateFilterView) {
@@ -71,8 +70,7 @@ public class OrganisationController {
     /**
      * Запрос на операцию сохранения обекта.
      *
-     * @param organisationSaveFilterView
-     * @return статус операции.
+     * @param organisationSaveFilterView Представление с фильтрацией входящих параметров для обновления организации.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     public void organisationSave(@RequestBody @Valid OrganisationSaveFilterView organisationSaveFilterView) {

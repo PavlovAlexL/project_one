@@ -1,6 +1,5 @@
 package com.palex.practice.service;
 
-
 import com.palex.practice.view.Office.OfficeListFilterView;
 import com.palex.practice.view.Office.OfficeListView;
 import com.palex.practice.view.Office.OfficeSaveFilterView;
@@ -10,27 +9,27 @@ import com.palex.practice.view.Office.OfficeView;
 import java.util.List;
 
 /**
- * Сервис
+ * Сервис для работы с объектами типа офис.
  */
 public interface OfficeService {
 
     /**
-     * Отобразить объекты с параметрами.
+     * Отобразить объекты офис по параметрам.
      */
     List<OfficeListView> list(OfficeListFilterView officeListFilterView);
 
     /**
-     *  Отобразить объект по Id.
+     *  Отобразить офис по идентификатору.
      */
     OfficeView getById(Long id);
 
     /**
-     * Изменить объект.
+     * Изменить офис.
      */
     void update(OfficeUpdateFilterView officeUpdateFilterView);
 
     /**
-     * Создать объект.
+     * Создать офис.
      */
     void save(OfficeSaveFilterView officeSaveFilterView);
 

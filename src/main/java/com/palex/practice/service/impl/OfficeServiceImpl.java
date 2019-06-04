@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Реализация сервиса офиса.
+ * Реализация сервиса для работы с объектами типа офис.
  */
 @Service
 public class OfficeServiceImpl implements OfficeService {
@@ -33,7 +33,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * Отобразить объекты офиса по параметрами.
+     * Отобразить объекты офис по параметрам.
      */
     @Override
     @Transactional
@@ -47,7 +47,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     *  Отобразить объект офиса по идентификатору.
+     *  Отобразить офис по идентификатору.
      */
     @Override
     @Transactional
@@ -57,7 +57,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * Изменить объект офиса в БД.
+     * Изменить офис.
      */
     @Override
     @Transactional
@@ -78,7 +78,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * Создать объект офиса и сохранить в БД.
+     * Создать офис.
      */
     @Override
     @Transactional

@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Запуск приложения
+ * Запуск.
  */
 @SpringBootApplication
 public class Application {

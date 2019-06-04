@@ -1,14 +1,13 @@
 package com.palex.practice.dao.impl;
 
 import com.palex.practice.dao.UserDocumentDao;
-import com.palex.practice.model.DocumentTypeEntity;
 import com.palex.practice.model.UserDocumentEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 
 /**
- * DAO для работы с UserDocument.
+ * Реализация DAO для работы с UserDocument.
  */
 @Repository
 public class UserDocumentDaoImpl implements UserDocumentDao {
@@ -20,9 +19,9 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     }
 
     /**
-     * Запрос по id.
+     * Запрос по идентификатору.
      * @param id Идентификатор.
-     * @return
+     * @return Объект UserDocumentEntity.
      */
     @Override
     public UserDocumentEntity getById(Long id) {
@@ -30,25 +29,21 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     }
 
     /**
-     * Сохранить объект.
-     * @param number
-     * @param date
-     * @param documentTypeEntity
+     * Сохранить документ пользователя
+     * @param userDocumentEntity документ.
      */
     @Override
-    public void save(String number, String date, DocumentTypeEntity documentTypeEntity) {
-        em.persist(new UserDocumentEntity(number, date, documentTypeEntity));
+    public void save(UserDocumentEntity userDocumentEntity) {
+        em.persist(userDocumentEntity);
     }
 
     /**
-     * Обновить объект.
-     * @param number
-     * @param date
-     * @param documentTypeEntity
+     * Обновить документ пользователя
+     * @param userDocumentEntity документ.
      */
     @Override
-    public void update(String number, String date, DocumentTypeEntity documentTypeEntity) {
-        em.merge(new UserDocumentEntity(number, date, documentTypeEntity));
+    public void update(UserDocumentEntity userDocumentEntity) {
+        em.merge(userDocumentEntity);
 
     }
 }

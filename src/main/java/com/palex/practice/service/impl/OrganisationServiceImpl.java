@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Реализация сервиса Организации.
+ * Реализация сервиса для работы с объектами типа организация.
  */
 @Service
 public class OrganisationServiceImpl implements OrganisationService {
@@ -29,7 +29,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     * Отобразить объекты организаци по параметрам.
+     * Отобразить организации по параметрам.
      */
     @Override
     @Transactional
@@ -40,7 +40,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     *  Отобразить объект организации по идентификатору.
+     *  Отобразить организацию по идентификатору.
      */
     @Override
     @Transactional
@@ -50,7 +50,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     * Изменить объект организации в БД.
+     * Изменить организацию.
      */
     @Override
     @Transactional
@@ -74,7 +74,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     * Создать объект организации и сохранить в БД.
+     * Создать организацию.
      */
     @Override
     @Transactional

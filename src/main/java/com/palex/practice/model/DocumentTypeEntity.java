@@ -6,41 +6,41 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Класс справочник, сопоставляющий наименование и код документа
+ * Класс справочник, сопоставляющий наименование и код документа.
  */
 @Entity
 @Table(name = "Document_type")
 public class DocumentTypeEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @Column(name="id",nullable = false)
     private Long id;
 
     /**
-     * Код документа
+     * Код документа.
      */
     @Column(name="code", length = 10, nullable = false)
     private String code;
 
     /**
-     * Наименование документа
+     * Наименование документа.
      */
     @Column(name="name", length = 100, nullable = false)
     private String name;
 
     /**
-     * Конструктор по умолчанию, нужен для Hibernate
+     * Конструктор по умолчанию, нужен для Hibernate.
      */
     public DocumentTypeEntity(){
     }
 
     /**
-     * Параметризированный конструктор
-     * @param code Код документа
-     * @param name Наименование докумнта
+     * Параметризированный конструктор.
+     * @param code Код документа.
+     * @param name Наименование докумнта.
      */
     public DocumentTypeEntity(String code, String name) {
         this.code = code;
@@ -49,10 +49,6 @@ public class DocumentTypeEntity {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getCode() {

@@ -9,11 +9,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * DAO для доступа к Organisation.
+ * Реализация DAO для доступа к организации.
  */
 @Repository
 public class OrganisationDaoImpl implements OrganisationDao {
@@ -25,9 +24,9 @@ public class OrganisationDaoImpl implements OrganisationDao {
     }
 
     /**
-     * Получение коллекции объектов по параметрам.
-     *
-     * @return
+     * Получение коллекции объектов организаций.
+     * @param organisationEntity Организация.
+     * @return коллекция организаций.
      */
     @Override
     public List<OrganisationEntity> getByParams(OrganisationEntity organisationEntity) {
@@ -40,20 +39,24 @@ public class OrganisationDaoImpl implements OrganisationDao {
         Root<OrganisationEntity> organisationEntityRoot = query.from(OrganisationEntity.class);
         Predicate predicate = cb.conjunction();
         predicate = cb.and(predicate, cb.equal(organisationEntityRoot.get("name"), name));
+
         if (inn != null) {
             predicate = cb.and(predicate, cb.equal(organisationEntityRoot.get("inn"), inn));
         }
+
         if (isActive != null) {
             predicate = cb.and(predicate, cb.equal(organisationEntityRoot.get("isActive"), isActive));
         }
+
         query.where(predicate);
+
         return em.createQuery(query).getResultList();
     }
 
     /**
-     * Получение объекта по ID.
-     * @param id
-     * @return
+     * Получение объекта по идентификатору.
+     * @param id идентификатор.
+     * @return организация.
      */
     @Override
     public OrganisationEntity getById(Long id) {
@@ -61,8 +64,8 @@ public class OrganisationDaoImpl implements OrganisationDao {
     }
 
     /**
-     * Изменить объект.
-     * @param
+     * Изменить организацию.
+     * @param organisationEntity Организация.
      */
     @Override
     public void update(OrganisationEntity organisationEntity) {
@@ -70,11 +73,10 @@ public class OrganisationDaoImpl implements OrganisationDao {
     }
 
     /**
-     * Сохраненить объект.
-     * @param
+     * Сохранить организацию.
+     * @param organisationEntity Организация.
      */
     @Override
-    @Transactional
     public void save(OrganisationEntity organisationEntity) {
         em.persist(organisationEntity);
     }

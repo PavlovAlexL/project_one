@@ -12,14 +12,14 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
- * Класс
+ * Офис.
  */
 @Entity
 @Table(name = "Office")
 public class OfficeEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,32 +27,32 @@ public class OfficeEntity {
     private Long id;
 
     /**
-     * Служебное поле Hibernate
+     * Служебное поле Hibernate.
      */
     @Version
     @Column (name="version", nullable = false)
     private Integer version;
 
     /**
-     * Наименование
+     * Наименование.
      */
     @Column(name = "name", length = 50)
     private String name;
 
     /**
-     * Адрес
+     * Адрес.
      */
     @Column(name="address", length = 200)
     private String address;
 
     /**
-     * Телефон
+     * Телефон.
      */
     @Column (name="phone", length = 20)
     private String phone;
 
     /**
-     * Статус
+     * Статус.
      */
     @Column (name="isActive")
     private Boolean isActive;

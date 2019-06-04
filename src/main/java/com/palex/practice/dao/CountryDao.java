@@ -10,16 +10,15 @@ import java.util.List;
 public interface CountryDao {
 
     /**
-     * Получить список.
-     *
-     * @return коллекцию объектов.
+     * Получить список всех стран.
+     * @return коллекцию объектов типа страна.
      */
     List<CountryEntity> getAll();
 
     /**
-     * Получить по коду.
-     * @param code код.
-     * @return объект
+     * Получить объект типа страна по коду.
+     * @param code Код.
+     * @return Страна.
      */
     CountryEntity getByCode(String code);
 }

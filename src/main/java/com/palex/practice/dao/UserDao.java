@@ -11,26 +11,24 @@ public interface UserDao {
 
     /**
      * Получение коллекции объектов по параметрам.
-     * @return
+     * @return коллекция пользователей.
      */
     List<UserEntity> getByParams(UserEntity userEntity);
 
     /**
      * Получение объекта по ID.
-     * @param id
-     * @return
+     * @param id идентификатор.
+     * @return пользователь.
      */
     UserEntity getById (Long id);
 
     /**
-     * Изменить объект.
-     * @param
+     * Изменить пользователя.
      */
     void update (UserEntity userEntity);
 
     /**
-     * Сохраненить объект.
-     * @param
+     * Сохраненить пользвателя.
      */
     void save (UserEntity userEntity);
 }

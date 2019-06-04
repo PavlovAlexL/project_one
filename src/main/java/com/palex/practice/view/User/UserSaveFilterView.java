@@ -1,6 +1,5 @@
 package com.palex.practice.view.User;
 
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,15 +7,17 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * View для валлидации создания User.
+ * View для валлидациии данных при сохранении пользователя.
  */
 public class UserSaveFilterView {
+
     /**
      * Идентификатор оффиса.
      */
     @NotNull
     @Min(1)
     public Long officeId;
+
     /**
      * Имя
      */

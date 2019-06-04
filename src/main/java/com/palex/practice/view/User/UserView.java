@@ -3,10 +3,11 @@ package com.palex.practice.view.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.palex.practice.model.CountryEntity;
 import com.palex.practice.model.UserDocumentEntity;
+
 import java.util.Date;
 
 /**
- * View для отправки результата.
+ * View для отправки позователя.
  */
 @JsonIgnoreProperties({"country", "userDocument"})
 public class UserView {

@@ -9,27 +9,27 @@ import com.palex.practice.view.Organisation.OrganisationView;
 import java.util.List;
 
 /**
- * Сервис
+ * Сервис для работы с объектами типа организация.
  */
 public interface OrganisationService {
 
     /**
-     * Отобразить объекты по параметрам.
+     * Отобразить организации по параметрам.
      */
     List<OrganisationListView> list(OrganisationListFilterView organisationListFilterView);
 
     /**
-     *  Отобразить объект по Id.
+     *  Отобразить организацию по идентификатору.
      */
     OrganisationView getById(Long id);
 
     /**
-     * Изменить объект.
+     * Изменить организацию.
      */
     void update(OrganisationUpdateFilterView organisationUpdateFilterView);
 
     /**
-     * Создать объект.
+     * Создать организацию.
      */
     void save(OrganisationSaveFilterView organisationSaveFilterView);
 

@@ -24,8 +24,8 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
     }
 
     /**
-     * Получение коллекции объектов.
-     * @return коллекция объектов.
+     * Получить список типов документов.
+     * @return Список типов документов.
      */
     @Override
     public List<DocumentTypeEntity> getAll() {
@@ -34,9 +34,9 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
     }
 
     /**
-     * Получить объект по коду документа.
+     * Получить по коду документа.
      * @param code Код.
-     * @return объект.
+     * @return Документ.
      */
     @Override
     public DocumentTypeEntity getByCode(String code) {
@@ -46,9 +46,9 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
     }
 
     /**
-     * Получить объект по имени документа.
+     * Получить по имени документа.
      * @param name Иия.
-     * @return объект.
+     * @return Документ.
      */
     @Override
     public DocumentTypeEntity getByName(String name) {

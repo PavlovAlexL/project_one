@@ -13,7 +13,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
- * DAO для доступа к Office.
+ * Реализация DAO для доступа к Office.
  */
 @Repository
 public class OfficeDaoImpl implements OfficeDao {
@@ -25,8 +25,9 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     /**
-     * Получение коллекции объектов по параметрам.
-     * @return коллекция объектов.
+     * Получение коллекции объектов типа офис по параметрам.
+     * @param officeEntity офис
+     * @return коллекция объектов типа офис.
      */
     @Override
     public List<OfficeEntity> getByParams(OfficeEntity officeEntity) {
@@ -56,8 +57,8 @@ public class OfficeDaoImpl implements OfficeDao {
 
     /**
      * Получение объекта по идентификатору.
-     * @param id Идентификатор.
-     * @return Объект.
+     * @param id идентификатор
+     * @return офис.
      */
     @Override
     public OfficeEntity getById(Long id) {
@@ -65,8 +66,8 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     /**
-     * Изменить объект.
-     * @param
+     * Изменить офис.
+     * @param officeEntity офис.
      */
     @Override
     public void update(OfficeEntity officeEntity) {
@@ -74,8 +75,8 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     /**
-     * Сохраненить объект.
-     * @param
+     * Сохраненить офис.
+     * @param officeEntity офис.
      */
     @Override
     public void save(OfficeEntity officeEntity) {

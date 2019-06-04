@@ -11,22 +11,21 @@ public interface DocumentTypeDao {
 
     /**
      * Получить список типов документов.
-     *
-     * @return объект.
+     * @return Список типов документов.
      */
     List<DocumentTypeEntity> getAll();
 
     /**
      * Получить по коду документа.
      * @param code Код.
-     * @return объект.
+     * @return Документ.
      */
     DocumentTypeEntity getByCode(String code);
 
     /**
-     * Получить по имени документу.
+     * Получить по имени документа.
      * @param name Иия.
-     * @return объект.
+     * @return Документ.
      */
     DocumentTypeEntity getByName(String name);
 

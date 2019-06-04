@@ -13,20 +13,20 @@ import javax.persistence.Table;
 public class CountryEntity {
 
     /**
-     * Уникальный идентификатор/
+     * Уникальный идентификатор.
      */
     @Id
     @Column(name="id",nullable = false)
     private Long id;
 
     /**
-     * Код страны/
+     * Код страны.
      */
     @Column(name="code", length = 10)
     private String code;
 
     /**
-     * Наименование страны/
+     * Наименование страны.
      */
     @Column(name="name", length = 50)
     private String name;

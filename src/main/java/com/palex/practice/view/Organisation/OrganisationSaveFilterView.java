@@ -1,13 +1,12 @@
 package com.palex.practice.view.Organisation;
 
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * View для валлидации данных сохранения Organisation.
+ * View для валлидации данных сохранения организации.
  */
 public class OrganisationSaveFilterView {
 
@@ -63,7 +62,6 @@ public class OrganisationSaveFilterView {
      * Статус.
      */
     public String isActive;
-
 
     public String getPhone() {
         return phone;

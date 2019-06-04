@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Реализация сервиса
+ * Реализация сервиса стран.
  */
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -18,6 +18,12 @@ public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
     private final MapperFacade mapperFacade;
 
+    /**
+     * Конструктор.
+     *
+     * @param countryDao
+     * @param mapperFacade
+     */
     public CountryServiceImpl(CountryDao countryDao, MapperFacade mapperFacade) {
         this.countryDao = countryDao;
         this.mapperFacade = mapperFacade;
@@ -25,7 +31,7 @@ public class CountryServiceImpl implements CountryService {
 
     /**
      * Плучить список видов гражданств.
-     * @return
+     * @return список гражданств.
      */
     @Override
     public List<CountryView> countries() {

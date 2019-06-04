@@ -22,7 +22,7 @@ import javax.persistence.Version;
 public class UserEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,64 +30,64 @@ public class UserEntity {
     private Long id;
 
     /**
-     * Служебное поле Hibernate
+     * Служебное поле Hibernate.
      */
     @Version
     @Column (name="version", nullable = false)
     private Integer version;
 
     /**
-     * Офис
+     * Офис.
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="office_id", nullable = false)
     private OfficeEntity office;
 
     /**
-     *Имя
+     *Имя.
      */
     @Column(name = "first_Name", length = 50, nullable = false)
     private String firstName;
 
     /**
-     * Фамилия
+     * Фамилия.
      */
     @Column(name = "last_Name", length = 50)
     private String lastName;
 
     /**
-     * Отчество
+     * Отчество.
      */
     @Column(name = "middle_Name", length = 50)
     private String middleName;
 
     /**
-     * Должность
+     * Должность.
      */
     @Column(name = "position", length = 100, nullable = false)
     private String position;
 
     /**
-     * Телефон
+     * Телефон.
      */
     @Column(name = "phone", length = 20)
     private String phone;
 
     /**
-     * Прошел ли сотрудник идентификацию
+     * Прошел ли сотрудник идентификацию.
      */
     @Column (name="is_identified")
     private Boolean isIdentified;
 
     /**
-     * Идентификатор документа в таблице документов
+     * Идентификатор документа в таблице документов.
      */
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="document_id")
     private UserDocumentEntity userDocument;
 
     /**
-     * Идентификатор гражданства
+     * Идентификатор гражданства.
      */
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name="citizenship_id")
@@ -97,6 +97,31 @@ public class UserEntity {
      * Конструктор для Hibernate.
      */
     public UserEntity() {
+    }
+
+    /**
+     * Конструктор.
+     *
+     * @param office       Оффис.
+     * @param firstName    Имя.
+     * @param lastName     Фамилия.
+     * @param middleName   Отчество.
+     * @param position     Должность.
+     * @param phone        Телефон.
+     * @param isIdentified Статус.
+     * @param userDocument Документ.
+     * @param country      Гражданство.
+     */
+    public UserEntity(OfficeEntity office, String firstName, String lastName, String middleName, String position, String phone, Boolean isIdentified, UserDocumentEntity userDocument, CountryEntity country) {
+        this.office = office;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.position = position;
+        this.phone = phone;
+        this.isIdentified = isIdentified;
+        this.userDocument = userDocument;
+        this.country = country;
     }
 
     /**

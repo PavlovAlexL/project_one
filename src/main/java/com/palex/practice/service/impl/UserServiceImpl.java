@@ -4,7 +4,6 @@ import com.palex.practice.dao.CountryDao;
 import com.palex.practice.dao.DocumentTypeDao;
 import com.palex.practice.dao.OfficeDao;
 import com.palex.practice.dao.UserDao;
-import com.palex.practice.dao.UserDocumentDao;
 import com.palex.practice.model.CountryEntity;
 import com.palex.practice.model.DocumentTypeEntity;
 import com.palex.practice.model.OfficeEntity;
@@ -23,30 +22,27 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Реализация сервиса пользователя.
+ * Реализация сервиса для работы с объектами пользователь.
  */
 @Service
 public class UserServiceImpl implements UserService {
-
 
     private final UserDao userDao;
     private final OfficeDao officeDao;
     private final CountryDao countryDao;
     private final MapperFacade mapperFacade;
     private final DocumentTypeDao documentTypeDao;
-    private final UserDocumentDao userDocumentDao;
 
-    public UserServiceImpl(UserDao userDao, OfficeDao officeDao, CountryDao countryDao, DocumentTypeDao documentTypeDao, MapperFacade mapperFacade, UserDocumentDao userDocumentDao) {
+    public UserServiceImpl(UserDao userDao, OfficeDao officeDao, CountryDao countryDao, DocumentTypeDao documentTypeDao, MapperFacade mapperFacade) {
         this.userDao = userDao;
         this.officeDao = officeDao;
         this.countryDao = countryDao;
         this.mapperFacade = mapperFacade;
         this.documentTypeDao = documentTypeDao;
-        this.userDocumentDao = userDocumentDao;
     }
 
     /**
-     * Отобразить объекты пользователя по параметрами.
+     * Отобразить пользователей по параметрам.
      */
     @Transactional
     @Override
@@ -68,7 +64,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *  Отобразить объект пользователя по идентификатору.
+     *  Отобразить пользователя по идентификатору.
      */
     @Transactional
     @Override
@@ -78,67 +74,122 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Изменить объект пользователя в БД.
+     * Изменить пользователя.
      */
     @Transactional
     @Override
     public void update(UserUpdateFilterView userUpdateFilterView) {
-        UserEntity userEntity = mapperFacade.map(userUpdateFilterView, UserEntity.class);
-        if (userUpdateFilterView.officeId != null) {
-            OfficeEntity officeEntity = officeDao.getById(userUpdateFilterView.officeId);
+
+        Long id = userUpdateFilterView.id;
+        Long officeId = userUpdateFilterView.officeId;
+        String firstName = userUpdateFilterView.firstName;
+        String lastName = userUpdateFilterView.lastName;
+        String middleName = userUpdateFilterView.middleName;
+        String position = userUpdateFilterView.position;
+        String phone = userUpdateFilterView.phone;
+        String docName = userUpdateFilterView.docName;
+        String docNumber = userUpdateFilterView.docNumber;
+        String docDate = userUpdateFilterView.docDate;
+        String citizenshipCode = userUpdateFilterView.citizenshipCode;
+        Boolean isIdentified = Boolean.parseBoolean(userUpdateFilterView.isIdentified);
+
+        UserEntity userEntity = userDao.getById(id);
+
+        if (officeId != null) {
+            OfficeEntity officeEntity = officeDao.getById(officeId);
             userEntity.setOffice(officeEntity);
         }
-        if (userUpdateFilterView.docNumber != null || userUpdateFilterView.docDate != null || userUpdateFilterView.docName != null) {
-            if (userUpdateFilterView.docNumber != null & userUpdateFilterView.docDate != null & userUpdateFilterView.docName != null) {
-                DocumentTypeEntity documentTypeEntity = documentTypeDao.getByName(userUpdateFilterView.docName);
-                UserDocumentEntity userDocumentEntity = new UserDocumentEntity(userUpdateFilterView.docNumber, userUpdateFilterView.docDate, documentTypeEntity);
-                userEntity.setUserDocument(userDocumentEntity);
-            } else throw new RuntimeException("for update document must needs enter all document fields");
+
+        if (firstName != null) {
+            userEntity.setFirstName(firstName);
         }
-        if (userUpdateFilterView.citizenshipCode != null) {
+
+        if (lastName != null) {
+            userEntity.setLastName(lastName);
+        }
+
+        if (middleName != null) {
+            userEntity.setMiddleName(middleName);
+        }
+
+        userEntity.setPosition(position);
+
+        if (phone != null) {
+            userEntity.setPhone(phone);
+        }
+
+        if (docNumber != null & docDate != null & docName != null) {
+            UserDocumentEntity userDocumentEntity;
+            if (userEntity.getUserDocument() != null) {
+                userDocumentEntity = userEntity.getUserDocument();
+            } else {
+                userDocumentEntity = new UserDocumentEntity();
+            }
+
+            DocumentTypeEntity documentTypeEntity = documentTypeDao.getByName(docName);
+            userDocumentEntity.setDocumentType(documentTypeEntity);
+            userDocumentEntity.setDocNumber(docNumber);
+            userDocumentEntity.setDoc_date(docDate);
+        } else throw new RuntimeException("for update document must needs enter all document fields");
+
+        if (citizenshipCode != null) {
             CountryEntity countryEntity = countryDao.getByCode(userUpdateFilterView.citizenshipCode);
             userEntity.setCountry(countryEntity);
         }
+
+        if (isIdentified != null) {
+            userEntity.setIsIdentified(isIdentified);
+        }
+
         userDao.update(userEntity);
     }
 
     /**
-     * Создать объект пользователя и сохранить в БД.
+     * Создать пользователя.
      */
     @Transactional
     @Override
     public void save(UserSaveFilterView userSaveFilterView) {
-        //UserEntity userEntity = mapperFacade.map(userSaveFilterView, UserEntity.class);
-        OfficeEntity officeEntity = officeDao.getById(userSaveFilterView.officeId);
+
+        Long officeId = userSaveFilterView.officeId;
         String firstName = userSaveFilterView.firstName;
         String lastName = userSaveFilterView.lastName;
-        String middleName;
-        String position;
-        String phone;
-        String docCode;
-        String docName;
-        String docNumber;
-        String docDate;
-        String citizenshipCode;
-        Boolean idIdentified;
-        
-        userEntity.setOffice(officeEntity);
-        if (userSaveFilterView.docCode != null || userSaveFilterView.docNumber != null || userSaveFilterView.docDate != null || userSaveFilterView.docName != null) {
+        String middleName = userSaveFilterView.middleName;
+        String position = userSaveFilterView.position;
+        String phone = userSaveFilterView.phone;
+        String docCode = userSaveFilterView.docCode;
+        String docName = userSaveFilterView.docName;
+        String docNumber = userSaveFilterView.docNumber;
+        String docDate = userSaveFilterView.docDate;
+        String citizenshipCode = userSaveFilterView.citizenshipCode;
+        Boolean isIdentified = Boolean.parseBoolean(userSaveFilterView.isIdentified);
+
+        OfficeEntity officeEntity = null;
+        if (officeId != null) {
+            officeEntity = officeDao.getById(officeId);
+        }
+
+        UserDocumentEntity userDocumentEntity = null;
+        if (docCode != null || docNumber != null || docDate != null || docName != null) {
             DocumentTypeEntity documentTypeEntity;
             if (userSaveFilterView.docCode != null) {
                 documentTypeEntity = documentTypeDao.getByCode(userSaveFilterView.docCode);
             } else if (userSaveFilterView.docName != null) {
                 documentTypeEntity = documentTypeDao.getByName(userSaveFilterView.docName);
             } else throw new RuntimeException("for saving document must needs docName or docCode");
-            if (userSaveFilterView.docNumber != null & userSaveFilterView.docDate != null) {
-                UserDocumentEntity userDocumentEntity = new UserDocumentEntity(userSaveFilterView.docNumber, userSaveFilterView.docDate, documentTypeEntity);
-                userEntity.setUserDocument(userDocumentEntity);
+
+            if (docNumber != null & docDate != null & documentTypeEntity != null) {
+                userDocumentEntity = new UserDocumentEntity(docNumber, docDate, documentTypeEntity);
             } else throw new RuntimeException("for saving document must needs enter docNumber and docDate");
         }
-        if (userSaveFilterView.citizenshipCode != null) {
-            CountryEntity countryEntity = countryDao.getByCode(userSaveFilterView.citizenshipCode);
-            userEntity.setCountry(countryEntity);
+
+        CountryEntity countryEntity = null;
+        if (citizenshipCode != null) {
+            countryEntity = countryDao.getByCode(citizenshipCode);
         }
+
+        UserEntity userEntity = new UserEntity(officeEntity, firstName, lastName, middleName, position, phone, isIdentified, userDocumentEntity, countryEntity);
+
         userDao.save(userEntity);
     }
 }

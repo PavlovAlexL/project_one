@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.logging.Logger;
 
 /**
- * Совет всем контроллерам, на перехват исключений, логгирование и отправку ErrorView
+ * Совет всем контроллерам, на перехват исключений, логгирование и отправку ErrorView.
  */
 @RestControllerAdvice
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {

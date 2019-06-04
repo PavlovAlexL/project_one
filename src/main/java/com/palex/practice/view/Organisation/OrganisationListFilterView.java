@@ -4,16 +4,25 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 /**
- * View для.
+ * View для валлидации данных для получения списка организаций.
  */
 public class OrganisationListFilterView {
 
+    /**
+     * Наименование.
+     */
     @NotEmpty
     @Size(min = 2, max = 50)
     public String name;
 
+    /**
+     * ИНН.
+     */
     public String inn;
 
+    /**
+     * Статус.
+     */
     public String isActive;
 
     public void setInn(String inn) {

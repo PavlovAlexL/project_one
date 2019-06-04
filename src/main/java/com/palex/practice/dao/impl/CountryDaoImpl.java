@@ -21,8 +21,8 @@ public class CountryDaoImpl implements CountryDao {
     }
 
     /**
-     * Получить списоком.
-     * @return коллекцию объектов.
+     * Получить список всех стран.
+     * @return коллекцию объектов типа страна.
      */
     @Override
     public List<CountryEntity> getAll() {
@@ -31,9 +31,9 @@ public class CountryDaoImpl implements CountryDao {
     }
 
     /**
-     * Получить по коду.
-     * @param code код.
-     * @return объект
+     * Получить объект типа страна по коду.
+     * @param code Код.
+     * @return Страна.
      */
     @Override
     public CountryEntity getByCode(String code) {

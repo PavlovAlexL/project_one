@@ -33,8 +33,8 @@ public class UserController {
     /**
      * Возврат коллекции обектов по параметрам.
      *
-     * @param userListFilterView
-     * @return
+     * @param userListFilterView Представление с фильтрацией входящих параметров для запроса пользователей по параметрам.
+     * @return коллекция запрошенных пользователей.
      */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public List<UserListView> userList(@RequestBody @Valid UserListFilterView userListFilterView) {
@@ -44,8 +44,8 @@ public class UserController {
     /**
      * Возврат объекта по Id.
      *
-     * @param id
-     * @return
+     * @param id Идентификатор пользователя.
+     * @return представление пользователя.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public UserView userGetById(@PathVariable("id") Long id){
@@ -55,8 +55,7 @@ public class UserController {
     /**
      * Запрос на операцию обновления объекта.
      *
-     * @param userUpdateFilterView
-     * @return статус операции.
+     * @param userUpdateFilterView Представление с фильтрацией входящих параметров для обновления пользователя.
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void userUpdate(@RequestBody @Valid UserUpdateFilterView userUpdateFilterView) {
@@ -66,8 +65,7 @@ public class UserController {
     /**
      * Запрос на операцию сохранения обекта.
      *
-     * @param userSaveFilterView
-     * @return статус операции.
+     * @param userSaveFilterView Представление с фильтрацией входящих параметров для сохранения пользователя.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void userSave(@RequestBody @Valid UserSaveFilterView userSaveFilterView) {

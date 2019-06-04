@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * View для валлидации входных данных для вывода списка Office.
+ * View для валлидации входных данных для вывода списка офисов.
  */
 public class OfficeListFilterView {
 

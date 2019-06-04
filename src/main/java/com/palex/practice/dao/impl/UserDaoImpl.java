@@ -1,9 +1,7 @@
 package com.palex.practice.dao.impl;
 
 import com.palex.practice.dao.UserDao;
-import com.palex.practice.model.CountryEntity;
 import com.palex.practice.model.OfficeEntity;
-import com.palex.practice.model.UserDocumentEntity;
 import com.palex.practice.model.UserEntity;
 import org.springframework.stereotype.Repository;
 
@@ -28,8 +26,7 @@ public class UserDaoImpl implements UserDao {
 
     /**
      * Получение коллекции объектов по параметрам.
-     *
-     * @return
+     * @return коллекция пользователей.
      */
     @Override
     public List<UserEntity> getByParams(UserEntity userEntity) {
@@ -78,8 +75,8 @@ public class UserDaoImpl implements UserDao {
 
     /**
      * Получение объекта по ID.
-     * @param id
-     * @return
+     * @param id идентификатор.
+     * @return пользователь.
      */
     @Override
     public UserEntity getById(Long id) {
@@ -87,61 +84,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     /**
-     * Изменить объект.
-     * @param
+     * Изменить пользователя.
      */
     @Override
     public void update(UserEntity userEntity) {
-        Long id = userEntity.getId();
-        OfficeEntity officeEntity = userEntity.getOffice();
-        String firstName = userEntity.getFirstName();
-        String lastName = userEntity.getLastName();
-        String middleName = userEntity.getMiddleName();
-        String position = userEntity.getPosition();
-        String phone = userEntity.getPhone();
-        UserDocumentEntity userDocumentEntity = userEntity.getUserDocument();
-        CountryEntity countryEntity = userEntity.getCountry();
-        Boolean isIdentified = userEntity.getIsIdentified();
-
-        UserEntity originalUserEntity = em.find(UserEntity.class, id);
-
-        if (officeEntity != null) {
-            originalUserEntity.setOffice(officeEntity);
-        }
-
-        originalUserEntity.setFirstName(firstName);
-
-        if (lastName != null) {
-            originalUserEntity.setLastName(lastName);
-        }
-
-        if (middleName != null) {
-            originalUserEntity.setMiddleName(middleName);
-        }
-
-        originalUserEntity.setPosition(position);
-
-        if (phone != null) {
-            originalUserEntity.setPhone(phone);
-        }
-
-        if (userDocumentEntity != null) {
-            originalUserEntity.setUserDocument(userDocumentEntity);
-        }
-
-        if (countryEntity != null) {
-            originalUserEntity.setCountry(countryEntity);
-        }
-
-        if (isIdentified != null) {
-            originalUserEntity.setIsIdentified(isIdentified);
-        }
-        em.merge(originalUserEntity);
+        em.merge(userEntity);
     }
 
     /**
-     * Сохраненить объект.
-     * @param
+     * Сохраненить пользвателя.
      */
     @Override
     public void save(UserEntity userEntity) {

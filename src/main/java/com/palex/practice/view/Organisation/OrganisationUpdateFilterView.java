@@ -1,6 +1,5 @@
 package com.palex.practice.view.Organisation;
 
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,7 +7,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * View для валлидации данных обновления Organisation.
+ * View для валлидации данных обновления организации.
  */
 public class OrganisationUpdateFilterView {
 
@@ -19,7 +18,6 @@ public class OrganisationUpdateFilterView {
     @Min(1)
     public Long id;
 
-
     /**
      * Наименование
      */
@@ -28,7 +26,6 @@ public class OrganisationUpdateFilterView {
     @Size(min = 2, max = 50)
     public String name;
 
-
     /**
      * Полное наименование.
      */
@@ -36,7 +33,6 @@ public class OrganisationUpdateFilterView {
     @NotBlank
     @Size(min = 2, max = 50)
     public String fullName;
-
 
     /**
      * ИНН.
@@ -47,7 +43,6 @@ public class OrganisationUpdateFilterView {
     @Pattern(regexp = "[0-9]*")
     public String inn;
 
-
     /**
      * КПП.
      */
@@ -57,7 +52,6 @@ public class OrganisationUpdateFilterView {
     @Pattern(regexp = "[0-9]*")
     public String kpp;
 
-
     /**
      * Адрес.
      */
@@ -66,13 +60,11 @@ public class OrganisationUpdateFilterView {
     @Size(min = 5, max = 200)
     public String address;
 
-
     /**
      * Телефон.
      */
     @Size(max = 20)
     public String phone;
-
 
     /**
      * Статус.

@@ -1,33 +1,28 @@
 package com.palex.practice.dao;
 
-import com.palex.practice.model.DocumentTypeEntity;
 import com.palex.practice.model.UserDocumentEntity;
 
 /**
- * DAO для работы с UserDocument
+ * DAO для работы с документом пользователя.
  */
 public interface UserDocumentDao {
 
     /**
-     * Запрос по id
-     * @param id Идернтификатор
-     * @return Объект UserDocumentEntity
+     * Запрос по идентификатору.
+     * @param id Идентификатор.
+     * @return Объект UserDocumentEntity.
      */
     UserDocumentEntity getById(Long id);
 
     /**
      * Сохранить документ пользователя
-     * @param number Номер документа
-     * @param date Дата документа
-     * @param documentTypeEntity Объект UserDocumetnEntity
+     * @param userDocumentEntity документ.
      */
-    void save(String number, String date, DocumentTypeEntity documentTypeEntity);
+    void save(UserDocumentEntity userDocumentEntity);
 
     /**
      * Обновить документ пользователя
-     * @param number
-     * @param date
-     * @param documentTypeEntity
+     * @param userDocumentEntity документ.
      */
-    void update(String number, String date, DocumentTypeEntity documentTypeEntity);
+    void update(UserDocumentEntity userDocumentEntity);
 }

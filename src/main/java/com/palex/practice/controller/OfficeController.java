@@ -34,8 +34,8 @@ public class OfficeController {
     /**
      * Возврат коллекции обектов по параметрам.
      *
-     * @param officeListFilterView
-     * @return
+     * @param officeListFilterView Представление с фильтрацией входящих параметров для оффиса.
+     * @return коллекция отобранных представлений офиса по параметров.
      */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public List<OfficeListView> officeList(@RequestBody @Valid OfficeListFilterView officeListFilterView) {
@@ -45,8 +45,8 @@ public class OfficeController {
     /**
      * Возврат объекта по Id.
      *
-     * @param id
-     * @return
+     * @param id иднетификатор запрашиваемого офиса.
+     * @return представление запрошенного офиса.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public OfficeView officeGetById(@PathVariable("id") @Valid @NotNull Long id) {
@@ -56,8 +56,7 @@ public class OfficeController {
     /**
      * Запрос на операцию обновления объекта.
      *
-     * @param officeUpdateFilterView
-     * @return статус операции.
+     * @param officeUpdateFilterView Представление с фильтрацией входящих параметров для сохранения оффиса.
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void officeUpdate(@RequestBody @Valid OfficeUpdateFilterView officeUpdateFilterView) {
@@ -67,8 +66,7 @@ public class OfficeController {
     /**
      * Запрос на операцию сохранения обекта.
      *
-     * @param officeSaveFilterView
-     * @return статус операции.
+     * @param officeSaveFilterView Представление с фильтрацией входящих параметров для обновления оффиса.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void officeSave(@RequestBody @Valid OfficeSaveFilterView officeSaveFilterView) {

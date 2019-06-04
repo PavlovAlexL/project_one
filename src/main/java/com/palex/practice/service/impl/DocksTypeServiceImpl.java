@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Реализация сервиса
+ * Реализация сервиса типов документов.
  */
 @Service
 public class DocksTypeServiceImpl implements DocksTypeService {
@@ -18,15 +18,20 @@ public class DocksTypeServiceImpl implements DocksTypeService {
     private final DocumentTypeDao documentTypeDao;
     private final MapperFacade mapperFacade;
 
-
+    /**
+     * Конструктор.
+     *
+     * @param documentTypeDao
+     * @param mapperFacade
+     */
     public DocksTypeServiceImpl(DocumentTypeDao documentTypeDao, MapperFacade mapperFacade) {
         this.documentTypeDao = documentTypeDao;
         this.mapperFacade = mapperFacade;
     }
 
     /**
-     * Плучить список типов документов
-     * @return
+     * Плучить список типов документов.
+     * @return список типов документов.
      */
     @Override
     public List<DocksTypeView> docs() {

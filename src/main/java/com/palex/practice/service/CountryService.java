@@ -5,7 +5,7 @@ import com.palex.practice.view.CountryView;
 import java.util.List;
 
 /**
- * Сервис
+ * Сервис стран.
  */
 public interface CountryService {
 

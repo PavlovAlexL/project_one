@@ -2,7 +2,7 @@ package com.palex.practice.view.Office;
 
 
 /**
- * View для вывода списка Office.
+ * View для вывода списка офисов.
  */
 public class OfficeListView {
 
