@@ -21,8 +21,7 @@ public class CountryDaoImpl implements CountryDao {
     }
 
     /**
-     * Получить список.
-     *
+     * Получить списоком.
      * @return коллекцию объектов.
      */
     @Override

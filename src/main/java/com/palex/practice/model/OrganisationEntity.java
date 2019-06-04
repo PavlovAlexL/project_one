@@ -69,12 +69,35 @@ public class OrganisationEntity {
     @Column(name="is_active")
     private Boolean isActive;
 
-    public Long getId() {
-        return id;
+    /**
+     * Конструктор для Hibernate.
+     */
+    public OrganisationEntity() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    /**
+     * Конструктор
+     *
+     * @param name     Имя.
+     * @param fullName полное имя.
+     * @param inn      ИНН.
+     * @param kpp      КПП.
+     * @param address  адрес.
+     * @param phone    телефон.
+     * @param isActive статус.
+     */
+    public OrganisationEntity(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+        this.name = name;
+        this.fullName = fullName;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

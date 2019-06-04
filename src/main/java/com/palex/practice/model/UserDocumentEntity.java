@@ -26,20 +26,12 @@ import java.util.Date;
 public class UserDocumentEntity {
 
     /**
-     * Конструктор
-     *
-     * @param documentTypeEntity
-     */
-    public UserDocumentEntity(DocumentTypeEntity documentTypeEntity) {
-        this.documentType = documentTypeEntity;
-    }
-
-    /**
      * Уникальный идентификатор
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id",nullable = false)
+    //@MapsId
     private Long id;
 
     /**
@@ -70,6 +62,12 @@ public class UserDocumentEntity {
     private DocumentTypeEntity documentType;
 
     /**
+     * Конструктор поумолчанию, нужен для Hibernate
+     */
+    public UserDocumentEntity() {
+    }
+
+    /**
      * Конструктор объекта
      * @param docNumber Номер документа
      * @param docDate Дата документа
@@ -87,21 +85,13 @@ public class UserDocumentEntity {
         }
     }
 
-    @Override
-    public String toString() {
-        return "UserDocumentEntity{" +
-                "id=" + id +
-                ", version=" + version +
-                ", docNumber='" + docNumber + '\'' +
-                ", docDate=" + docDate +
-                ", documentType=" + documentType +
-                '}';
-    }
-
     /**
-     * Конструктор поумолчанию, нужен для Hibernate
+     * Конструктор
+     *
+     * @param documentTypeEntity
      */
-    public UserDocumentEntity() {
+    public UserDocumentEntity(DocumentTypeEntity documentTypeEntity) {
+        this.documentType = documentTypeEntity;
     }
 
     public Long getId() {

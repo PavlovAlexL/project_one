@@ -6,7 +6,6 @@ import com.palex.practice.view.Office.OfficeListView;
 import com.palex.practice.view.Office.OfficeSaveFilterView;
 import com.palex.practice.view.Office.OfficeUpdateFilterView;
 import com.palex.practice.view.Office.OfficeView;
-import com.palex.practice.view.SuccessView;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,9 +60,8 @@ public class OfficeController {
      * @return статус операции.
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public SuccessView officeUpdate(@RequestBody @Valid OfficeUpdateFilterView officeUpdateFilterView) {
+    public void officeUpdate(@RequestBody @Valid OfficeUpdateFilterView officeUpdateFilterView) {
         officeService.update(officeUpdateFilterView);
-        return new SuccessView();
     }
 
     /**
@@ -73,8 +71,7 @@ public class OfficeController {
      * @return статус операции.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public SuccessView officeSave(@RequestBody @Valid OfficeSaveFilterView officeSaveFilterView) {
+    public void officeSave(@RequestBody @Valid OfficeSaveFilterView officeSaveFilterView) {
         officeService.save(officeSaveFilterView);
-        return new SuccessView();
     }
 }

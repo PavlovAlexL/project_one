@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Реализация сервиса
+ * Реализация сервиса Организации.
  */
 @Service
 public class OrganisationServiceImpl implements OrganisationService {
@@ -29,7 +29,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     * Отобразить объекты по параметрам.
+     * Отобразить объекты организаци по параметрам.
      */
     @Override
     @Transactional
@@ -40,7 +40,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     *  Отобразить объект по Id.
+     *  Отобразить объект организации по идентификатору.
      */
     @Override
     @Transactional
@@ -50,24 +50,44 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     * Изменить объект.
+     * Изменить объект организации в БД.
      */
     @Override
     @Transactional
     public void update(OrganisationUpdateFilterView organisationUpdateFilterView) {
-        OrganisationEntity organisationEntity = mapperFacade.map(organisationUpdateFilterView, OrganisationEntity.class);
+        Long id = organisationUpdateFilterView.id;
+        OrganisationEntity organisationEntity = organisationDao.getById(id);
+
+        organisationEntity.setName(organisationUpdateFilterView.name);
+        organisationEntity.setFullName(organisationUpdateFilterView.fullName);
+        organisationEntity.setInn(organisationUpdateFilterView.inn);
+        organisationEntity.setKpp(organisationUpdateFilterView.kpp);
+        organisationEntity.setAddress(organisationUpdateFilterView.address);
+
+        if (organisationUpdateFilterView.phone != null) {
+            organisationEntity.setPhone(organisationUpdateFilterView.phone);
+        }
+        if (organisationUpdateFilterView.isActive != null) {
+            organisationEntity.setIsActive(Boolean.parseBoolean(organisationUpdateFilterView.isActive));
+        }
         organisationDao.update(organisationEntity);
     }
 
     /**
-     * Создать объект.
+     * Создать объект организации и сохранить в БД.
      */
     @Override
     @Transactional
     public void save(OrganisationSaveFilterView organisationSaveFilterView) {
-        OrganisationEntity organisationEntity = mapperFacade.map(organisationSaveFilterView, OrganisationEntity.class);
+        String name = organisationSaveFilterView.name;
+        String fullName = organisationSaveFilterView.fullName;
+        String inn = organisationSaveFilterView.inn;
+        String kpp = organisationSaveFilterView.kpp;
+        String address = organisationSaveFilterView.address;
+        String phone = organisationSaveFilterView.phone;
+        Boolean isActive = Boolean.parseBoolean(organisationSaveFilterView.isActive);
+        OrganisationEntity organisationEntity = new OrganisationEntity(name, fullName, inn, kpp, address, phone, isActive);
         organisationDao.save(organisationEntity);
     }
-
 }
 

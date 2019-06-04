@@ -23,7 +23,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Реализация сервиса
+ * Реализация сервиса пользователя.
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Отобразить объекты с параметрами.
+     * Отобразить объекты пользователя по параметрами.
      */
     @Transactional
     @Override
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *  Отобразить объект по Id.
+     *  Отобразить объект пользователя по идентификатору.
      */
     @Transactional
     @Override
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Изменить объект.
+     * Изменить объект пользователя в БД.
      */
     @Transactional
     @Override
@@ -103,13 +103,25 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Создать объект.
+     * Создать объект пользователя и сохранить в БД.
      */
     @Transactional
     @Override
     public void save(UserSaveFilterView userSaveFilterView) {
-        UserEntity userEntity = mapperFacade.map(userSaveFilterView, UserEntity.class);
+        //UserEntity userEntity = mapperFacade.map(userSaveFilterView, UserEntity.class);
         OfficeEntity officeEntity = officeDao.getById(userSaveFilterView.officeId);
+        String firstName = userSaveFilterView.firstName;
+        String lastName = userSaveFilterView.lastName;
+        String middleName;
+        String position;
+        String phone;
+        String docCode;
+        String docName;
+        String docNumber;
+        String docDate;
+        String citizenshipCode;
+        Boolean idIdentified;
+        
         userEntity.setOffice(officeEntity);
         if (userSaveFilterView.docCode != null || userSaveFilterView.docNumber != null || userSaveFilterView.docDate != null || userSaveFilterView.docName != null) {
             DocumentTypeEntity documentTypeEntity;

@@ -25,6 +25,7 @@ public class CountryServiceImpl implements CountryService {
 
     /**
      * Плучить список видов гражданств.
+     * @return
      */
     @Override
     public List<CountryView> countries() {

@@ -26,8 +26,7 @@ public class OfficeDaoImpl implements OfficeDao {
 
     /**
      * Получение коллекции объектов по параметрам.
-     *
-     * @return
+     * @return коллекция объектов.
      */
     @Override
     public List<OfficeEntity> getByParams(OfficeEntity officeEntity) {
@@ -56,9 +55,9 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     /**
-     * Получение объекта по ID.
-     * @param id
-     * @return
+     * Получение объекта по идентификатору.
+     * @param id Идентификатор.
+     * @return Объект.
      */
     @Override
     public OfficeEntity getById(Long id) {
@@ -71,16 +70,7 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public void update(OfficeEntity officeEntity) {
-        OfficeEntity originalOfficeEntity = em.find(OfficeEntity.class, officeEntity.getId());
-        originalOfficeEntity.setName(officeEntity.getName());
-        originalOfficeEntity.setAddress(officeEntity.getAddress());
-        if (officeEntity.getPhone() != null) {
-            originalOfficeEntity.setPhone(officeEntity.getPhone());
-        }
-        if (officeEntity.getIsActive() != null) {
-            originalOfficeEntity.setIsActive(officeEntity.getIsActive());
-        }
-        em.merge(originalOfficeEntity);
+        em.merge(officeEntity);
     }
 
     /**

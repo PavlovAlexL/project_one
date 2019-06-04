@@ -1,6 +1,5 @@
 package com.palex.practice.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,18 +58,37 @@ public class OfficeEntity {
     private Boolean isActive;
 
     /**
-     * Принадлежность к организации
+     * Принадлежность к организации.
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "org_id", nullable = false)
     private OrganisationEntity organisation;
 
-    public Long getId() {
-        return id;
+    /**
+     * Конструктор для Hibernate.
+     */
+    public OfficeEntity() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    /**
+     * Конструктор
+     *
+     * @param name         Имя.
+     * @param address      адрес.
+     * @param phone        телефон.
+     * @param isActive     статус.
+     * @param organisation принадлежность к организации.
+     */
+    public OfficeEntity(String name, String address, String phone, Boolean isActive, OrganisationEntity organisation) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+        this.organisation = organisation;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

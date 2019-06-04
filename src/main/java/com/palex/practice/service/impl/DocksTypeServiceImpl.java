@@ -4,7 +4,6 @@ import com.palex.practice.dao.DocumentTypeDao;
 import com.palex.practice.model.DocumentTypeEntity;
 import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.service.DocksTypeService;
-import com.palex.practice.view.CountryView;
 import com.palex.practice.view.DocksTypeView;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +26,7 @@ public class DocksTypeServiceImpl implements DocksTypeService {
 
     /**
      * Плучить список типов документов
+     * @return
      */
     @Override
     public List<DocksTypeView> docs() {

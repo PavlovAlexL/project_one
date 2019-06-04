@@ -1,7 +1,6 @@
 package com.palex.practice.controller;
 
 import com.palex.practice.service.UserService;
-import com.palex.practice.view.SuccessView;
 import com.palex.practice.view.User.UserListFilterView;
 import com.palex.practice.view.User.UserListView;
 import com.palex.practice.view.User.UserSaveFilterView;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -61,9 +59,8 @@ public class UserController {
      * @return статус операции.
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public SuccessView userUpdate(@RequestBody @Valid UserUpdateFilterView userUpdateFilterView) {
+    public void userUpdate(@RequestBody @Valid UserUpdateFilterView userUpdateFilterView) {
         userService.update(userUpdateFilterView);
-        return new SuccessView();
     }
 
     /**
@@ -73,8 +70,7 @@ public class UserController {
      * @return статус операции.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public SuccessView userSave(@RequestBody @Valid UserSaveFilterView userSaveFilterView) {
+    public void userSave(@RequestBody @Valid UserSaveFilterView userSaveFilterView) {
         userService.save(userSaveFilterView);
-        return new SuccessView();
     }
 }

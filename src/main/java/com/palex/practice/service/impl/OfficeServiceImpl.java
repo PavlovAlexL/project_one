@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Реализация сервиса
+ * Реализация сервиса офиса.
  */
 @Service
 public class OfficeServiceImpl implements OfficeService {
@@ -33,7 +33,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * Отобразить объекты с параметрами.
+     * Отобразить объекты офиса по параметрами.
      */
     @Override
     @Transactional
@@ -47,7 +47,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     *  Отобразить объект по Id.
+     *  Отобразить объект офиса по идентификатору.
      */
     @Override
     @Transactional
@@ -57,24 +57,40 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * Изменить объект.
+     * Изменить объект офиса в БД.
      */
     @Override
     @Transactional
     public void update(OfficeUpdateFilterView officeUpdateFilterView) {
-        OfficeEntity officeEntity = mapperFacade.map(officeUpdateFilterView, OfficeEntity.class);
+        Long id = officeUpdateFilterView.id;
+        OfficeEntity officeEntity = officeDao.getById(id);
+
+        officeEntity.setName(officeUpdateFilterView.name);
+        officeEntity.setAddress(officeUpdateFilterView.address);
+
+        if (officeUpdateFilterView.phone != null) {
+            officeEntity.setPhone(officeUpdateFilterView.phone);
+        }
+        if (officeUpdateFilterView.isActive != null) {
+            officeEntity.setIsActive(Boolean.parseBoolean(officeUpdateFilterView.isActive));
+        }
         officeDao.update(officeEntity);
     }
 
     /**
-     * Создать объект.
+     * Создать объект офиса и сохранить в БД.
      */
     @Override
     @Transactional
     public void save(OfficeSaveFilterView officeSaveFilterView) {
-        OfficeEntity officeEntity = mapperFacade.map(officeSaveFilterView, OfficeEntity.class);
-        OrganisationEntity organisationEntity = organisationDao.getById(officeSaveFilterView.orgId);
-        officeEntity.setOrganisation(organisationEntity);
+        //OfficeEntity officeEntity = mapperFacade.map(officeSaveFilterView, OfficeEntity.class);
+        Long orgId = officeSaveFilterView.orgId;
+        String name = officeSaveFilterView.name;
+        String address = officeSaveFilterView.address;
+        String phone = officeSaveFilterView.phone;
+        Boolean isActive = Boolean.parseBoolean(officeSaveFilterView.isActive);
+        OrganisationEntity organisationEntity = organisationDao.getById(orgId);
+        OfficeEntity officeEntity = new OfficeEntity(name, address, phone, isActive, organisationEntity);
         officeDao.save(officeEntity);
     }
 

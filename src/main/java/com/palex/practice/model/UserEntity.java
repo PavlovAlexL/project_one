@@ -1,6 +1,5 @@
 package com.palex.practice.model;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
-
 
 /**
  * Класс сотрудник.
@@ -95,8 +93,23 @@ public class UserEntity {
     @JoinColumn(name="citizenship_id")
     private CountryEntity country;
 
-    public void setId(Long id) {
-        this.id = id;
+    /**
+     * Конструктор для Hibernate.
+     */
+    public UserEntity() {
+    }
+
+    /**
+     * Конструктор.
+     *
+     * @param office    Принадлежность к оффису.
+     * @param firstName Имя.
+     * @param position  Должность.
+     */
+    public UserEntity(OfficeEntity office, String firstName, String position) {
+        this.office = office;
+        this.firstName = firstName;
+        this.position = position;
     }
 
     public Long getId() {

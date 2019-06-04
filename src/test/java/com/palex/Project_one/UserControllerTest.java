@@ -1,6 +1,7 @@
 package com.palex.Project_one;
 
 import com.palex.practice.Application;
+import com.palex.practice.ResultDataAdvice;
 import com.palex.practice.controller.OfficeController;
 import com.palex.practice.controller.OrganisationController;
 import com.palex.practice.controller.UserController;
@@ -42,6 +43,9 @@ public class UserControllerTest {
 
     @InjectMocks
     private OrganisationController organisationController;
+
+    @InjectMocks
+    private ResultDataAdvice resultDataAdvice;
 
     @Test
     public void whenSaveNoBodyDataInput_thenReturn400AndError() throws Exception {
@@ -405,7 +409,7 @@ public class UserControllerTest {
         jsonString = "{\"officeId\":\"1\",\"firstName\":\"TestFirstName\",\"lastName\":\"TestLastName\",\"middleName\":\"TestMiddleName\",\"position\":\"Manager\",\"phone\":\"+79855555555\",\"docCode\":\"07\",\"docName\":\"Военный билет\",\"docNumber\":\"123456789\",\"docDate\":\"01.07.2000\",\"citizenshipCode\":\"643\",\"isIdentified\":\"true\"}";
         this.mockMvc.perform(post("/api/user/save").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonString)).andExpect(status().isOk());
 
-        jsonString = "{\"id\":\"1\",\"officeId\":\"1\",\"firstName\":\"NewTestFirstName\",\"lastName\":\"NewTestLastName\",\"middleName\":\"NewTestMiddleName\",\"position\":null,\"phone\":\"+79857777777000000000000000\",\"docName\":\"Test Document\",\"docNumber\":\"987654321\",\"docDate\":\"02.02.2010\",\"citizenshipCode\":\"804\",\"isIdentified\":\"false\"}";
+        jsonString = "{\"id\":\"1\",\"officeId\":\"1\",\"firstName\":\"NewTestFirstName\",\"lastName\":\"NewTestLastName\",\"middleName\":\"NewTestMiddleName\",\"position\":nullrk ,\"phone\":\"+79857777777000000000000000\",\"docName\":\"Test Document\",\"docNumber\":\"987654321\",\"docDate\":\"02.02.2010\",\"citizenshipCode\":\"804\",\"isIdentified\":\"false\"}";
         this.mockMvc.perform(post("/api/user/update").contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonString))
                 .andDo(print())

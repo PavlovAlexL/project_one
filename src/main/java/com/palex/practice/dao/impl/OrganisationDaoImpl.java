@@ -66,20 +66,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
      */
     @Override
     public void update(OrganisationEntity organisationEntity) {
-
-        OrganisationEntity originalOrganisationEntity = em.find(OrganisationEntity.class, organisationEntity.getId());
-        originalOrganisationEntity.setName(organisationEntity.getName());
-        originalOrganisationEntity.setFullName(organisationEntity.getFullName());
-        originalOrganisationEntity.setInn(organisationEntity.getInn());
-        originalOrganisationEntity.setKpp(organisationEntity.getKpp());
-        originalOrganisationEntity.setAddress(organisationEntity.getAddress());
-        if (organisationEntity.getPhone() != null) {
-            originalOrganisationEntity.setPhone(organisationEntity.getPhone());
-        }
-        if (organisationEntity.getIsActive() != null) {
-            originalOrganisationEntity.setIsActive(organisationEntity.getIsActive());
-        }
-        em.merge(originalOrganisationEntity);
+        em.merge(organisationEntity);
     }
 
     /**
@@ -90,7 +77,6 @@ public class OrganisationDaoImpl implements OrganisationDao {
     @Transactional
     public void save(OrganisationEntity organisationEntity) {
         em.persist(organisationEntity);
-        em.close();
     }
 
 }
