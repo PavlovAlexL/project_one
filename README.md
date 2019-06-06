@@ -1,39 +1,96 @@
 ##ProjectOne - my first REST-full API.
 
-### Installation
-1. Install JDK 1.8
-2. Add local variables
-Name: ```JAVA_HOME```, Value:```C:\Program Files\Java\jdk1.8.0_131```
-and add to path:```;%JAVA_HOME%\bin```
-Check installation:in cmd ```echo %JAVA_HOME%```
-You must get ```java -version```
-3. Install maven http://apache-mirror.rbc.ru/pub/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
-Extract archive to c:/maven, or other.
-add local variables:Name:```M2_HOME```, Value:```c:/maven```
-add to path:```;%M2_HOME%\bin```
-Check installation: in cmd ```mvn --version```
-3. Start the project:
-    open console on project path, and run ```mvn spring-boot:run```
-    project will be accessing in http://localhost:8888
-4. Import to Intellij IDEA
-File->Open
-Change pom.xml in the root project path
-Ok->Open as Project
+### Установка
+- Установите JDK 1.8 (если еще не установлено)
+- Добавьте переменные окружения:
 
-###Using
-You must use http GET method for getting entities for id, and use http POST method for other operations.
+```sh
+name: JAVA_HOME
+Value: C:\Program Files\Java\jdk1.8.0_131
+```
 
-#####api/organization
+и добавьте в переменную path:
+```;%JAVA_HOME%\bin```
 
-Use ***api/organization/list*** for list organisations:
+Проверьте установку:
+
+в консоли введите:
+
+```sh
+echo %JAVA_HOME%    должно вернуть C:\Program Files\Java\jdk1.8.0_131
+java -version       должно вернуть версию java
+```
+
+- Установитье maven http://apache-mirror.rbc.ru/pub/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
+
+Распакуйте архив в c:/maven, или в другую директорию.
+Добавьте переменные окружения:
+```sh
+Name: M2_HOME
+Value: c:/maven
+```
+добавьте в path:
+```sh
+%M2_HOME%\bin
+```
+Проверьте установку:
+в консоли введите 
+ ```sh 
+ mvn --version      должны получить версию maven
+ ```
+- можно приступать к запуску:
+откройте консоль в той директории, куда вы распаковали приложение и выполните комманду:
+```sh 
+mvn spring-boot:run
+```
+- приложение будет доступно по ссылке
+```sh
+http://localhost:8888
+```
+
+### Использование
+
+##### Вывод справочников
+
+для получения справочника кодов и наименований документов выполните POST запрос:
+http://localhost:8888/api/docs
+пример ответа:
+
+```
+[
+  {
+    “name”:“”,
+    “code”:””
+  },
+  ...
+]
+```
+
+для получения справочника кодов и наименований стран выполните POST запрос:
+http://localhost:8888/api/countries
+
+пример ответа:
+```
+[
+  {
+    “name”:“”,
+    “code”:””
+  },
+  ...
+]
+```
+
+Для получения списка организаций выполните POST запрос:
+http://localhost:8888/api/organization/list
+
 ``` json
-In:
+Тело запроса:
 {
-  “name”:””, //required
+  “name”:””, //обязательный параметр
   “inn”:””,
   “isActive”:””
 }
-Out:
+Тело ответа:
 [
   {
     “id”:””,
@@ -44,10 +101,12 @@ Out:
 ]
 ...
 ```
-#####api/organization/{id}
-Use for get organisation by id
+
+Для получения организации по идентификатору выполниет GET запрос
+http://localhost:8888/api/organization/id
+
 ``` json
-Out:
+Тело ответа:
 {
   “id”:””,
   “name”:””,
@@ -60,56 +119,60 @@ Out:
 }
 ```
 
-#####api/organization/update
-Use for update your organisation
+Для обновления записи об организации выполните POST запрос:
+http://localhost:8888/api/organization/update
+
 ``` json
-In:
+Тело запроса:
 {
-  “id”:””, //required
-  “name”:””, //required
-  “fullName”:””, //required
-  “inn”:””, //required
-  “kpp”:””,  //required
-  “address”:””, //required
+  “id”:””, //обязательный параметр
+  “name”:””, //обязательный параметр
+  “fullName”:””, //обязательный параметр
+  “inn”:””, //обязательный параметр
+  “kpp”:””,  //обязательный параметр
+  “address”:””, //обязательный параметр
   “phone”,””,
   “isActive”:””
 }
-
-Out:
+Тело ответа успешного ответа:
 {
     “result”:”success”
 }
 ```
-#####api/organization/save
-Use for save organisation
-``` In:
+
+Для сохранения организации в БД выполните POST запрос:
+http://localhost:8888/api/organization/save
+
+``` 
+Тело запроса:
 {
-  “name”:””, //required
-  “fullName”:””, //required
-  “inn”:””, //required
-  “kpp”:””, //required
-  “address”:””, //required
+  “name”:””, //обязательный параметр
+  “fullName”:””, //обязательный параметр
+  “inn”:””, //обязательный параметр
+  “kpp”:””, //обязательный параметр
+  “address”:””, //обязательный параметр
   “phone”,””,
   “isActive”:”true”
 }
-
-Out:
+Тело успешного ответа:
 {
     “result”:”success”
 }
 ```
 
-##### api/office/list
+Для получения списка оффисов выполните POST запрос:
+http://localhost:8888/api/office/list
+
 ```
-In:
+Тело запроса:
 {
-  “orgId”:””, //required
+  “orgId”:””, //обязательный параметр
   “name”:””,
   “phone”:””,
   “isActive” 
 }
 
-Out:
+Тело успешного ответа:
 [
   {
     “id”:””,
@@ -120,9 +183,11 @@ Out:
 ]
 ```
 
-#####api/office/{id}
+Для получения офиса по идентификатору выполниет GET запрос
+http://localhost:8888/api/office/id
+
 ```
-Out:
+Тело успешного ответа:
 {
   “id”:””,
   “name”:””,
@@ -131,45 +196,52 @@ Out:
   “isActive”:””
 }
 ```
-#####api/office/update
+
+Для обновления записи об офисе выполните POST запрос:
+http://localhost:8888/api/office/update
+
 ```
-In:
+Тело запроса:
 {
-  “id”:””, //required
-  “name”:””, //required
-  “address”:””, //required
+  “id”:””, //обязательный параметр
+  “name”:””, //обязательный параметр
+  “address”:””, //обязательный параметр
   “phone”,””,
   “isActive”:”” 
 }
 
-Out:
+Тело успешного ответа:
 {
     “result”:”success”
 }
 ```
 
-#####api/office/save
+Для сохранения офиса в БД выполните POST запрос:
+http://localhost:8888/api/office/save
+
 ```
-In:
+Тело запроса:
 {
-  “orgId”:””, //required
+  “orgId”:””, //обязательный параметр
   “name”:””,
   “address”:””,
   “phone”,””,
   “isActive”:””
 }
 
-Out:
+Тело успешного ответа:
 {
     “result”:”success”
 }
 ```
 
-#####api/user/list
+Для получения списка пользвателей выполните POST запрос:
+http://localhost:8888/api/user/list
+
 ```
-In (фильтр):
+Тело запроса:
 {
-  “officeId”:””, //required
+  “officeId”:””, //обязательный параметр
   “firstName”:””,
   “lastName”:””,
   “middleName”:””,
@@ -177,7 +249,7 @@ In (фильтр):
   “docCode”:””,
   “citizenshipCode”:””
 }
-Out:
+Тело успешного ответа:
 {
   “id”:””,
   “firstName”:””,
@@ -187,10 +259,11 @@ Out:
 }
 ```
 
-#####api/user/{id}
+Для получения пользователя по идентификатору выполниет GET запрос
+http://localhost:8888/api/user/id
 
 ```
-Out:
+Тело успешного ответа:
 {
   “id”:””,
   “firstName”:””,
@@ -206,17 +279,18 @@ Out:
   “isIdentified”:””
 }
 ```
+Для обновления записи об пользователе выполните POST запрос:
+http://localhost:8888/api/user/update
 
-#####api/user/update
 ```
-In:
+Тело запроса:
 {
-  “id”:””, //required
+  “id”:””, //обязательный параметр
   “officeId”:””,
-  “firstName”:””, //required
+  “firstName”:””, //обязательный параметр
   “lastName”:””,
   “middleName”:””,
-  “position”:”” //required
+  “position”:”” //обязательный параметр
   “phone”,””,
   “docName”:””,
   “docNumber”:””,
@@ -224,21 +298,22 @@ In:
   “citizenshipCode”:””,
   “isIdentified”:””
 
-Out:
+Тело успешного ответа:
 {
     “result”:”success”
 }
 ```
 
-#####api/user/save
+Для сохранения ползователя в БД выполните POST запрос:
+http://localhost:8888/api/user/save
 ```
-In:
+Тело запроса:
 {
-  “officeId”:””, //required
-  “firstName”:””, //required
+  “officeId”:””, //обязательный параметр
+  “firstName”:””, //обязательный параметр
   “secondName”:””,
   “middleName”:””,
-  “position”:”” //required
+  “position”:”” //обязательный параметр
   “phone”,””,
   “docCode”:””,
   “docName”:””,
@@ -247,34 +322,12 @@ In:
   “citizenshipCode”:””,
   “isIdentified”:””
 }
-Out:
+Тело успешного ответа:
 {
     “result”:”success”
 }
 ```
-####Directories:
-#####api/docs
-```
-[
-  {
-    “name”:“”,
-    “code”:””
-  },
-  ...
-]
-```
 
-####User document types
-#####api/countries
-```
-[
-  {
-    “name”:“”,
-    “code”:””
-  },
-  ...
-]
-```
 
 
 

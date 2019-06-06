@@ -49,7 +49,7 @@ public class OrganisationController {
      * @param id идентификатор.
      * @return Представление запрошенной организации.
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id", method = RequestMethod.GET)
     @ResponseBody
     public OrganisationView organisationGetById(@PathVariable("id") @Valid @NotNull @Min(1) Long id) {
         return organisationService.getById(id);

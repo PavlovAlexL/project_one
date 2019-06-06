@@ -46,7 +46,7 @@ public class OfficeController {
      * @param id иднетификатор запрашиваемого офиса.
      * @return представление запрошенного офиса.
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id", method = RequestMethod.GET)
     public OfficeView officeGetById(@PathVariable("id") @Valid @NotNull Long id) {
         return officeService.getById(id);
     }

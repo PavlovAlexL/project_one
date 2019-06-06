@@ -45,7 +45,7 @@ public class UserController {
      * @param id Идентификатор пользователя.
      * @return представление пользователя.
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id", method = RequestMethod.GET)
     public UserView userGetById(@PathVariable("id") Long id){
         return userService.getById(id);
     }
