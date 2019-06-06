@@ -80,5 +80,4 @@ public class OrganisationDaoImpl implements OrganisationDao {
     public void save(OrganisationEntity organisationEntity) {
         em.persist(organisationEntity);
     }
-
 }

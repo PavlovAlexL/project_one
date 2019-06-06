@@ -18,5 +18,4 @@ public class CountryView {
      */
     @JsonProperty("citizenshipCode")
     public String code;
-
 }

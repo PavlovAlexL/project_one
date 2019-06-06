@@ -98,7 +98,6 @@ public class UserView {
         if (userDocument != null){
             return userDocument.getDocNumber();
         } else return null;
-
     }
 
     /**

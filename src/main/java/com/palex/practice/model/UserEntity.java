@@ -16,7 +16,6 @@ import javax.persistence.Version;
 /**
  * Класс сотрудник.
  */
-
 @Entity
 @Table(name = "User")
 public class UserEntity {

@@ -43,7 +43,6 @@ public class OfficeListFilterView {
         } else {
             this.name = name;
         }
-
     }
 
     public String getPhone() {
@@ -69,5 +68,4 @@ public class OfficeListFilterView {
             this.isActive = isActive;
         }
     }
-
 }

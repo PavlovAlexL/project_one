@@ -33,7 +33,6 @@ public class OfficeController {
 
     /**
      * Возврат коллекции обектов по параметрам.
-     *
      * @param officeListFilterView Представление с фильтрацией входящих параметров для оффиса.
      * @return коллекция отобранных представлений офиса по параметров.
      */
@@ -44,7 +43,6 @@ public class OfficeController {
 
     /**
      * Возврат объекта по Id.
-     *
      * @param id иднетификатор запрашиваемого офиса.
      * @return представление запрошенного офиса.
      */
@@ -65,7 +63,6 @@ public class OfficeController {
 
     /**
      * Запрос на операцию сохранения обекта.
-     *
      * @param officeSaveFilterView Представление с фильтрацией входящих параметров для обновления оффиса.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)

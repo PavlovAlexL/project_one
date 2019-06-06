@@ -27,18 +27,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class OfficeControllerTest {
 
-
     @Autowired
     ObjectMapper mapper;
-
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext wac;
-
     @InjectMocks
     private OfficeController officeController;
-
     @InjectMocks
     private OrganisationController organisationController;
 
@@ -267,7 +263,6 @@ public class OfficeControllerTest {
                 .andExpect(jsonPath("$.error").value("Error occured"));
     }
 
-
     @Test
     public void whenGetNotExistingDataInput_thenReturn200andResultNull() throws Exception {
         this.mockMvc.perform(get("/api/user/100").contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -276,7 +271,6 @@ public class OfficeControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
-
 
     @Test
     public void whenUpdateValidAllDataInput_thenReturn200andResultSuccess() throws Exception {
@@ -358,6 +352,4 @@ public class OfficeControllerTest {
                 .andExpect(jsonPath("$.data.phone").value("+79851111111"))
                 .andExpect(jsonPath("$.data.isActive").value("true"));
     }
-
-
 }

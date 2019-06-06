@@ -93,5 +93,4 @@ public class OfficeServiceImpl implements OfficeService {
         OfficeEntity officeEntity = new OfficeEntity(name, address, phone, isActive, organisationEntity);
         officeDao.save(officeEntity);
     }
-
 }

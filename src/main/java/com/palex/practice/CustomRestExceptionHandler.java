@@ -37,5 +37,4 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         logger.info(ex.getMessage());
         return new ErrorView();
     }
-
 }

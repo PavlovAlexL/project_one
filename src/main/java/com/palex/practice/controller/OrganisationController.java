@@ -36,7 +36,6 @@ public class OrganisationController {
 
     /**
      * Возврат коллекции обектов по параметрам.
-     *
      * @param organisationListFilterView Представление с фильтрацией входящих параметров для организации.
      * @return коллекция запрошенных представлений организаций по параметрам.
      */
@@ -47,7 +46,6 @@ public class OrganisationController {
 
     /**
      * Возврат объекта по Id.
-     *
      * @param id идентификатор.
      * @return Представление запрошенной организации.
      */
@@ -59,7 +57,6 @@ public class OrganisationController {
 
     /**
      * Запрос на операцию обновления объекта.
-     *
      * @param organisationUpdateFilterView Представление с фильтрацией входящих параметров для сохранения организации.
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -69,12 +66,10 @@ public class OrganisationController {
 
     /**
      * Запрос на операцию сохранения обекта.
-     *
      * @param organisationSaveFilterView Представление с фильтрацией входящих параметров для обновления организации.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     public void organisationSave(@RequestBody @Valid OrganisationSaveFilterView organisationSaveFilterView) {
         organisationService.save(organisationSaveFilterView);
     }
-
 }

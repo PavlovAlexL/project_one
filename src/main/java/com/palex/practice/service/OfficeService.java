@@ -32,5 +32,4 @@ public interface OfficeService {
      * Создать офис.
      */
     void save(OfficeSaveFilterView officeSaveFilterView);
-
 }

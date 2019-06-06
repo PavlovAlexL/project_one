@@ -32,5 +32,4 @@ public interface OrganisationService {
      * Создать организацию.
      */
     void save(OrganisationSaveFilterView organisationSaveFilterView);
-
 }

@@ -20,5 +20,4 @@ public class OfficeListView {
      * Статус.
      */
     public Boolean isActive;
-
 }

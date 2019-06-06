@@ -129,5 +129,4 @@ public class UserDocumentEntity {
     public void setDocumentType(DocumentTypeEntity documentType) {
         this.documentType = documentType;
     }
-
 }

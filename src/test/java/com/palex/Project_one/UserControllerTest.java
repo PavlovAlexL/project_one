@@ -26,7 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class})
 @AutoConfigureMockMvc
-
 public class UserControllerTest {
 
     @Autowired
@@ -91,7 +90,6 @@ public class UserControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.error").value("Error occured"));
     }
-
 
     @Test
     public void whenSaveValidRequiresDataInput_thenReturn200andResultSuccess() throws Exception {
@@ -176,7 +174,6 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.data.citizenshipCode").isNotEmpty())
                 .andExpect(jsonPath("$.data.isIdentified").isNotEmpty());
     }
-
 
     @Test
     public void whenListNoBodyDataInput_thenReturn400AndError() throws Exception {
@@ -319,7 +316,6 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.error").value("Error occured"));
     }
 
-
     @Test
     public void whenGetNotExistingDataInput_thenReturn200andResultNull() throws Exception {
         this.mockMvc.perform(get("/api/user/100").contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -328,7 +324,6 @@ public class UserControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
-
 
     @Test
     public void whenUpdateValidAllDataInput_thenReturn200andResultSuccess() throws Exception {
@@ -432,7 +427,5 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.data.citizenshipCode").value("643"))
                 .andExpect(jsonPath("$.data.isIdentified").value("true"));
     }
-
-
 }
 

@@ -32,5 +32,4 @@ public interface UserService {
      * Создать пользователя.
      */
     void save(UserSaveFilterView userSaveFilterView);
-
 }

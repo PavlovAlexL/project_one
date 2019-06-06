@@ -44,6 +44,5 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     @Override
     public void update(UserDocumentEntity userDocumentEntity) {
         em.merge(userDocumentEntity);
-
     }
 }

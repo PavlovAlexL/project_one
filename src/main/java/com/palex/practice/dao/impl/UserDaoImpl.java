@@ -98,5 +98,4 @@ public class UserDaoImpl implements UserDao {
     public void save(UserEntity userEntity) {
         em.persist(userEntity);
     }
-
 }

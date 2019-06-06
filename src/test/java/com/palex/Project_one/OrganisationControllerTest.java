@@ -28,7 +28,6 @@ public class OrganisationControllerTest {
 
     @Autowired
     ObjectMapper mapper;
-
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -69,7 +68,6 @@ public class OrganisationControllerTest {
                 .andExpect(jsonPath("$.error").value("Error occured"));
     }
 
-
     @Test
     public void whenSaveValidRequiresDataInput_thenReturn200andResultSuccess() throws Exception {
 
@@ -108,7 +106,6 @@ public class OrganisationControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.error").value("Error occured"));
     }
-
 
     @Test
     public void whenGetIdValidInput_thenReturn200andResultSuccess() throws Exception {
@@ -229,8 +226,6 @@ public class OrganisationControllerTest {
                 .andExpect(jsonPath("$.data[0].isActive").value("true"));
     }
 
-
-
     @Test
     public void whenUpdateNoBodyDataInput_thenReturn400AndError() throws Exception {
         String jsonString = "{\"name\":\"Test\",\"fullName\":\"OOO TestOrganisation\",\"inn\":\"1111111111\",\"kpp\":\"999999999\",\"address\":\"TestOrganisationAddress\",\"phone\":\"+79852053969\",\"isActive\":\"true\"}";
@@ -242,7 +237,6 @@ public class OrganisationControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.error").value("Error occured"));
     }
-
 
     @Test
     public void whenUpdateValidAllDataInput_thenReturn200andResultSuccess() throws Exception {
@@ -321,5 +315,4 @@ public class OrganisationControllerTest {
                 .andExpect(jsonPath("$.data.address").value("TestOrganisationAddress"))
                 .andExpect(jsonPath("$.data.isActive").value("true"));
     }
-
 }

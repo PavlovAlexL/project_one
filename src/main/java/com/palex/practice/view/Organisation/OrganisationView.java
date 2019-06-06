@@ -44,5 +44,4 @@ public class OrganisationView {
      * Статус.
      */
     public Boolean isActive;
-
 }

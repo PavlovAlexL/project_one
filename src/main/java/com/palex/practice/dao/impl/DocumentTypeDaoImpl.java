@@ -64,6 +64,4 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
         criteria.where(builder.equal(root.get(parametr), data));
         return criteria;
     }
-
-
 }

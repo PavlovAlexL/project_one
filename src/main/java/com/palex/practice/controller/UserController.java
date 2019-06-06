@@ -32,7 +32,6 @@ public class UserController {
 
     /**
      * Возврат коллекции обектов по параметрам.
-     *
      * @param userListFilterView Представление с фильтрацией входящих параметров для запроса пользователей по параметрам.
      * @return коллекция запрошенных пользователей.
      */
@@ -43,7 +42,6 @@ public class UserController {
 
     /**
      * Возврат объекта по Id.
-     *
      * @param id Идентификатор пользователя.
      * @return представление пользователя.
      */
@@ -54,7 +52,6 @@ public class UserController {
 
     /**
      * Запрос на операцию обновления объекта.
-     *
      * @param userUpdateFilterView Представление с фильтрацией входящих параметров для обновления пользователя.
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -64,7 +61,6 @@ public class UserController {
 
     /**
      * Запрос на операцию сохранения обекта.
-     *
      * @param userSaveFilterView Представление с фильтрацией входящих параметров для сохранения пользователя.
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)

@@ -130,5 +130,4 @@ public class OfficeEntity {
     public void setOrganisation(OrganisationEntity organisation) {
         this.organisation = organisation;
     }
-
 }

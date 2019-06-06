@@ -18,8 +18,8 @@ public class ResultDataAdvice implements ResponseBodyAdvice {
 
     /**
      * Определить поддерживается ли кастомизация.
-     * @param methodParameter
-     * @param aClass
+     * @param methodParameter метод.
+     * @param aClass класс конвертера.
      * @return
      */
     @Override
@@ -29,7 +29,6 @@ public class ResultDataAdvice implements ResponseBodyAdvice {
 
     /**
      * Кастомизация ответа сервера.
-     *
      * @param o                  Данные.
      * @param methodParameter    метод.
      * @param mediaType          тип данных.
@@ -41,7 +40,7 @@ public class ResultDataAdvice implements ResponseBodyAdvice {
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         if (methodParameter.getParameterType().getName().equals("void")) {
-            return new ResultView(new SuccessView());
+            return new SuccessView();
         } else {
             return new ResultView(o);
         }

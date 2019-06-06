@@ -19,5 +19,4 @@ public class OrganisationListView {
      * Статус
      */
     public String isActive;
-
 }

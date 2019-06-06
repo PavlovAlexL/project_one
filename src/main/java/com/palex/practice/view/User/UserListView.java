@@ -29,5 +29,4 @@ public class UserListView {
      * Должность.
      */
     public String position;
-
 }
