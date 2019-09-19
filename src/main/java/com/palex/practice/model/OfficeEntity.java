@@ -1,19 +1,25 @@
 package com.palex.practice.model;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-
+/**
+ * Офис.
+ */
 @Entity
 @Table(name = "Office")
 public class OfficeEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,72 +27,68 @@ public class OfficeEntity {
     private Long id;
 
     /**
-     * Служебное поле Hibernate
+     * Служебное поле Hibernate.
      */
     @Version
     @Column (name="version", nullable = false)
     private Integer version;
 
     /**
-     * Наименование
+     * Наименование.
      */
     @Column(name = "name", length = 50)
     private String name;
 
     /**
-     * Адрес
+     * Адрес.
      */
     @Column(name="address", length = 200)
     private String address;
 
     /**
-     * Телефон
+     * Телефон.
      */
     @Column (name="phone", length = 20)
     private String phone;
 
     /**
-     * Статус
+     * Статус.
      */
     @Column (name="isActive")
     private Boolean isActive;
 
     /**
-     * Принадлежность к организации
+     * Принадлежность к организации.
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "org_id", nullable = false)
     private OrganisationEntity organisation;
 
     /**
-     * Множество пользователей, принадлежащих данному офису
+     * Конструктор для Hibernate.
      */
-    @OneToMany(mappedBy = "office", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserEntity> users;
-
-
-    public OfficeEntity(){
-
+    public OfficeEntity() {
     }
 
-    public OfficeEntity(Map<String, String> params, OrganisationEntity organisationEntity) {
-        this.organisation = organisationEntity;
-        this.name = params.get("name");
-        this.address = params.get("address");
-        this.phone = params.get("phone");
-        this.isActive = Boolean.parseBoolean(params.get("isActive"));
+    /**
+     * Конструктор
+     *
+     * @param name         Имя.
+     * @param address      адрес.
+     * @param phone        телефон.
+     * @param isActive     статус.
+     * @param organisation принадлежность к организации.
+     */
+    public OfficeEntity(String name, String address, String phone, Boolean isActive, OrganisationEntity organisation) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+        this.organisation = organisation;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public String getName() {
@@ -128,16 +130,4 @@ public class OfficeEntity {
     public void setOrganisation(OrganisationEntity organisation) {
         this.organisation = organisation;
     }
-
-    public Set<UserEntity> getUsers() {
-        if(users == null){
-            users = new HashSet<>();
-        }
-        return users;
-    }
-
-    public void setUsers(Set<UserEntity> users) {
-        this.users = users;
-    }
-
 }

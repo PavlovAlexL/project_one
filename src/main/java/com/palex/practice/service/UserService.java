@@ -1,30 +1,35 @@
 package com.palex.practice.service;
 
-import com.palex.practice.view.UserView;
+import com.palex.practice.view.User.UserListFilterView;
+import com.palex.practice.view.User.UserListView;
+import com.palex.practice.view.User.UserSaveFilterView;
+import com.palex.practice.view.User.UserUpdateFilterView;
+import com.palex.practice.view.User.UserView;
 
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Сервис для работы с объектами пользователь.
+ */
 public interface UserService {
 
     /**
-     * Отобразить объекта с параметрами.
+     * Отобразить пользователей по параметрам.
      */
-    List<UserView> list(Map<String,String> params);
+    List<UserListView> list(UserListFilterView userListFilterView);
 
     /**
-     *  Отобразить объект по Id.
+     *  Отобразить пользователя по идентификатору.
      */
     UserView getById(Long id);
 
     /**
-     * Изменить объект.
+     * Изменить пользователя.
      */
-    void update(Map<String,String> params);
+    void update(UserUpdateFilterView userUpdateFilterView);
 
     /**
-     * Создать объект.
+     * Создать пользователя.
      */
-    void save(Map<String,String> params);
-
+    void save(UserSaveFilterView userSaveFilterView);
 }

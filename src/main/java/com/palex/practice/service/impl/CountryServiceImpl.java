@@ -9,17 +9,30 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Реализация сервиса стран.
+ */
 @Service
 public class CountryServiceImpl implements CountryService {
 
     private final CountryDao countryDao;
     private final MapperFacade mapperFacade;
 
+    /**
+     * Конструктор.
+     *
+     * @param countryDao
+     * @param mapperFacade
+     */
     public CountryServiceImpl(CountryDao countryDao, MapperFacade mapperFacade) {
         this.countryDao = countryDao;
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * Плучить список видов гражданств.
+     * @return список гражданств.
+     */
     @Override
     public List<CountryView> countries() {
         List<CountryEntity> all = countryDao.getAll();

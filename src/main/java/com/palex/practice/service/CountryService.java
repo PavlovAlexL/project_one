@@ -4,11 +4,13 @@ import com.palex.practice.view.CountryView;
 
 import java.util.List;
 
+/**
+ * Сервис стран.
+ */
 public interface CountryService {
 
     /**
      * Плучить список видов гражданств.
-     * @return {@CountryEntity}
      */
     List<CountryView> countries();
 }

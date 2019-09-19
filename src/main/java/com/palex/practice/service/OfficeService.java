@@ -1,30 +1,35 @@
 package com.palex.practice.service;
 
-import com.palex.practice.view.OfficeView;
+import com.palex.practice.view.Office.OfficeListFilterView;
+import com.palex.practice.view.Office.OfficeListView;
+import com.palex.practice.view.Office.OfficeSaveFilterView;
+import com.palex.practice.view.Office.OfficeUpdateFilterView;
+import com.palex.practice.view.Office.OfficeView;
 
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Сервис для работы с объектами типа офис.
+ */
 public interface OfficeService {
 
     /**
-     * Отобразить объекта с параметрами.
+     * Отобразить объекты офис по параметрам.
      */
-    List<OfficeView> list(Map<String,String> params);
+    List<OfficeListView> list(OfficeListFilterView officeListFilterView);
 
     /**
-     *  Отобразить объект по Id.
+     *  Отобразить офис по идентификатору.
      */
     OfficeView getById(Long id);
 
     /**
-     * Изменить объект.
+     * Изменить офис.
      */
-    void update(Map<String,String> params);
+    void update(OfficeUpdateFilterView officeUpdateFilterView);
 
     /**
-     * Создать объект.
+     * Создать офис.
      */
-    void save(Map<String,String> params);
-
+    void save(OfficeSaveFilterView officeSaveFilterView);
 }

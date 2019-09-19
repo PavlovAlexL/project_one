@@ -4,13 +4,19 @@ import com.palex.practice.dao.OrganisationDao;
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.service.OrganisationService;
-import com.palex.practice.view.OrganisationView;
+import com.palex.practice.view.Organisation.OrganisationListFilterView;
+import com.palex.practice.view.Organisation.OrganisationListView;
+import com.palex.practice.view.Organisation.OrganisationSaveFilterView;
+import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;
+import com.palex.practice.view.Organisation.OrganisationView;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Реализация сервиса для работы с объектами типа организация.
+ */
 @Service
 public class OrganisationServiceImpl implements OrganisationService {
 
@@ -22,51 +28,66 @@ public class OrganisationServiceImpl implements OrganisationService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * Отобразить организации по параметрам.
+     */
     @Override
-    public List<OrganisationView> list(Map<String, String> params) {
-        List<OrganisationEntity> result = organisationDao.getByParams(params.get("name"));
-
-        if(params.containsKey("inn")&params.get("inn") != null){
-            List<OrganisationEntity> temp = new ArrayList<>();
-            String inn = params.get("inn");
-            for(OrganisationEntity oe : result){
-                if(oe.getInn().equals(inn)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
-        }
-
-        if(params.containsKey("isActive")&params.get("isActive") != null){
-            List<OrganisationEntity> temp = new ArrayList<>();
-            Boolean status = Boolean.parseBoolean(params.get("isActive"));
-            for(OrganisationEntity oe : result){
-                if(oe.getIsActive().equals(status)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
-        }
-
-        return mapperFacade.mapAsList(result, OrganisationView.class);
+    @Transactional
+    public List<OrganisationListView> list(OrganisationListFilterView organisationListFilterView) {
+        OrganisationEntity organisationEntity = mapperFacade.map(organisationListFilterView, OrganisationEntity.class);
+        List<OrganisationEntity> organisationEntities = organisationDao.getByParams(organisationEntity);
+        return mapperFacade.mapAsList(organisationEntities, OrganisationListView.class);
     }
 
+    /**
+     *  Отобразить организацию по идентификатору.
+     */
     @Override
+    @Transactional
     public OrganisationView getById(Long id) {
-        OrganisationEntity result = organisationDao.getById(id);
-        return mapperFacade.map(result, OrganisationView.class);
+        OrganisationEntity organisationEntity = organisationDao.getById(id);
+        return mapperFacade.map(organisationEntity, OrganisationView.class);
     }
 
+    /**
+     * Изменить организацию.
+     */
     @Override
-    public void update(Map<String, String> params) {
-        organisationDao.update(params);
+    @Transactional
+    public void update(OrganisationUpdateFilterView organisationUpdateFilterView) {
+        Long id = organisationUpdateFilterView.id;
+        OrganisationEntity organisationEntity = organisationDao.getById(id);
+
+        organisationEntity.setName(organisationUpdateFilterView.name);
+        organisationEntity.setFullName(organisationUpdateFilterView.fullName);
+        organisationEntity.setInn(organisationUpdateFilterView.inn);
+        organisationEntity.setKpp(organisationUpdateFilterView.kpp);
+        organisationEntity.setAddress(organisationUpdateFilterView.address);
+
+        if (organisationUpdateFilterView.phone != null) {
+            organisationEntity.setPhone(organisationUpdateFilterView.phone);
+        }
+        if (organisationUpdateFilterView.isActive != null) {
+            organisationEntity.setIsActive(Boolean.parseBoolean(organisationUpdateFilterView.isActive));
+        }
+        organisationDao.update(organisationEntity);
     }
 
+    /**
+     * Создать организацию.
+     */
     @Override
-    public void save(Map<String, String> params){
-        OrganisationEntity oe = new OrganisationEntity(params);
-        organisationDao.save(oe);
+    @Transactional
+    public void save(OrganisationSaveFilterView organisationSaveFilterView) {
+        String name = organisationSaveFilterView.name;
+        String fullName = organisationSaveFilterView.fullName;
+        String inn = organisationSaveFilterView.inn;
+        String kpp = organisationSaveFilterView.kpp;
+        String address = organisationSaveFilterView.address;
+        String phone = organisationSaveFilterView.phone;
+        Boolean isActive = Boolean.parseBoolean(organisationSaveFilterView.isActive);
+        OrganisationEntity organisationEntity = new OrganisationEntity(name, fullName, inn, kpp, address, phone, isActive);
+        organisationDao.save(organisationEntity);
     }
-
 }
 

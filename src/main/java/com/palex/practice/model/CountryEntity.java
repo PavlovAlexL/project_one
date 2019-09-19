@@ -1,29 +1,32 @@
 package com.palex.practice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Column;
 
+/**
+ * Класс - справочник, сопоставляющий наименование и код страны
+ */
 @Entity
 @Table(name = "Country")
 public class CountryEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @Column(name="id",nullable = false)
     private Long id;
 
     /**
-     * Код страны
+     * Код страны.
      */
     @Column(name="code", length = 10)
     private String code;
 
     /**
-     * Название страны
+     * Наименование страны.
      */
     @Column(name="name", length = 50)
     private String name;
@@ -47,5 +50,4 @@ public class CountryEntity {
     public void setName(String name) {
         this.name = name;
     }
-
 }

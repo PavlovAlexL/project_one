@@ -5,13 +5,14 @@ import com.palex.practice.service.DocksTypeService;
 import com.palex.practice.view.CountryView;
 import com.palex.practice.view.DocksTypeView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
 
 /**
  * Контроллер для доступа к справочникам.
@@ -31,11 +32,9 @@ public class ReferenceController {
 
     /**
      * Вывод справочника типов документов.
-     * @return Коллекция типов документов.
+     * @return Коллекция типов документов в формате json.
      */
-    @RequestMapping(
-            value = "/countries",
-            method = {GET})
+    @RequestMapping(value = "/countries",method = {GET})
     @ResponseBody
     public List<CountryView> countries() {
         return countryService.countries();
@@ -43,14 +42,11 @@ public class ReferenceController {
 
     /**
      * Вывод справочника стран.
-     * @return Коллекция стран в формате
+     * @return Коллекция стран в формате json.
      */
-    @RequestMapping(
-            value = "/docs",
-            method = {GET})
+    @RequestMapping(value = "/docs",method = {GET})
     @ResponseBody
     public List<DocksTypeView> docs(){
         return docksTypeService.docs();
     }
-
 }

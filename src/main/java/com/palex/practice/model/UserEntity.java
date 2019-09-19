@@ -1,18 +1,27 @@
 package com.palex.practice.model;
 
-import javax.persistence.*;
-import java.util.Map;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * Класс сотрудник.
  */
-
 @Entity
 @Table(name = "User")
 public class UserEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,105 +29,115 @@ public class UserEntity {
     private Long id;
 
     /**
-     * Специальный поле Hibernate
+     * Служебное поле Hibernate.
      */
     @Version
     @Column (name="version", nullable = false)
     private Integer version;
 
     /**
-     * Офис
+     * Офис.
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="office_id", nullable = false)
     private OfficeEntity office;
 
     /**
-     *Имя
+     *Имя.
      */
     @Column(name = "first_Name", length = 50, nullable = false)
     private String firstName;
 
     /**
-     * Фамилия
+     * Фамилия.
      */
-    @Column(name = "second_Name", length = 50)
-    private String secondName;
+    @Column(name = "last_Name", length = 50)
+    private String lastName;
 
     /**
-     * Отчество
+     * Отчество.
      */
     @Column(name = "middle_Name", length = 50)
     private String middleName;
 
     /**
-     * Должность
+     * Должность.
      */
     @Column(name = "position", length = 100, nullable = false)
     private String position;
 
     /**
-     * Телефон
+     * Телефон.
      */
-    @Column(name = "phone", length = 11)
+    @Column(name = "phone", length = 20)
     private String phone;
 
     /**
-     * Прошел ли сотрудник идентификацию
+     * Прошел ли сотрудник идентификацию.
      */
     @Column (name="is_identified")
     private Boolean isIdentified;
 
     /**
-     * Идентификатор документа в таблице документов
+     * Идентификатор документа в таблице документов.
      */
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="document_id")
     private UserDocumentEntity userDocument;
 
     /**
-     * Идентификатор гражданства
+     * Идентификатор гражданства.
      */
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name="citizenship_id")
     private CountryEntity country;
 
-    public UserEntity(){
+    /**
+     * Конструктор для Hibernate.
+     */
+    public UserEntity() {
     }
 
-
-    public UserEntity(Map<String, String> params, OfficeEntity officeEntity, UserDocumentEntity userDocumentEntity, CountryEntity countryEntity){
-
-        this.office = officeEntity;
-        this.firstName = params.get("firstName");
-        this.secondName = params.get("secondName");
-        this.middleName = params.get("middleName");
-        this.position = params.get("position");
-        this.phone = params.get("phone");
-        if(userDocumentEntity != null){
-            System.out.println("one");
-            this.userDocument = userDocumentEntity;
-        }
-        if(countryEntity != null){
-            System.out.println("two");
-            this.country = countryEntity;
-        }
-        this.isIdentified = Boolean.parseBoolean(params.get("isIdentified"));
-
-
+    /**
+     * Конструктор.
+     *
+     * @param office       Оффис.
+     * @param firstName    Имя.
+     * @param lastName     Фамилия.
+     * @param middleName   Отчество.
+     * @param position     Должность.
+     * @param phone        Телефон.
+     * @param isIdentified Статус.
+     * @param userDocument Документ.
+     * @param country      Гражданство.
+     */
+    public UserEntity(OfficeEntity office, String firstName, String lastName, String middleName, String position, String phone, Boolean isIdentified, UserDocumentEntity userDocument, CountryEntity country) {
+        this.office = office;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.position = position;
+        this.phone = phone;
+        this.isIdentified = isIdentified;
+        this.userDocument = userDocument;
+        this.country = country;
     }
 
+    /**
+     * Конструктор.
+     *
+     * @param office    Принадлежность к оффису.
+     * @param firstName Имя.
+     * @param position  Должность.
+     */
+    public UserEntity(OfficeEntity office, String firstName, String position) {
+        this.office = office;
+        this.firstName = firstName;
+        this.position = position;
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public OfficeEntity getOffice() {
@@ -137,12 +156,12 @@ public class UserEntity {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getMiddleName() {
@@ -169,14 +188,6 @@ public class UserEntity {
         this.phone = phone;
     }
 
-    public Boolean getIsIdentified() {
-        return isIdentified;
-    }
-
-    public void setIsIdentified(Boolean isIdentified) {
-        this.isIdentified = isIdentified;
-    }
-
     public UserDocumentEntity getUserDocument() {
         return userDocument;
     }
@@ -193,4 +204,11 @@ public class UserEntity {
         this.country = country;
     }
 
+    public Boolean getIsIdentified() {
+        return isIdentified;
+    }
+
+    public void setIsIdentified(Boolean isIdentified) {
+        this.isIdentified = isIdentified;
+    }
 }

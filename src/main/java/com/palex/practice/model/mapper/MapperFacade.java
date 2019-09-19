@@ -3,9 +3,8 @@ package com.palex.practice.model.mapper;
 import java.util.List;
 
 /**
- * Фасад для преобразования между можелями БД и фронта
+ * Фасад для преобразования между моделями БД и фронта
  */
-
 public interface MapperFacade {
 
     /**

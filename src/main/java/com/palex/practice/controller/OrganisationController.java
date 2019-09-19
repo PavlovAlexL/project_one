@@ -1,18 +1,29 @@
 package com.palex.practice.controller;
 
-import com.palex.practice.view.OrganisationView;
 import com.palex.practice.service.OrganisationService;
-import org.springframework.web.bind.annotation.*;
+import com.palex.practice.view.Organisation.OrganisationListFilterView;
+import com.palex.practice.view.Organisation.OrganisationListView;
+import com.palex.practice.view.Organisation.OrganisationSaveFilterView;
+import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;
+import com.palex.practice.view.Organisation.OrganisationView;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+/**
+ * Контроллер для обработки запросов для Organisation.
+ */
 @RestController
 @RequestMapping(value = "/api/organisation", produces = APPLICATION_JSON_VALUE)
 public class OrganisationController {
@@ -24,65 +35,41 @@ public class OrganisationController {
     }
 
     /**
-     * Запрос списка по параметрам.
-     * @param params
-     * @return
+     * Возврат коллекции обектов по параметрам.
+     * @param organisationListFilterView Представление с фильтрацией входящих параметров для организации.
+     * @return коллекция запрошенных представлений организаций по параметрам.
      */
-    @RequestMapping(
-            value = "/list",
-            method = {POST})
-    @ResponseBody
-    public List<OrganisationView> organisationList (
-            @RequestParam Map<String, String> params
-    ) {
-        return organisationService.list(params);
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public List<OrganisationListView> organisationList(@RequestBody @Valid OrganisationListFilterView organisationListFilterView) {
+        return organisationService.list(organisationListFilterView);
     }
 
     /**
-     * Запрос по Id.
-     * @param organisationId
-     * @return
+     * Возврат объекта по Id.
+     * @param id идентификатор.
+     * @return Представление запрошенной организации.
      */
-    @RequestMapping(
-            value = "/{id}",
-            method = {GET})
+    @RequestMapping(value = "/id", method = RequestMethod.GET)
     @ResponseBody
-    public OrganisationView organisationGetById(
-            @PathVariable("id") @Valid @NotNull Long organisationId
-    ){
-        return organisationService.getById(organisationId);
+    public OrganisationView organisationGetById(@PathVariable("id") @Valid @NotNull @Min(1) Long id) {
+        return organisationService.getById(id);
     }
 
     /**
-     * Запрос на обновление
-     * @param params
-     * @return
+     * Запрос на операцию обновления объекта.
+     * @param organisationUpdateFilterView Представление с фильтрацией входящих параметров для сохранения организации.
      */
-    @RequestMapping(
-            value = "/update",
-            method = {POST})
-    @ResponseBody
-    public String organisatonUpdate(
-            @RequestParam Map<String, String> params
-    ){
-        organisationService.update(params);
-        return "organisatonUpdate";
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void organisatonUpdate(@RequestBody @Valid OrganisationUpdateFilterView organisationUpdateFilterView) {
+        organisationService.update(organisationUpdateFilterView);
     }
 
     /**
-     * Запрос на сохранение
-     * @param params collection of parameters
-     * @return
+     * Запрос на операцию сохранения обекта.
+     * @param organisationSaveFilterView Представление с фильтрацией входящих параметров для обновления организации.
      */
-    @RequestMapping(
-            value = "/save",
-            method = {POST})
-    @ResponseBody
-    public String organisationSave(
-            @RequestParam Map<String, String> params
-    ){
-        organisationService.save(params);
-        return "organisationSave";
+    @RequestMapping(value = "/save", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public void organisationSave(@RequestBody @Valid OrganisationSaveFilterView organisationSaveFilterView) {
+        organisationService.save(organisationSaveFilterView);
     }
-
 }

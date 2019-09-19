@@ -1,30 +1,35 @@
 package com.palex.practice.service;
 
-import com.palex.practice.view.OrganisationView;
+import com.palex.practice.view.Organisation.OrganisationListFilterView;
+import com.palex.practice.view.Organisation.OrganisationListView;
+import com.palex.practice.view.Organisation.OrganisationSaveFilterView;
+import com.palex.practice.view.Organisation.OrganisationUpdateFilterView;
+import com.palex.practice.view.Organisation.OrganisationView;
 
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Сервис для работы с объектами типа организация.
+ */
 public interface OrganisationService {
 
     /**
-     * Отобразить объекты по параметрам.
+     * Отобразить организации по параметрам.
      */
-    List<OrganisationView> list(Map<String, String> params);
+    List<OrganisationListView> list(OrganisationListFilterView organisationListFilterView);
 
     /**
-     *  Отобразить объект по Id.
+     *  Отобразить организацию по идентификатору.
      */
     OrganisationView getById(Long id);
 
     /**
-     * Изменить объект.
+     * Изменить организацию.
      */
-    void update(Map<String, String> params);
+    void update(OrganisationUpdateFilterView organisationUpdateFilterView);
 
     /**
-     * Создать объект.
+     * Создать организацию.
      */
-    void save(Map<String, String> params);
-
+    void save(OrganisationSaveFilterView organisationSaveFilterView);
 }

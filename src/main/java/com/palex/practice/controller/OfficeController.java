@@ -1,18 +1,25 @@
 package com.palex.practice.controller;
 
-import com.palex.practice.view.OfficeView;
 import com.palex.practice.service.OfficeService;
-import org.springframework.web.bind.annotation.*;
+import com.palex.practice.view.Office.OfficeListFilterView;
+import com.palex.practice.view.Office.OfficeListView;
+import com.palex.practice.view.Office.OfficeSaveFilterView;
+import com.palex.practice.view.Office.OfficeUpdateFilterView;
+import com.palex.practice.view.Office.OfficeView;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
- * Контроллер для office
+ * Контроллер для обработки запросов для Office
  */
 @RestController
 @RequestMapping(value = "/api/office", produces = APPLICATION_JSON_VALUE)
@@ -25,64 +32,41 @@ public class OfficeController {
     }
 
     /**
-     * Запрос списка по параметрам
-     * @param params коллекция параметров
-     * @return List<OfficeView>
+     * Возврат коллекции обектов по параметрам.
+     * @param officeListFilterView Представление с фильтрацией входящих параметров для оффиса.
+     * @return коллекция отобранных представлений офиса по параметров.
      */
-    @RequestMapping(
-            value = "/list",
-            method = {POST})
-    @ResponseBody
-     public List<OfficeView> officeList (
-            @RequestParam Map<String,String> params
-    ) {
-        return officeService.list(params);
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public List<OfficeListView> officeList(@RequestBody @Valid OfficeListFilterView officeListFilterView) {
+        return officeService.list(officeListFilterView);
     }
 
     /**
-     * Запрос по Id.
-     * @param officeId идентификатор объекта
-     * @return OfficeView
+     * Возврат объекта по Id.
+     * @param id иднетификатор запрашиваемого офиса.
+     * @return представление запрошенного офиса.
      */
-    @RequestMapping(
-            value = "/{id}",
-            method = {GET})
-    @ResponseBody
-    public OfficeView officeGetById(
-            @PathVariable("id") Long officeId
-    ){
-        return officeService.getById(officeId);
+    @RequestMapping(value = "/id", method = RequestMethod.GET)
+    public OfficeView officeGetById(@PathVariable("id") @Valid @NotNull Long id) {
+        return officeService.getById(id);
     }
 
     /**
-     * Запрос на обновление.
-     * @param params коллекция параметров.
+     * Запрос на операцию обновления объекта.
+     *
+     * @param officeUpdateFilterView Представление с фильтрацией входящих параметров для сохранения оффиса.
      */
-    @RequestMapping(
-            value = "/update",
-            method = {POST})
-    @ResponseBody
-    public String officeUpdate (
-            @RequestParam Map<String,String> params
-    ) {
-        officeService.update(params);
-        return "officeUpdate";
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void officeUpdate(@RequestBody @Valid OfficeUpdateFilterView officeUpdateFilterView) {
+        officeService.update(officeUpdateFilterView);
     }
 
     /**
-     * Запрос на сохранение.
-     * @param params коллекция параметров.
-     * @return
+     * Запрос на операцию сохранения обекта.
+     * @param officeSaveFilterView Представление с фильтрацией входящих параметров для обновления оффиса.
      */
-    @RequestMapping(
-            value = "/save",
-            method = {POST})
-    @ResponseBody
-    public String officeSave(
-            @RequestParam Map<String,String> params
-    ) {
-        officeService.save(params);
-        return "officeSave";
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public void officeSave(@RequestBody @Valid OfficeSaveFilterView officeSaveFilterView) {
+        officeService.save(officeSaveFilterView);
     }
-
 }

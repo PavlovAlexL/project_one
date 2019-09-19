@@ -1,15 +1,22 @@
 package com.palex.practice.model;
 
-import javax.persistence.*;
-import java.util.Map;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
+/**
+ * Организация.
+ */
 @Entity
 @Table(name="Organisation")
 public class OrganisationEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,81 +24,83 @@ public class OrganisationEntity {
     private Long id;
 
     /**
-     * Служебное поле Hibernate
+     * Служебное поле Hibernate.
      */
     @Version
     @Column (name="version", nullable = false)
     private Integer version;
 
     /**
-     * Название
+     * Наименование организации.
      */
     @Column (name="name", nullable = false)
     private String name;
 
     /**
-     * Полное название
+     * Полное наименование организации.
      */
     @Column(name="full_Name", nullable = false)
     private String fullName;
 
     /**
-     * ИНН
+     * ИНН.
      */
     @Column(name="inn", nullable = false)
     private String inn;
 
     /**
-     * КПП
+     * КПП.
      */
     @Column(name="kpp", nullable = false)
     private String kpp;
 
     /**
-     * Адресс
+     * Адрес.
      */
     @Column(nullable = false)
     private String address;
 
     /**
-     * Телефон
+     * Телефон.
      */
     @Column(name="phone")
     private String phone;
 
     /**
-     * Статус
+     * Статус.
      */
     @Column(name="is_active")
     private Boolean isActive;
 
-    public OrganisationEntity(){
+    /**
+     * Конструктор для Hibernate.
+     */
+    public OrganisationEntity() {
     }
 
-    public OrganisationEntity(Map<String, String> params){
-                if(params.containsKey("id")) {
-                    this.id = Long.parseLong(params.get("id"));
-                }
-                this.name = params.get("name");
-                this.fullName = params.get("fullName");
-                this.inn = params.get("inn");
-                this.kpp = params.get("kpp");
-                this.address = params.get("address");
-                this.phone = params.get("phone");
-                this.isActive = Boolean.parseBoolean(params.get("isActive"));
+    /**
+     * Конструктор с параметрами.
+     *
+     * @param name     Имя.
+     * @param fullName полное имя.
+     * @param inn      ИНН.
+     * @param kpp      КПП.
+     * @param address  адрес.
+     * @param phone    телефон.
+     * @param isActive статус.
+     */
+    public OrganisationEntity(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+        this.name = name;
+        this.fullName = fullName;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
     }
-
 
     public Long getId() {
         return id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public String getName() {
@@ -135,6 +144,7 @@ public class OrganisationEntity {
     }
 
     public String getPhone() { return phone; }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -146,5 +156,4 @@ public class OrganisationEntity {
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
-
 }

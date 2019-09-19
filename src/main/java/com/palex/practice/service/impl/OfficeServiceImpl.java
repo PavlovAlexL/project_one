@@ -6,13 +6,19 @@ import com.palex.practice.model.OfficeEntity;
 import com.palex.practice.model.OrganisationEntity;
 import com.palex.practice.model.mapper.MapperFacade;
 import com.palex.practice.service.OfficeService;
-import com.palex.practice.view.OfficeView;
+import com.palex.practice.view.Office.OfficeListFilterView;
+import com.palex.practice.view.Office.OfficeListView;
+import com.palex.practice.view.Office.OfficeSaveFilterView;
+import com.palex.practice.view.Office.OfficeUpdateFilterView;
+import com.palex.practice.view.Office.OfficeView;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Реализация сервиса для работы с объектами типа офис.
+ */
 @Service
 public class OfficeServiceImpl implements OfficeService {
 
@@ -26,60 +32,65 @@ public class OfficeServiceImpl implements OfficeService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * Отобразить объекты офис по параметрам.
+     */
     @Override
-    public List<OfficeView> list(Map<String, String> params) {
-        OrganisationEntity organisationEntity = organisationDao.getById(Long.parseLong(params.get("orgId")));
-        List<OfficeEntity> result = officeDao.getByParams(organisationEntity);
-
-        if(params.containsKey("name")&params.get("name") != null){
-            List<OfficeEntity> temp = new ArrayList<>();
-            String name = params.get("name");
-            for(OfficeEntity oe : result){
-                if(oe.getName().equals(name)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
+    @Transactional
+    public List<OfficeListView> list(OfficeListFilterView officeListFilterView) {
+        OfficeEntity officeEntity = mapperFacade.map(officeListFilterView, OfficeEntity.class);
+        if (officeListFilterView.orgId != null) {
+            officeEntity.setOrganisation(organisationDao.getById(officeListFilterView.orgId));
         }
-        if(params.containsKey("phone")&params.get("phone") != null){
-            List<OfficeEntity> temp = new ArrayList<>();
-            String phone = params.get("phone");
-            for(OfficeEntity oe : result){
-                if(oe.getPhone().equals(phone)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
-        }
-        if(params.containsKey("isActive")&params.get("isActive") != null){
-            List<OfficeEntity> temp = new ArrayList<>();
-            Boolean status = Boolean.parseBoolean(params.get("phone"));
-            for(OfficeEntity oe : result){
-                if(oe.getIsActive().equals(status)){
-                    temp.add(oe);
-                }
-            }
-            result = temp;
-        }
-        return mapperFacade.mapAsList(result, OfficeView.class);
+        List<OfficeEntity> officeEntities = officeDao.getByParams(officeEntity);
+        return mapperFacade.mapAsList(officeEntities, OfficeListView.class);
     }
 
+    /**
+     *  Отобразить офис по идентификатору.
+     */
     @Override
+    @Transactional
     public OfficeView getById(Long id) {
-        OfficeEntity result = officeDao.getById(id);
-        return mapperFacade.map(result, OfficeView.class);
+        OfficeEntity officeEntity = officeDao.getById(id);
+        return mapperFacade.map(officeEntity, OfficeView.class);
     }
 
+    /**
+     * Изменить офис.
+     */
     @Override
-    public void update(Map<String, String> params) {
-        officeDao.update(params);
+    @Transactional
+    public void update(OfficeUpdateFilterView officeUpdateFilterView) {
+        Long id = officeUpdateFilterView.id;
+        OfficeEntity officeEntity = officeDao.getById(id);
+
+        officeEntity.setName(officeUpdateFilterView.name);
+        officeEntity.setAddress(officeUpdateFilterView.address);
+
+        if (officeUpdateFilterView.phone != null) {
+            officeEntity.setPhone(officeUpdateFilterView.phone);
+        }
+        if (officeUpdateFilterView.isActive != null) {
+            officeEntity.setIsActive(Boolean.parseBoolean(officeUpdateFilterView.isActive));
+        }
+        officeDao.update(officeEntity);
     }
 
+    /**
+     * Создать офис.
+     */
     @Override
-    public void save(Map<String, String> params) {
-        OrganisationEntity organisationEntity = organisationDao.getById(Long.parseLong(params.get("orgId")));
-        OfficeEntity officeEntity = new OfficeEntity(params, organisationEntity);
+    @Transactional
+    public void save(OfficeSaveFilterView officeSaveFilterView) {
+        //OfficeEntity officeEntity = mapperFacade.map(officeSaveFilterView, OfficeEntity.class);
+        Long orgId = officeSaveFilterView.orgId;
+        String name = officeSaveFilterView.name;
+        String address = officeSaveFilterView.address;
+        String phone = officeSaveFilterView.phone;
+        Boolean isActive = Boolean.parseBoolean(officeSaveFilterView.isActive);
+        OrganisationEntity organisationEntity = organisationDao.getById(orgId);
+        OfficeEntity officeEntity = new OfficeEntity(name, address, phone, isActive, organisationEntity);
         officeDao.save(officeEntity);
     }
-
 }

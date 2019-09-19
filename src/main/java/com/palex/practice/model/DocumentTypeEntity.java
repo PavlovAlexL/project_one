@@ -1,36 +1,47 @@
 package com.palex.practice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Column;
 
+/**
+ * Класс справочник, сопоставляющий наименование и код документа.
+ */
 @Entity
 @Table(name = "Document_type")
 public class DocumentTypeEntity {
 
     /**
-     * Уникальный идентификатор
+     * Уникальный идентификатор.
      */
     @Id
     @Column(name="id",nullable = false)
     private Long id;
 
     /**
-     * Doc code
+     * Код документа.
      */
     @Column(name="code", length = 10, nullable = false)
     private String code;
 
     /**
-     * Doc name
+     * Наименование документа.
      */
     @Column(name="name", length = 100, nullable = false)
     private String name;
 
+    /**
+     * Конструктор по умолчанию, нужен для Hibernate.
+     */
     public DocumentTypeEntity(){
     }
 
+    /**
+     * Параметризированный конструктор.
+     * @param code Код документа.
+     * @param name Наименование докумнта.
+     */
     public DocumentTypeEntity(String code, String name) {
         this.code = code;
         this.name = name;
@@ -55,5 +66,4 @@ public class DocumentTypeEntity {
     public void setName(String name) {
         this.name = name;
     }
-
 }

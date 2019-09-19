@@ -1,31 +1,21 @@
 package com.palex.practice.view;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.NotEmpty;
-@JsonInclude(JsonInclude.Include.NON_NULL)
+/**
+ * View для отображения справочника стран.
+ */
 public class CountryView {
 
-    @NotEmpty
-    private String code;
+    /**
+     * Имя.
+     */
+    @JsonProperty("citizenshipName")
+    public String name;
 
-    @NotEmpty
-    private String name;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    /**
+     * Код.
+     */
+    @JsonProperty("citizenshipCode")
+    public String code;
 }

@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS Organisation (
   kpp         VARCHAR(9)  NOT NULL,
   address     VARCHAR(200) NOT NULL,
   phone       VARCHAR(20) ,
-  isActive   BOOLEAN
+  is_Active   BOOLEAN
 );
 COMMENT ON TABLE  Organisation IS 'Организация';
 COMMENT ON COLUMN Organisation.id IS 'id';
@@ -53,7 +53,7 @@ COMMENT ON COLUMN Organisation.inn IS 'ИНН организации';
 COMMENT ON COLUMN Organisation.kpp IS 'КПП организации';
 COMMENT ON COLUMN Organisation.address IS 'Адрес';
 COMMENT ON COLUMN Organisation.phone IS 'Телефон';
-COMMENT ON COLUMN Organisation.isActive IS 'Статус';
+COMMENT ON COLUMN Organisation.is_Active IS 'Статус';
 
 
 CREATE TABLE IF NOT EXISTS Office (
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS Office (
   name        VARCHAR(50),
   address     VARCHAR(200),
   phone       VARCHAR(20),
-  isActive    BOOLEAN
+  is_Active    BOOLEAN
 );
 COMMENT ON TABLE Office IS 'Офис';
 COMMENT ON COLUMN Office.id IS 'id';
@@ -72,7 +72,7 @@ COMMENT ON COLUMN Office.org_id IS 'Идентификатор организа�
 COMMENT ON COLUMN Office.name IS 'Название';
 COMMENT ON COLUMN Office.address IS 'Адрес';
 COMMENT ON COLUMN Office.phone IS 'Телефон';
-COMMENT ON COLUMN Office.isActive IS 'Статус';
+COMMENT ON COLUMN Office.is_Active IS 'Статус';
 CREATE INDEX IX_Office_org_id ON Office(org_id);
 
 
@@ -81,10 +81,10 @@ CREATE TABLE IF NOT EXISTS User (
   version              INTEGER NOT NULL DEFAULT 1,
   office_id            INTEGER NOT NULL REFERENCES Office(id),
   first_name           VARCHAR(50) NOT NULL,
-  second_name          VARCHAR(50) ,
+  last_name          VARCHAR(50) ,
   middle_name          VARCHAR(50) ,
   position             VARCHAR(100) NOT NULL,
-  phone                VARCHAR(11) ,
+  phone                VARCHAR(20) ,
   document_id          INTEGER REFERENCES User_document(id),
   citizenship_id       INTEGER REFERENCES Country(id),
   is_identified        BOOLEAN
@@ -94,7 +94,7 @@ COMMENT ON COLUMN User.id IS 'id';
 COMMENT ON COLUMN User.version IS 'Служебное поле hibernate, должно быть NOT NULL';
 COMMENT ON COLUMN User.office_id IS 'Офис, связан с OfficeEntity.id';
 COMMENT ON COLUMN User.first_name IS 'Имя';
-COMMENT ON COLUMN User.second_name IS 'Фамилия';
+COMMENT ON COLUMN User.last_name IS 'Фамилия';
 COMMENT ON COLUMN User.middle_name IS 'Отчество';
 COMMENT ON COLUMN User.position IS 'Должность';
 COMMENT ON COLUMN User.phone IS 'Телефон';

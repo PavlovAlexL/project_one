@@ -11,6 +11,7 @@ INSERT INTO Document_type (code, name) VALUES (21, 'Паспорт гражда�
 INSERT INTO Document_type (code, name) VALUES (23, 'Свидетельство о рождении, выданное уполномоченным органом иностранного государства');
 INSERT INTO Document_type (code, name) VALUES (24, 'Удостоверение личности военнослужащего Российской Федерации');
 INSERT INTO Document_type (code, name) VALUES (91, 'Иные документы');
+INSERT INTO Document_type (code, name) VALUES (77, 'Test Document');
 
 INSERT INTO Country (code, name) VALUES (616,	'ПОЛЬША');
 INSERT INTO Country (code, name) VALUES (643,	'РОССИЯ');
@@ -26,21 +27,5 @@ INSERT INTO Country (code, name) VALUES (438,	'ЛИХТЕНШТЕЙН');
 INSERT INTO Country (code, name) VALUES (440,	'ЛИТВА');
 INSERT INTO Country (code, name) VALUES (442,	'ЛЮКСЕМБУРГ');
 INSERT INTO Country (code, name) VALUES (276,	'ГЕРМАНИЯ');
-
-INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, isActive) VALUES ('Белл', 'ООО "Белл Интегратор"',            '1111111111','222222222','г. Москва, ул. Южнопортовая','84957778899','true');
-INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, isActive) VALUES ('Крок', 'ООО "Крок"',                       '3333333333','222232222','г. Москва, ул. Таганская','84953778899','true');
-INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, isActive) VALUES ('HPE',  'ООО "Хюлед Паккард Энтерпрайз"',   '1111671111','222223322','г. Москва, ул. Южная','84959955635','true');
-INSERT INTO Organisation (name, full_Name, inn, kpp, address, phone, isActive) VALUES ('MS',   'ООО "Майкрософт РУС"',             '3333863333','222236822','г. Москва, ул. Каширская','84953222322','true');
-
-INSERT INTO Office (org_id, name, address, phone,isActive ) VALUES (2, 'Kiev', 'Kiev, Maidan square, 1', 800012345611, true);
-INSERT INTO Office (org_id, name, address, phone,isActive ) VALUES (2, 'Москва', 'г. Москва, ул. Угрешская, д1. к.5', 84952223334, true);
-INSERT INTO Office (org_id, name, address, phone,isActive ) VALUES (1, 'Брест', 'респ. Беларусь, ул. Лукашенко, д.2', 84957774441, true);
-INSERT INTO Office (org_id, name, address, phone,isActive ) VALUES (1, 'Видное','МО г. Видное ул. Промышленная, д.34', 89457766222, true);
-
-INSERT INTO User (office_id, first_Name, position) VALUES (1, 'Sasha', 'Менеджер');
-INSERT INTO User (office_id, first_Name, position) VALUES (2, 'Pasha', 'Менеджер');
-INSERT INTO User (office_id, first_Name, position) VALUES (1, 'Gogi', 'Программист');
-INSERT INTO User (office_id, first_Name, position) VALUES (2, 'Senya', 'Бухгалтер');
-
 
 
